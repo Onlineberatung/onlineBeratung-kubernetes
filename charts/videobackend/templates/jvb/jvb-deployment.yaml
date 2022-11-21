@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: jvb
+  name: jvb
+  namespace: jitsi
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      k8s-app: jvb
+  template:
+    metadata:
+      labels:
+        k8s-app: jvb
+    spec:
+      containers:
+        - name: jvb
+          ports:
+            - containerPort: 30300
+              protocol: UDP
+            - containerPort: 4443
+          image: {{ .Values.jvbImageName }}:{{ .Values.jvbVersion }}
+          resources: {}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: XMPP_SERVER
+              value: prosody
+            - name: DOCKER_HOST_ADDRESS
+              value: 10.251.11.137
+            - name: XMPP_DOMAIN
+              value: meet.jitsi
+            - name: XMPP_AUTH_DOMAIN
+              value: auth.meet.jitsi
+            - name: XMPP_INTERNAL_MUC_DOMAIN
+              value: internal-muc.meet.jitsi
+            - name: JVB_STUN_SERVERS
+              value: stun.l.google.com:19302,stun1.l.google.com:19302,stun2.l.google.com:19302
+            - name: JVB_TCP_HARVESTER_DISABLED
+              value: "true"
+            - name: JVB_PORT
+              value: "30300"
+            - name: JVB_TCP_PORT
+              value: "4443"
+            - name: JVB_TCP_MAPPED_PORT
+              value: "4443"
+            - name: JVB_BREWERY_MUC
+              value: jvbbrewery
+            - name: TZ
+              value: UTC
+            - name: JVB_AUTH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: JVB_AUTH_PASSWORD
+                  name: jitsi-secret-{{ .Release.Name }}-env
+            - name: JVB_AUTH_USER
+              valueFrom:
+                secretKeyRef:
+                  key: JVB_AUTH_USER
+                  name: jitsi-secret-{{ .Release.Name }}-env
+            - name: JICOFO_AUTH_USER
+              valueFrom:
+                secretKeyRef:
+                  key: JICOFO_AUTH_USER
+                  name: jitsi-secret-{{ .Release.Name }}-env
+            - name: JICOFO_AUTH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: JICOFO_AUTH_PASSWORD
+                  name: jitsi-secret-{{ .Release.Name }}-env
+            - name: PUBLIC_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: VIDEOCALL_SERVER_URL
+                  name: jitsi-prosody-{{ .Release.Name }}-env

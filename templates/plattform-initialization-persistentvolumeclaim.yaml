@@ -1,0 +1,12 @@
+{{- if .Values.global.initializeDummyData }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: plattform-initialization-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+{{- end }}

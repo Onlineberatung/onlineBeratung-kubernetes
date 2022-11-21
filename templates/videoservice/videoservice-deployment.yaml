@@ -1,0 +1,164 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: videoservice
+  name: videoservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: videoservice
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.network/database_network: "true"
+        io.kompose.network/frontend_network: "true"
+        io.kompose.network/service_network: "true"
+        io.kompose.service: videoservice
+    spec:
+      hostAliases:
+        - ip: {{ .Values.global.dockerHostIp }}
+          hostnames:
+            - {{ .Values.global.domainName }}
+      initContainers:
+        - name: wait-for-keycloak
+          image: busybox
+          command: [ "sh", "-c", "until nc -z keycloak 8080 > /dev/null; do echo Waiting for keycloak.; sleep 5; done;" ]
+      containers:
+        - env:
+            - name: APP_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: APP_BASE_URL
+                  name: videoservice-{{ .Release.Name }}-env
+            - name: CSRF_COOKIE_PROPERTY
+              valueFrom:
+                configMapKeyRef:
+                  key: CSRF_COOKIE_PROPERTY
+                  name: videoservice-{{ .Release.Name }}-env
+            - name: CSRF_HEADER_PROPERTY
+              valueFrom:
+                configMapKeyRef:
+                  key: CSRF_HEADER_PROPERTY
+                  name: videoservice-{{ .Release.Name }}-env
+            - name: KEYCLOAK_AUTH_SERVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: KEYCLOAK_AUTH_SERVER_URL
+                  name: videoservice-{{ .Release.Name }}-env
+            - name: KEYCLOAK_CORS
+              valueFrom:
+                configMapKeyRef:
+                  key: KEYCLOAK_CORS
+                  name: videoservice-{{ .Release.Name }}-env
+            - name: KEYCLOAK_PRINCIPAL_ATTRIBUTE
+              valueFrom:
+                configMapKeyRef:
+                  key: KEYCLOAK_PRINCIPAL_ATTRIBUTE
+                  name: videoservice-{{ .Release.Name }}-env
+            - name: KEYCLOAK_REALM
+              valueFrom:
+                configMapKeyRef:
+                  key: KEYCLOAK_REALM
+                  name: videoservice-{{ .Release.Name }}-env
+            - name: KEYCLOAK_RESOURCE
+              valueFrom:
+                configMapKeyRef:
+                  key: KEYCLOAK_RESOURCE
+                  name: videoservice-{{ .Release.Name }}-env
+            - name: LIVE_SERVICE_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: LIVE_SERVICE_API_URL
+                  name: videoservice-{{ .Release.Name }}-env
+            - name: MESSAGE_SERVICE_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: MESSAGE_SERVICE_API_URL
+                  name: videoservice-{{ .Release.Name }}-env
+            - name: SPRING_PROFILES_ACTIVE
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_PROFILES_ACTIVE
+                  name: videoservice-{{ .Release.Name }}-env
+            - name: USER_SERVICE_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: USER_SERVICE_API_URL
+                  name: videoservice-{{ .Release.Name }}-env
+            - name: VIDEO_CALL_SECURITY_JWT_AUDIENCE
+              valueFrom:
+                configMapKeyRef:
+                  key: VIDEO_CALL_SECURITY_JWT_AUDIENCE
+                  name: videoservice-{{ .Release.Name }}-env
+            - name: VIDEO_CALL_SECURITY_JWT_ISSUER
+              valueFrom:
+                configMapKeyRef:
+                  key: VIDEO_CALL_SECURITY_JWT_ISSUER
+                  name: videoservice-{{ .Release.Name }}-env
+            - name: VIDEO_CALL_SECURITY_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: VIDEO_CALL_SECURITY_JWT_SECRET
+                  name: videoservice-secret-{{ .Release.Name }}-env
+            - name: VIDEO_CALL_SECURITY_JWT_SUBJECT
+              valueFrom:
+                configMapKeyRef:
+                  key: VIDEO_CALL_SECURITY_JWT_SUBJECT
+                  name: videoservice-{{ .Release.Name }}-env
+            - name: VIDEO_CALL_SECURITY_JWT_VALIDITY_HOURS
+              valueFrom:
+                configMapKeyRef:
+                  key: VIDEO_CALL_SECURITY_JWT_VALIDITY_HOURS
+                  name: videoservice-{{ .Release.Name }}-env
+            - name: VIDEO_CALL_SERVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: VIDEO_CALL_SERVER_URL
+                  name: videoservice-{{ .Release.Name }}-env
+            - name: MULTITENANCY_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: MULTITENANCY_ENABLED
+                  name: videoservice-{{ .Release.Name }}-env
+            - name: TENANT_SERVICE_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: TENANT_SERVICE_API_URL
+                  name: videoservice-{{ .Release.Name }}-env
+            - name: STATISTICS_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: STATISTICS_ENABLED
+                  name: messageservice-{{ .Release.Name }}-env
+            - name: SPRING_RABBITMQ_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: SPRING_RABBITMQ_USERNAME
+                  name: statisticsservice-secret-{{ .Release.Name }}-env
+            - name: SPRING_RABBITMQ_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: SPRING_RABBITMQ_PASSWORD
+                  name: statisticsservice-secret-{{ .Release.Name }}-env
+            - name: FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED
+                  name: videoservice-{{ .Release.Name }}-env
+            - name: TEST_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED
+                  name: videoservice-{{ .Release.Name }}-env
+          image: {{ .Values.videoServiceImageName }}:{{ .Values.videoServiceImageVersion }}
+          name: videoservice
+          ports:
+            - containerPort: 8080
+          resources: { }
+      imagePullSecrets:
+        - name: registry-secret
+      restartPolicy: Always

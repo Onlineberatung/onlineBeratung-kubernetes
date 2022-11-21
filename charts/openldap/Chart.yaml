@@ -1,0 +1,6 @@
+name: online-counseling-open-ldap
+description: The chart providing open ldap
+version: 0.0.1
+apiVersion: v1
+keywords:
+ - online-counseling-open-ldap

@@ -1,0 +1,22 @@
+{
+	"htmlTemplateFilename":"message-notification-consultant.html",
+	"subject":"Neue Nachricht [PLZ: ${plz}]",
+	"templateImages" : [
+		{
+			"filename":"illustration-bottom.png",
+			"filetype":"image/png"
+		},
+		{
+			"filename":"illustration-top.png",
+			"filetype":"image/png"
+		}
+	],
+	"templateDataFields": 
+		[
+			"tenant_name",
+			"tenant_claim",
+			"plz",
+			"url",
+			"name"
+		]
+}

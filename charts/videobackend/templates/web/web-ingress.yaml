@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jitsi-web
+  namespace: jitsi
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-production
+spec:
+{{- if .Values.videoCallCustomTlsSecret }}
+  tls:
+    - hosts:
+        - {{ .Values.videoCallServerUrl }}
+      secretName: {{ .Values.videoCallCustomTlsSecret }}
+{{- else if .Values.global.enableTls }}
+  tls:
+    - hosts:
+        - {{ .Values.videoCallServerUrl }}
+      secretName: {{ .Values.videoCallServerUrl }}
+{{- end }}
+  rules:
+    - host: {{ .Values.videoCallServerUrl }}
+      http:
+        paths:
+          - backend:
+              service:
+                name: web
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix

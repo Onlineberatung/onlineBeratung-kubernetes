@@ -1,0 +1,275 @@
+global:
+  domainName: "app.onlineberatung.local"
+  dockerHostIp: "192.168.65.2"
+  enableTls: false
+  multitenancyEnabled: false
+  statisticsEnabled: "true"
+  topicsEnabled: "true"
+  demographicsEnabled: "false"
+  appointmentsEnabled: false
+  counselingToolsEnabled: false
+  adminConsoleEnabled: false
+  elkDisabled: true
+  rabbitStatisticsUser: "statistics"
+  rabbitStatisticsPassword: "statistics"
+  multitenancyWithSingleDomainEnabled: "false"
+  initializeDummyData: true
+  useExternalMariaDb: false
+  settingMainTenantSubdomainForSingleDomainMultitenancy: "app"
+
+  # Secrets MariaDB
+  mysqlRootPassword: "root"
+  springLiquibasePassword: "liquibase"
+  springLiquibaseUser: "liquibase"
+  agencyServiceSpringDatasourcePassword: "agencyservice"
+  agencyServiceSpringDatasourceUsername: "agencyservice"
+  messageServiceSpringDatasourceUsername: "messageservice"
+  messageServiceSpringDatasourcePassword: "messageservice"
+  userServiceSpringDatasourceUsername: "userservice"
+  userServiceSpringDatasourcePassword: "userservice"
+  uploadServiceSpringDatasourceUsername: "uploadservice"
+  uploadServiceSpringDatasourcePassword: "uploadservice"
+  tenantServiceSpringDatasourceUsername: "tenantservice"
+  tenantServiceSpringDatasourcePassword: "tenantservice"
+  consultingTypeServiceSpringDatasourceUsername: "consultingtypeservice"
+  consultingTypeServiceSpringDatasourcePassword: "consultingtypeservice"
+  appointmentServiceSpringDatasourceUsername: "appointmenteservice"
+  appointmentServiceSpringDatasourcePassword: "appointmenteservice"
+  keycloakDbUser: "keycloak"
+  keycloakDbPassword: "keycloak"
+  # Secrets MongoDB
+  mongoInitDbRootUsername: "admin"
+  mongoInitDbRootPassword: "admin"
+  nosqlclientMongoUsername: "nosqlclient"
+  nosqlclientMongoPassword: "nosqlclient"
+  rocketchatMongoUsername: "rocketchat"
+  rocketchatMongoPassword: "rocketchat"
+  oplogMongoUsername: "oplog"
+  oplogMongoPassword: "oplog"
+  statisticsMongoUser: "statistics"
+  statisticsMongoPass: "statistics"
+  consultingTypeMongoUser: "consulting_types"
+  consultingTypeMongoPass: "consulting_types"
+  masterkey: "local"
+
+# CSRF
+csrfCookieProperty: "CSRF-TOKEN"
+csrfHeaderProperty: "X-CSRF-TOKEN"
+# Keycloak
+keycloakRealm: "online-beratung"
+keycloakAuthServerUrl: "http://app.onlineberatung.local/auth"
+keycloakPrincipalAttribute: "preferred_username"
+keycloakserviceAdminClientid: "admin-cli"
+keycloakserviceAppClientid: "app"
+keycloakserviceTechuserId:  "8294c392-e1e0-405b-ac2f-ba3043cbad3e"
+identityOpenidConnectUrl: "/realms/online-beratung/protocol/openid-connect"
+identityOtpUrl: "/realms/online-beratung/otp-config"
+
+# Rocketchat
+rocketSystemuserId: "hjvBcfWH5vS3KLv27"
+rocketCredentialschedulerCron: "0 0 0/1 * * ?"
+
+# Agencyservice
+agencyServiceKeycloakResource: "agency-service"
+
+agencyServiceSpringProfilesActive: "dev"
+agencyServiceImageName: "ghcr.io/onlineberatung/onlineberatung-agencyservice/onlineberatung-agencyservice"
+agencyServiceImageVersion: "develop_20221117_173329"
+
+# ConsultingTypeService
+consultingTypesJsonPath : "consulting-type-settings"
+consultingTypeServiceImageName: "ghcr.io/onlineberatung/onlineberatung-consultingtypeservice/onlineberatung-consultingtypeservice"
+consultingTypeServiceImageVersion: "develop_20221116_164336"
+consultingTypeServiceKeycloakResource: "consultingtype-service"
+
+# Frontend
+#frontendImageName: "docker.pkg.github.com/virtualidentityag/vi-saas-frontend-theme/vi-saas-frontend-theme"
+#frontendImageVersion: "dockerImage.v.037-develop"
+frontendImageName: "ghcr.io/onlineberatung/onlineberatung-frontend/onlineberatung-frontend"
+frontendImageVersion: "develop_20221121_122116"
+
+# Live service
+liveServiceImageName: "ghcr.io/onlineberatung/onlineberatung-liveservice/onlineberatung-liveservice"
+liveServiceImageVersion: "develop_20221117_114908"
+liveServiceSpringProfilesActive: "prod"
+liveServiceAppBaseUrl: "http://app.onlineberatung.local"
+
+# Mail service
+mailServiceSpringProfilesActive: "dev"
+springMailHost: "mail.mail"
+springMailUsername: "xxx"
+springMailPassword: "xxx"
+springMailProtocol: "smtp"
+springMailDefaultEncoding:  "UTF-8"
+mailSender:  "noreply@app.onlineberatung.local"
+mailErrorRecipients: "admin@onlineberatung.local"
+appImprintUrl: "http://app.onlineberatung.local/impressum"
+appDataprivacyUrl: "http://app.onlineberatung.local/datenschutz"
+mailServiceLoggingLevelRoot:  "DEBUG"
+mailServiceImageName: "ghcr.io/onlineberatung/onlineberatung-mailservice/onlineberatung-mailservice"
+mailServiceImageVersion: "develop_20221116_164215"
+
+# Message service
+messageServiceImageName: "ghcr.io/onlineberatung/onlineberatung-messageservice/onlineberatung-messageservice"
+messageServiceImageVersion: "develop_20221117_170507"
+messageServiceSpringProfilesActive: "local"
+messageServiceKeycloakResource: "message-service"
+csrfWhitelistHeaderProperty: "local"
+
+# Upload service
+uploadServiceImageName: "ghcr.io/onlineberatung/onlineberatung-uploadservice/onlineberatung-uploadservice"
+uploadServiceImageVersion: "develop_20221116_164233"
+uploadServiceSpringProfilesActive: "local"
+uploadServiceKeycloakResource:  "upload-service"
+
+# User service
+userServiceImageName: "ghcr.io/onlineberatung/onlineberatung-userservice/onlineberatung-userservice"
+userServiceImageVersion: "develop_20221118_105158"
+consultantImportFilename: "import/consultants.csv"
+consultantImportProtocolFilename: "import/consultants-import.txt"
+askerImportFilename: "import/askers.csv"
+askerImportWithoutsessionFilename: "import/askers-without-session.csv"
+askerImportProtocolFilename: "import/askers-import.txt"
+askerImportWelcomeMessageFilename: "import/welcome_consulting_type_[ConsultingType].txt"
+askerImportWelcomeMessageFilenameReplaceValue: "[ConsultingType]"
+userServiceSpringProfilesActive: "dev"
+userServiceKeycloakResource: "user-service"
+firebaseConfigurationCredentialsFilePath: "/firebase/firebase-credentials.json"
+firebaseConfigurationNotificationMessage: "Du hast eine neue Nachricht erhalten"
+userAnonymousDeleteworkflowCron: "* * * * * ?"
+userAnonymousDeactivateworkflowCron: "* * * * * ?"
+sessionInactiveDeleteworkflowEnabled: "true"
+sessionInactiveDeleteworkflowCron: "0 0 * * * ?"
+sessionInactiveDeleteworkflowCheckDays: "30"
+
+# Video service
+videoServiceImageName: "ghcr.io/onlineberatung/onlineberatung-videoservice/onlineberatung-videoservice"
+videoServiceImageVersion: "dockerImage.v.30.release-os"
+videoServiceSpringProfilesActive: "dev"
+videoCallServerUrl: "http://video.onlineberatung.local"
+videoCallSecurityJwtAudience: "my_server1"
+videoCallSecurityJwtIssuer: "my_app_client"
+videoCallSecurityJwtSubject: "meet.jitsi"
+videoCallSecurityJwtSecret: "ca464fd202c74dc92139765ac798980204c4c1d3e8b69494ef897313fe58b936"
+videoServiceKeycloakResource: "video-service"
+
+# Admin console frontend
+adminconsoleImageName: "ghcr.io/virtualidentityag/vi-saas-admin/vi-saas-admin"
+adminconsoleImageVersion: "dockerImage.v.341.release-2022-11-21"
+
+# Statistics Service
+statisticsServiceImageName: "ghcr.io/onlineberatung/onlineberatung-statisticsservice/onlineberatung-statisticsservice"
+statisticsServiceImageVersion: "develop_20221117_155914"
+
+logstashHost: "http://logstash.default:8080"
+online-counseling-logstash:
+  elasticsearchHosts: "http://elasticsearch-master.default:9200"
+  logstashPipeline:
+    logstash.conf: |
+
+      input {
+       http { 
+            port => 8080 # default: 8080, not 9600 
+            codec => "json" 
+          }
+      }
+      
+      filter {
+         if [serviceName] != "frontend" {
+            drop{}
+         }
+         if ![request][correlationId] or ![request][timestamp] {
+           drop{}
+         }
+      }
+      output {
+        elasticsearch
+        {                 
+          hosts => ["http://elasticsearch-master.default:9200"]
+          user => '${ELASTICSEARCH_USERNAME}'
+          password => '${ELASTICSEARCH_PASSWORD}'
+          ecs_compatibility => disabled 
+          index => "http-log-%{+YYYY.MM.dd}" 
+          document_type => "json"
+        }
+      }
+online-counseling-backup:
+  enableBackup: false
+  mysqlRootPassword: ""
+  backupDatabaseUser: ""
+  backupBucketAccessKey: ""
+  backupBucketSecretKey: ""
+  backupMongoDBAdmin: ""
+  backupMongoDBAdminPass: ""
+  backupGsCloudUserUUID: ""
+  backupGsCloudApiToken: ""
+  backupGsCloudClusterId: ""
+
+# Default secrets, for production use please overwrite all values
+# Keycloak
+keycloakserviceAdminUsername: "realmadmin"
+keycloakserviceAdminPassword: "Testtest!12"
+keycloakserviceTechnicalUsername: "technical"
+keycloakserviceTechnicalPassword: "Testtest!12"
+
+# Statistics
+statisticsMongoUser: "statistics"
+statisticsMongoPass: "statistics"
+
+# LDAP
+online-counseling-open-ldap:
+  adminPassword: "admin"
+  configPassword: "config"
+
+rocketTechnicalUsername: "rocket-chat-technical-user"
+rocketTechnicalPassword: "technical"
+rocketSystemuserUsername: "system1"
+rocketSystemuserPassword: "system"
+
+mailExchangeUser: ""
+mailExchangePassword: ''
+
+serviceEncryptionAppkey: "DaS-HiEr-iSt-eIn-bEiSpIeL"
+
+online-counseling-videobackend:
+  jicofoComponentSecret: "9ea69e051020adb6524bbec8d88e670f"
+  jicofoAuthUser: "focus"
+  jicofoAuthPassword: "cb7a95bf9671bff5afffd931e566e2dd"
+  jvbAuthPassword: "6ba13a7ae9fa26809a3705273d568c5e"
+  jvbAuthUser: "jvb"
+  jibriRecorderPassword: "777dc0295b984503ab6e02e105bac80f"
+  jibriRecorderUser: "recorder"
+  jibriXmppPassword: "34167bb5be4998526ee2ae1a82504643"
+  jibriXmppUser: "jibri"
+  jigasiXmppPassword: "53b2b722bce988cf2776198553143bca"
+  jigasiXmppUser: "jigasi"
+  jwtAcceptedAudiences: "my_server1"
+  jwtAcceptedIssuers: "my_app_client"
+  jwtAppId: "meet.jitsi"
+  jwtAppSecret: "ca464fd202c74dc92139765ac798980204c4c1d3e8b69494ef897313fe58b936"
+  turnCredentials: "example"
+  videoCallServerUrl: "video.onlineberatung.local"
+  turnHost: "turn.onlineberatung.local"
+  turnPort: "443"
+
+online-counseling-rabbitmq:
+  rabbitDefaultPass: "admin"
+  rabbitDefaultUser: "admin"
+
+# Kibana
+online-counseling-kibana:
+  kibanaConfig:
+    kibana.yml: |
+      elasticsearch:
+        hosts:
+         - "http://elasticsearch.develop:9200"
+        serviceAccountToken: "AAEAAWVsYXN0aWMva2liYW5hL2tpYmFuYXRva2VuOnFSZTdJblZaU3JDMVNwTmxFQm40Wnc"
+      xpack:
+        encryptedSavedObjects:
+          encryptionKey: 866cb03e9b2d5c4f23bfb8ae72113d13
+        reporting:
+          encryptionKey: 7fb9e63caffbd78d59bccf0aecca4312
+        security:
+          encryptionKey: e88b4a2a392bde1ee1f59af9f43b5440
+  kibanaEncryptionKey: "9wonFxmvmSeGr0kgrvQKRGjS6LVZhVO_Awkfe0IGaY3NDpaPaj"
+  elasticsearchHosts: "http://elasticsearch-master.default:9200"

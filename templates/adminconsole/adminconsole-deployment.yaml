@@ -1,0 +1,33 @@
+{{- if .Values.global.adminConsoleEnabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.network/adminconsole_network: "true"
+    io.kompose.service: adminconsole
+  name: adminconsole
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: adminconsole
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.network/adminconsole_network: "true"
+        io.kompose.network/service_network: "true"
+        io.kompose.service: adminconsole
+    spec:
+      containers:
+        - image:  {{ .Values.adminconsoleImageName }}:{{ .Values.adminconsoleImageVersion }}
+          name: adminconsole
+          ports:
+            - containerPort: 80
+          resources: {}
+      imagePullSecrets:
+        - name: registry-secret
+      restartPolicy: Always
+status: {}
+{{- end }}

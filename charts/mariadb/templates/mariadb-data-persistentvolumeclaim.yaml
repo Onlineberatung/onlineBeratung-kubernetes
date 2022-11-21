@@ -1,0 +1,14 @@
+{{- if not .Values.global.useExternalMariaDb }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    io.kompose.service: mariadb-data
+  name: mariadb-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.mariaDbDataStorage }}
+{{- end }}

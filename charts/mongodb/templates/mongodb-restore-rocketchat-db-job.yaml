@@ -1,0 +1,64 @@
+{{- if .Values.global.initializeDummyData }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: restore-rocketchat-database
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "7"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: add-mongo-dump
+          image: {{ .Values.mongoImageName }}:{{ .Values.mongoVersion }}
+          command: [ "bash", "-c" ]
+          args:
+            - >
+              cp /mongo/dump/dump.tar /dump/dump.tar &&
+              cd /dump &&
+              tar -zxvf dump.tar
+          volumeMounts:
+            - mountPath: /mongo/dump
+              name: mongodb-dump
+            - mountPath: /dump
+              name: mongodb-data
+      containers:
+        - name: restore-rocketchat-database
+          image: {{ .Values.mongoImageName }}:{{ .Values.mongoVersion }}
+          env:
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: MONGO_INITDB_ROOT_PASSWORD
+                  name: mongodb-secret-{{ .Release.Name }}-env
+            - name: MONGODB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: MONGO_INITDB_ROOT_USERNAME
+                  name: mongodb-secret-{{ .Release.Name }}-env
+          command:
+            - /bin/bash
+            - -c
+            - >
+              mongorestore "mongodb://$MONGODB_USERNAME:$MONGODB_PASSWORD@mongodb.{{ .Release.Namespace }}:27017" --dir /dump/dump;
+              touch /init/data/mongo-rocketchat-database-restored.lock
+          volumeMounts:
+            - mountPath: /dump
+              name: mongodb-data
+            - mountPath: /init/data
+              name: plattform-init-data
+      restartPolicy: Never
+      volumes:
+        - name: mongodb-dump
+          configMap:
+            name: mongodb-dump-{{ .Release.Name }}-configmap
+        - name: mongodb-data
+          persistentVolumeClaim:
+            claimName: mongodb-data
+        - name: plattform-init-data
+          persistentVolumeClaim:
+            claimName: plattform-initialization-data
+  backoffLimit: 1
+{{- end }}

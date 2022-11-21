@@ -1,0 +1,27 @@
+apiVersion: v1
+data:
+  SPRING_PROFILES_ACTIVE: {{ .Values.mailServiceSpringProfilesActive }}
+  SPRING_MAIL_HOST: {{ .Values.springMailHost }}
+  SPRING_MAIL_PORT: "587"
+  SPRING_MAIL_PROTOCOL: {{ .Values.springMailProtocol }}
+  SPRING_MAIL_DEFAULT_ENCODING: {{ .Values.springMailDefaultEncoding }}
+  SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH:  {{ .Values.useSmtpAuth | default "false" | quote }}
+  SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE: {{ .Values.startTlsEnabled | default "false" | quote }}
+  MAIL_SENDER: {{ .Values.mailSender }}
+  MAIL_ERROR_RECIPIENTS: {{ .Values.mailErrorRecipients }}
+  MAIL_FIX_RECIPIENT: {{ .Values.fixRecipient | default "" | quote }}
+  APP_IMPRINT_URL: {{ .Values.appImprintUrl }}
+  APP_DATAPRIVACY_URL: {{ .Values.appDataprivacyUrl }}
+  MAIL_USESMTP: "true"
+  MAIL_EXCHANGE_URL: ""
+  MAIL_EXCHANGE_VERSION: ""
+  CSRF_HEADER_PROPERTY:  {{ .Values.csrfHeaderProperty }}
+  CSRF_COOKIE_PROPERTY: {{ .Values.csrfCookieProperty }}
+  LOGGING_LEVEL_ROOT: {{ .Values.mailServiceLoggingLevelRoot }}
+  TEMPLATE_USE_CUSTOM_RESOURCES_PATH: {{ .Values.useCustomResourcePath | default "true" | quote }}
+  TEMPLATE_CUSTOM_RESOURCES_PATH: "mailserviceTemplates/"
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: mailservice-{{ .Release.Name }}-env
+  name: mailservice-{{ .Release.Name }}-env

@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  binaryData:
+    {{ .Files.Get "resources/openldap-dump.tar.gz" | b64enc | nindent 4 }}
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: openldap-dump-{{ .Release.Name }}-configmap
+  name: openldap-dump-{{ .Release.Name }}-configmap

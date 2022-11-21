@@ -1,0 +1,212 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: mailservice
+  name: mailservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mailservice
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.network/database_network: "true"
+        io.kompose.network/frontend_network: "true"
+        io.kompose.network/service_network: "true"
+        io.kompose.service: mailservice
+    spec:
+      hostAliases:
+        - ip: {{ .Values.global.dockerHostIp }}
+          hostnames:
+            - {{ .Values.global.domainName }}
+      containers:
+        - env:
+            - name: APP_DATAPRIVACY_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: APP_DATAPRIVACY_URL
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: APP_IMPRINT_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: APP_IMPRINT_URL
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: CSRF_COOKIE_PROPERTY
+              valueFrom:
+                configMapKeyRef:
+                  key: CSRF_COOKIE_PROPERTY
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: CSRF_HEADER_PROPERTY
+              valueFrom:
+                configMapKeyRef:
+                  key: CSRF_HEADER_PROPERTY
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: MAIL_ERROR_RECIPIENTS
+              valueFrom:
+                configMapKeyRef:
+                  key: MAIL_ERROR_RECIPIENTS
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: MAIL_EXCHANGE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: MAIL_EXCHANGE_PASSWORD
+                  name: mailservice-secret-{{ .Release.Name }}-env
+            - name: MAIL_EXCHANGE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: MAIL_EXCHANGE_URL
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: MAIL_EXCHANGE_USER
+              valueFrom:
+                secretKeyRef:
+                  key: MAIL_EXCHANGE_USER
+                  name: mailservice-secret-{{ .Release.Name }}-env
+            - name: MAIL_EXCHANGE_VERSION
+              valueFrom:
+                configMapKeyRef:
+                  key: MAIL_EXCHANGE_VERSION
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: MAIL_SENDER
+              valueFrom:
+                configMapKeyRef:
+                  key: MAIL_SENDER
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: MAIL_USESMTP
+              valueFrom:
+                configMapKeyRef:
+                  key: MAIL_USESMTP
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: SPRING_MAIL_DEFAULT_ENCODING
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_MAIL_DEFAULT_ENCODING
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: SPRING_MAIL_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_MAIL_HOST
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: SPRING_MAIL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: SPRING_MAIL_PASSWORD
+                  name: mailservice-secret-{{ .Release.Name }}-env
+            - name: SPRING_MAIL_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_MAIL_PORT
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: SPRING_MAIL_PROTOCOL
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_MAIL_PROTOCOL
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: SPRING_MAIL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: SPRING_MAIL_USERNAME
+                  name: mailservice-secret-{{ .Release.Name }}-env
+            - name: SPRING_PROFILES_ACTIVE
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_PROFILES_ACTIVE
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: TEMPLATE_USE_CUSTOM_RESOURCES_PATH
+              valueFrom:
+                configMapKeyRef:
+                  key: TEMPLATE_USE_CUSTOM_RESOURCES_PATH
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: TEMPLATE_CUSTOM_RESOURCES_PATH
+              valueFrom:
+                configMapKeyRef:
+                  key: TEMPLATE_CUSTOM_RESOURCES_PATH
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: MAIL_FIX_RECIPIENT
+              valueFrom:
+                configMapKeyRef:
+                  key: MAIL_FIX_RECIPIENT
+                  name: mailservice-{{ .Release.Name }}-env
+          name: mailservice
+          ports:
+            - containerPort: 8080
+          image:  {{ .Values.mailServiceImageName }}:{{ .Values.mailServiceImageVersion }}
+          resources: {}
+          volumeMounts:
+            - mountPath: /mailserviceTemplates/assign-enquiry-notification.html
+              name: mailservice-templates
+              subPath: assign-enquiry-notification.html
+            - mountPath: /mailserviceTemplates/assign-enquiry-notification.json
+              name: mailservice-templates
+              subPath: assign-enquiry-notification.json
+            - mountPath: /mailserviceTemplates/enquiry-notification-consultant.html
+              name: mailservice-templates
+              subPath: enquiry-notification-consultant.html
+            - mountPath: /mailserviceTemplates/enquiry-notification-consultant.json
+              name: mailservice-templates
+              subPath: enquiry-notification-consultant.json
+            - mountPath: /mailserviceTemplates/feedback-message-notification.html
+              name: mailservice-templates
+              subPath: feedback-message-notification.html
+            - mountPath: /mailserviceTemplates/feedback-message-notification.json
+              name: mailservice-templates
+              subPath: feedback-message-notification.json
+            - mountPath: /mailserviceTemplates/message-notification-asker.html
+              name: mailservice-templates
+              subPath: message-notification-asker.html
+            - mountPath: /mailserviceTemplates/message-notification-asker.json
+              name: mailservice-templates
+              subPath: message-notification-asker.json
+            - mountPath: /mailserviceTemplates/message-notification-consultant.html
+              name: mailservice-templates
+              subPath: message-notification-consultant.html
+            - mountPath: /mailserviceTemplates/message-notification-consultant.json
+              name: mailservice-templates
+              subPath: message-notification-consultant.json
+            - mountPath: /mailserviceTemplates/reassign-confirmation-notification.html
+              name: mailservice-templates
+              subPath: reassign-confirmation-notification.html
+            - mountPath: /mailserviceTemplates/reassign-confirmation-notification.json
+              name: mailservice-templates
+              subPath: reassign-confirmation-notification.json
+            - mountPath: /mailserviceTemplates/reassign-request-notification.html
+              name: mailservice-templates
+              subPath: reassign-request-notification.html
+            - mountPath: /mailserviceTemplates/reassign-request-notification.json
+              name: mailservice-templates
+              subPath: reassign-request-notification.json
+            - mountPath: /mailserviceTemplates/free-text.html
+              name: mailservice-templates
+              subPath: free-text.html
+            - mountPath: /mailserviceTemplates/free-text.json
+              name: mailservice-templates
+              subPath: free-text.json
+            - mountPath: /mailserviceTemplates/images/illustration-bottom.png
+              name: mailservice-templates-images
+              subPath: "illustration-bottom.png"
+            - mountPath: /mailserviceTemplates/images/illustration-top.png
+              name: mailservice-templates-images
+              subPath: "illustration-top.png"
+      imagePullSecrets:
+        - name: registry-secret
+      restartPolicy: Always
+      volumes:
+        - name: mailservice-templates
+          configMap:
+            name: mailservice-templates-{{ .Release.Name }}-configmap
+        - name: mailservice-templates-images
+          configMap:
+            name: mailservice-templates-images-{{ .Release.Name }}-configmap

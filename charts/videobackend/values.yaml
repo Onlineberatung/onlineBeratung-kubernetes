@@ -1,0 +1,29 @@
+jicofoImageName: 'jitsi/jicofo'
+jvbImageName: 'jitsi/jvb'
+prosodyImageName: 'jitsi/prosody'
+webImageName: 'jitsi/web'
+
+jicofoVersion: 'stable-7439-2'
+jvbVersion: 'stable-7439-2'
+prosodyVersion: 'stable-7439-2'
+webVersion: 'stable-7439-2'
+
+jicofoComponentSecret: 9ea69e051020adb6524bbec8d88e670f
+jicofoAuthUser: focus
+jicofoAuthPassword: cb7a95bf9671bff5afffd931e566e2dd
+jvbAuthPassword: 6ba13a7ae9fa26809a3705273d568c5e
+jvbAuthUser: jvb
+jibriRecorderPassword: "777dc0295b984503ab6e02e105bac80f"
+jibriRecorderUser: "recorder"
+jibriXmppPassword: "34167bb5be4998526ee2ae1a82504643"
+jibriXmppUser: "jibri"
+jigasiXmppPassword: "53b2b722bce988cf2776198553143bca"
+jigasiXmppUser: "jigasi"
+jwtAcceptedAudiences: "my_server1"
+jwtAcceptedIssuers: "my_app_client"
+jwtAppId: "meet.jitsi"
+jwtAppSecret: "ca464fd202c74dc92139765ac798980204c4c1d3e8b69494ef897313fe58b936"
+
+videoCallServerUrl: tbd
+videoCallServerHost: tbd
+turnCredentials: tbd

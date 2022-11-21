@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: rabbitmq
+  name: rabbitmq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: rabbitmq
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: rabbitmq
+    spec:
+      hostname: rabbitmq
+      {{- if .Values.global.initializeDummyData }}
+      initContainers:
+        - name: rabbitmq-provide-definition
+          image: {{ .Values.rabbitImageName }}:{{ .Values.rabbitVersion }}
+          command: [ "/bin/bash", "-c" ]
+          args:
+            - >
+              base64 -d /dump/binaryData > /var/lib/rabbitmq/mnesia/rabbit_rabbitmq_dump.json;
+          volumeMounts:
+            - mountPath: /dump
+              name: rabbit-dump
+            - mountPath: /var/lib/rabbitmq/mnesia
+              name: rabbitmq-mnesia
+      {{- end }}
+      containers:
+        - image: {{ .Values.rabbitImageName }}:{{ .Values.rabbitVersion }}
+          ports:
+            - containerPort: 5672
+            - containerPort: 15672
+          name: rabbitmq
+          resources: {}
+          volumeMounts:
+            - mountPath: /etc/rabbitmq/
+              name: rabbitmq-config
+            - mountPath: /var/lib/rabbitmq/mnesia
+              name: rabbitmq-mnesia
+      restartPolicy: Always
+      volumes:
+        - name: rabbitmq-config
+          configMap:
+            name: rabbitmq-config-{{ .Release.Name }}-configmap
+        - name: rabbitmq-mnesia
+          persistentVolumeClaim:
+            claimName: rabbitmq-mnesia
+        - name: rabbit-dump
+          configMap:
+            name: rabbitmq-dump-{{ .Release.Name }}-configmap

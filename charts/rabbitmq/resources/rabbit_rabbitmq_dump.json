@@ -1,0 +1,193 @@
+{
+  "rabbit_version": "3.9.14",
+  "rabbitmq_version": "3.9.14",
+  "product_name": "RabbitMQ",
+  "product_version": "3.9.14",
+  "users": [
+    {
+      "name": "admin",
+      "password_hash": "2dtELcC0Owpjz+I6l6nYogS8ydf8rbnt+cS9+mmj8xU70zcl",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": [
+        "administrator"
+      ],
+      "limits": {}
+    },
+    {
+      "name": "statistics",
+      "password_hash": "YS+pJHj6K794sdD7e0DI3orKA1tA4/4JcOkGCh8XIhTv4Xo9",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": [
+        "administrator"
+      ],
+      "limits": {}
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "admin",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    },
+    {
+      "user": "statistics",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "topic_permissions": [
+    {
+      "user": "statistics",
+      "vhost": "/",
+      "exchange": "statistics.topic",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "parameters": [],
+  "global_parameters": [
+    {
+      "name": "internal_cluster_id",
+      "value": "rabbitmq-cluster-id-ejH8MMN3N66_xdqBoaopoA"
+    }
+  ],
+  "policies": [],
+  "queues": [
+    {
+      "name": "statistics.START_VIDEO_CALL",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-dead-letter-exchange": "statistics.dead_letter",
+        "x-dead-letter-routing-key": "DEAD_LETTER"
+      }
+    },
+    {
+      "name": "statistics.CREATE_MESSAGE",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-dead-letter-exchange": "statistics.dead_letter",
+        "x-dead-letter-routing-key": "DEAD_LETTER"
+      }
+    },
+    {
+      "name": "statistics.dead_letter_queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "statistics.ASSIGN_SESSION",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-dead-letter-exchange": "statistics.dead_letter",
+        "x-dead-letter-routing-key": "DEAD_LETTER"
+      }
+    },
+    {
+      "name": "statistics.STOP_VIDEO_CALL",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-dead-letter-exchange": "statistics.dead_letter",
+        "x-dead-letter-routing-key": "DEAD_LETTER"
+      }
+    },
+    {
+      "name": "statistics.REGISTRATION",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-dead-letter-exchange": "statistics.dead_letter",
+        "x-dead-letter-routing-key": "DEAD_LETTER"
+      }
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "statistics.topic",
+      "vhost": "/",
+      "type": "topic",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "statistics.dead_letter",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "statistics.dead_letter",
+      "vhost": "/",
+      "destination": "statistics.dead_letter_queue",
+      "destination_type": "queue",
+      "routing_key": "DEAD_LETTER",
+      "arguments": {}
+    },
+    {
+      "source": "statistics.topic",
+      "vhost": "/",
+      "destination": "statistics.ASSIGN_SESSION",
+      "destination_type": "queue",
+      "routing_key": "ASSIGN_SESSION",
+      "arguments": {}
+    },
+    {
+      "source": "statistics.topic",
+      "vhost": "/",
+      "destination": "statistics.CREATE_MESSAGE",
+      "destination_type": "queue",
+      "routing_key": "CREATE_MESSAGE",
+      "arguments": {}
+    },
+    {
+      "source": "statistics.topic",
+      "vhost": "/",
+      "destination": "statistics.START_VIDEO_CALL",
+      "destination_type": "queue",
+      "routing_key": "START_VIDEO_CALL",
+      "arguments": {}
+    },
+    {
+      "source": "statistics.topic",
+      "vhost": "/",
+      "destination": "statistics.STOP_VIDEO_CALL",
+      "destination_type": "queue",
+      "routing_key": "STOP_VIDEO_CALL",
+      "arguments": {}
+    },
+    {
+      "source": "statistics.topic",
+      "vhost": "/",
+      "destination": "statistics.REGISTRATION",
+      "destination_type": "queue",
+      "routing_key": "REGISTRATION",
+      "arguments": {}
+    }
+  ]
+}

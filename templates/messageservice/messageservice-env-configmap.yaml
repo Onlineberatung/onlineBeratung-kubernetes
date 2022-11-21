@@ -1,0 +1,45 @@
+apiVersion: v1
+data:
+  # General
+{{- if .Values.global.enableTls }}
+  APP_BASE_URL: "https://{{ .Values.global.domainName }}"
+{{- else }}
+  APP_BASE_URL: "http://{{ .Values.global.domainName }}"
+{{- end }}
+  # Spring/Database
+  SPRING_PROFILES_ACTIVE: {{ .Values.messageServiceSpringProfilesActive }}
+  # Keycloak
+  KEYCLOAK_AUTH_SERVER_URL: {{ .Values.keycloakAuthServerUrl }}
+  KEYCLOAK_REALM: {{ .Values.keycloakRealm }}
+  KEYCLOAK_PRINCIPAL_ATTRIBUTE: {{ .Values.keycloakPrincipalAttribute }}
+  KEYCLOAK_RESOURCE: {{ .Values.messageServiceKeycloakResource }}
+  KEYCLOAK_CORS: "false"
+  KEYCLOAKSERVICE_ADMIN_CLIENTID: {{ .Values.keycloakserviceAdminClientid }}
+  KEYCLOAKSERVICE_APP_CLIENTID: {{ .Values.keycloakserviceAppClientid}}
+  # Rocket.Chat
+  ROCKET_CHAT_API_URL: "http://rocketchat.{{ .Release.Namespace }}:3000/api/v1"
+  ROCKET_SYSTEMUSER_ID: {{ .Values.rocketSystemuserId}}
+  ROCKET_CREDENTIALSCHEDULER_CRON: {{ .Values.rocketCredentialschedulerCron}}
+  # Services
+  USER_SERVICE_API_URL: "http://userservice.{{ .Release.Namespace }}:8080/users"
+  USER_SERVICE_API_LIVEPROXY_URL: "http://userservice.{{ .Release.Namespace }}:8080"
+  # CSRF
+  CSRF_HEADER_PROPERTY: {{ .Values.csrfHeaderProperty}}
+  CSRF_COOKIE_PROPERTY: {{ .Values.csrfCookieProperty}}
+  # Logging
+  #LOGGING_LEVEL_ROOT: "DEBUG"
+  {{- if .Values.global.useExternalMariaDb }}
+  SPRING_DATASOURCE_URL: "jdbc:mariadb://{{ .Values.global.mariaDbHost }}:3306/messageservice"
+  {{- else }}
+  SPRING_DATASOURCE_URL: "jdbc:mariadb://mariadb.{{ .Release.Namespace }}:3306/messageservice"
+  {{- end }}
+  CSRF_WHITELIST_HEADER_PROPERTY: {{ .Values.csrfWhitelistHeaderProperty}}
+  MULTITENANCY_ENABLED: {{ .Values.global.multitenancyEnabled | quote }}
+  TENANT_SERVICE_API_URL: "http://tenantservice.{{ .Release.Namespace }}:8080"
+  STATISTICS_ENABLED: {{ .Values.global.statisticsEnabled | quote }}
+  FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED: {{ .Values.global.multitenancyWithSingleDomainEnabled | quote }}
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: messageservice-{{ .Release.Name }}-env
+  name: messageservice-{{ .Release.Name }}-env

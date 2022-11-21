@@ -1,0 +1,6 @@
+name: online-counseling-rocketchat
+description: The chart providing rocketchat
+version: 0.0.1
+apiVersion: v1
+keywords:
+ - online-counseling-rocketchat

@@ -1,0 +1,83 @@
+{
+  "tenantId": 1,
+  "id": 0,
+  "slug": "beratung",
+  "excludeNonMainConsultantsFromTeamSessions": false,
+  "lockedAgencies": false,
+  "consultantBoundedToConsultingType": false,
+  "welcomeMessage": {
+    "sendWelcomeMessage": false,
+    "welcomeMessageText": null
+  },
+  "sendFurtherStepsMessage": true,
+  "sendSaveSessionDataMessage": false,
+  "isSetEmailAllowed": true,
+  "isVideoCallAllowed": true,
+  "showAskerProfile": true,
+  "isSubsequentRegistrationAllowed": false,
+  "isAnonymousConversationAllowed": true,
+  "sessionDataInitializing": {
+    "addictiveDrugs": false,
+    "age": false,
+    "gender": false,
+    "relation": false,
+    "state": false
+  },
+  "whiteSpot": {
+    "whiteSpotAgencyAssigned": null,
+    "whiteSpotAgencyId": null
+  },
+  "groupChat": {
+    "isGroupChat": false,
+    "groupChatRules": null
+  },
+  "monitoring": {
+    "initializeMonitoring": false,
+    "monitoringTemplateFile": null
+  },
+  "initializeFeedbackChat": false,
+  "isPeerChat": false,
+  "languageFormal": true,
+  "roles": {
+    "consultant": {
+      "default": ["consultant"]
+    }
+  },
+  "notifications": {
+    "teamSessions": {
+      "newMessage": {
+        "allTeamConsultants": false
+      }
+    }
+  },
+  "registration": {
+    "minPostcodeSize": 5,
+    "autoSelectAgency": false,
+    "autoSelectPostcode": false,
+    "mandatoryFields": {
+      "age": false,
+      "state": false
+    },
+    "notes": {
+      "agencySelection": null,
+      "password": null
+    }
+  },
+  "titles": {
+    "default": "Beratung",
+    "short": "Beratung",
+    "long": "Beratung",
+    "welcome": "Herzlich Willkommen!",
+    "registrationDropdown": "Beratung"
+  },
+  "urls": {
+    "requiredAidMissingRedirectUrl": null,
+    "registrationPostcodeFallbackUrl": null
+  },
+  "welcomeScreen": {
+    "anonymous": {
+      "title": "Anonym und kostenfrei",
+      "text": "Sie bleiben anonym und erhalten kostenfreie Beratung und Hilfe"
+    }
+  }
+}

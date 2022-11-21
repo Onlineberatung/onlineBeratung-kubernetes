@@ -1,0 +1,10 @@
+openldapImageName: "bitnami/openldap"
+openldapVersion: "2.6"
+
+adminUsername: "admin"
+adminPassword: "admin"
+
+olcRootDn: "dc=onlineberatung,dc=de"
+ouConfDn: "ou=ob,dc=onlineberatung,dc=de"
+ouConfOu: "ob"
+ouConfUsersDn: "ou=users,ou=ob,dc=onlineberatung,dc=de"

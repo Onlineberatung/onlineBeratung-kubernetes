@@ -1,0 +1,6 @@
+mariadbImageName: "mariadb"
+mariadbVersion: "10.5.10"
+
+mysqlRootPassword: "root"
+
+mariaDbDataStorage: "1Gi"

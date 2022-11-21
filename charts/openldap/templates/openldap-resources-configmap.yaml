@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: openldap-{{ .Release.Name }}-config
+data:
+  ou-conf.ldif: |
+    dn: {{ .Values.ouConfDn }}
+    objectClass: organizationalUnit
+    ou: {{ .Values.ouConfOu }}
+
+    dn: {{ .Values.ouConfUsersDn }}
+    objectClass: organizationalUnit
+    ou: users

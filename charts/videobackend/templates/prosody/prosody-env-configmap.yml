@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jitsi-prosody-{{ .Release.Name }}-env
+  namespace: jitsi
+data:
+  VIDEOCALL_SERVER_URL: {{ .Values.videoCallServerUrl }}
+  TURN_HOST: {{ .Values.turnHost }}
+  TURN_PORT: {{ .Values.turnPort | quote }}

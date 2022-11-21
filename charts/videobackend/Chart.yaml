@@ -1,0 +1,6 @@
+name: online-counseling-videobackend
+description: The chart providing jitsi videobackend
+version: 0.0.1
+apiVersion: v1
+keywords:
+ - online-counseling-videobackend

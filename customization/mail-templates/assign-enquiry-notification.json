@@ -1,0 +1,22 @@
+{
+	"htmlTemplateFilename":"assign-enquiry-notification.html",
+	"subject":"Neue_r Ratsuchende_r",
+	"templateImages" : [
+		{
+			"filename":"illustration-bottom.png",
+			"filetype":"image/png"
+		},
+		{
+			"filename":"illustration-top.png",
+			"filetype":"image/png"
+		}
+	],
+	"templateDataFields": 
+		[
+			"tenant_name",
+			"tenant_claim",
+			"name_recipient",
+			"name_sender",
+			"name_user"
+		]
+}

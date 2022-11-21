@@ -1,0 +1,164 @@
+.settings-dialog {
+  // Change the background color of the tabs list
+  > div:first-child > div:first-child > span:first-child:empty {
+    background-color: $colorGrey4;
+  }
+
+  div[role="tablist"] {
+    div[role="tab"] {
+      color: $tabColor;
+
+      &[data-selected] {
+        color: $tabColorSelected;
+
+        & > span[data-selected] {
+          background-color: $tabSelectedLine;
+        }
+      }
+    }
+  }
+
+  // Hide the auth panel in the UI which allows the user to sign out
+  // https://github.com/jitsi/jitsi-meet/blob/5dee37dd8220888cf587a70bba81c4d9d75fd40c/react/features/settings/components/web/ProfileTab.js#L191-L215
+  .profile-pane {
+    #login_button, .auth-name, .mock-atlaskit-label {
+      display: none;
+    }
+  }
+
+  .profile-edit {
+    flex-direction: column;
+    margin: 24px 0 0;
+
+    .profile-edit-field {
+      margin: 0 0 24px;
+
+      input {
+        color: rgb(51, 51, 51);
+      }
+
+      & > div {
+        display: flex;
+
+        label {
+          display: flex;
+          align-items: center;
+
+          div {
+            color: $labelColor;
+            font-weight: 400;
+            padding: 0;
+          }
+        }
+
+        & > * {
+          flex: 1;
+        }
+
+        & > div > div > div {
+          background-color: $colorWhite;
+          border-width: 1px;
+          padding: 15px 20px;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+
+  // Somehow Jitsi doesn't load the German label for this 
+  // feature. Since it's not really important just hide it.
+  input[name="disableSelfView"] {
+    ~ * {
+      display: none;
+    }
+  }
+
+  .dropdown-menu {
+    button {
+      background: $colorWhite;
+      border: 1px solid $colorPrimary;
+      border-radius: 4px;
+      height: auto;
+      padding: 8px 20px;
+      text-align: left;
+
+      &, & > span {
+        color: $colorPrimary;
+      }
+
+      span[role="presentation"] {
+        color: $colorGrey3;
+        fill: $colorGrey3;
+
+        svg {
+          transform: scale(2);
+        }
+      }
+    }
+  }
+
+  .settings-pane {
+    h2 {
+      font-size: 16px;
+      line-height: 21px;
+      font-family: "Nunito",sans-serif;
+      font-weight: 600;
+    }
+
+    .mock-atlaskit-label {
+      color: $colorPrimary;
+    }
+
+    label {
+      input[type="checkbox"] {
+        & + svg {
+          --local-background: #{$colorWhite};
+          --local-background-active: #{$colorWhite};
+          --local-background-checked: #{$colorWhite};
+          --local-background-checked-hover: #{$colorWhite};
+          --local-background-disabled: #{$colorWhite};
+
+          --local-border: #{$colorGrey3};
+          --local-border-disabled: #{$colorGrey3};
+          --local-border-focus: #{$colorGrey3};
+          --local-border-active: #{$colorGrey3};
+          --local-border-checked: #{$colorGrey3};
+          --local-border-checked-hover: #{$colorGrey3};
+          --local-tick-rest: transparent;
+
+          --local-background-hover: #{$colorWhite};
+          --local-border-hover: #{$colorPrimary};
+
+          --local-tick-checked: #{$colorPrimary};
+          --local-tick-disabled: #{$colorPrimary};
+          --local-tick-active: #{$colorPrimary};
+
+          --local-border-invalid: #{$form-error};
+          --local-border-checked-invalid: #{$form-error};
+
+          transform: scale(2);
+
+          rect {
+            stroke-width: 1px;
+          }
+
+          & + span {
+            color: #{$labelColor};
+          }
+        }
+
+        &:checked + svg {
+          /* Extra override because jitsi has overwritten */
+          --checkbox-background-color: #{$colorWhite};
+          --checkbox-border-color: #{$colorPrimary};
+        }
+      }
+    }
+  }
+
+  // Hide Gravatar input field. The `disableThirdPartyRequests`
+  // config option unfortunately doesn't take care of this.
+  .profile-edit > .profile-edit-field:nth-child(2) {
+    display: none;
+  }
+}

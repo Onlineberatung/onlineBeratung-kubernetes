@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: liveservice
+  name: liveservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: liveservice
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.network/database_network: "true"
+        io.kompose.network/frontend_network: "true"
+        io.kompose.network/service_network: "true"
+        io.kompose.service: liveservice
+    spec:
+      hostAliases:
+        - ip: {{ .Values.global.dockerHostIp }}
+          hostnames:
+            - {{ .Values.global.domainName }}
+      initContainers:
+        - name: wait-for-keycloak
+          image: busybox
+          command: [ "sh", "-c", "until nc -z keycloak 8080 > /dev/null; do echo Waiting for keycloak.; sleep 5; done;" ]
+      containers:
+        - env:
+            - name: SPRING_PROFILES_ACTIVE
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_PROFILES_ACTIVE
+                  name: liveservice-{{ .Release.Name }}-env
+            - name: APP_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: APP_BASE_URL
+                  name: liveservice-{{ .Release.Name }}-env
+            - name: KEYCLOAK_AUTH_SERVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: KEYCLOAK_AUTH_SERVER_URL
+                  name: liveservice-{{ .Release.Name }}-env
+            - name: KEYCLOAK_REALM
+              valueFrom:
+                configMapKeyRef:
+                  key: KEYCLOAK_REALM
+                  name: liveservice-{{ .Release.Name }}-env
+            - name: KEYCLOAK_RESOURCE
+              valueFrom:
+                configMapKeyRef:
+                  key: KEYCLOAK_RESOURCE
+                  name: liveservice-{{ .Release.Name }}-env
+            - name: SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING
+                  name: liveservice-{{ .Release.Name }}-env
+          name: liveservice
+          ports:
+            - containerPort: 8080
+          image:  {{ .Values.liveServiceImageName }}:{{ .Values.liveServiceImageVersion }}
+          resources: {}
+      imagePullSecrets:
+        - name: registry-secret
+      restartPolicy: Always

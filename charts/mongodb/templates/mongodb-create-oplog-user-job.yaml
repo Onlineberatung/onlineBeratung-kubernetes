@@ -1,0 +1,50 @@
+{{- if .Values.global.initializeDummyData }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: create-oplog-user
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "4"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    spec:
+      containers:
+        - name: create-mongo-oplog
+          image: {{ .Values.mongoImageName }}:{{ .Values.mongoVersion }}
+          env:
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: MONGO_INITDB_ROOT_PASSWORD
+                  name: mongodb-secret-{{ .Release.Name }}-env
+            - name: MONGODB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: MONGO_INITDB_ROOT_USERNAME
+                  name: mongodb-secret-{{ .Release.Name }}-env
+            - name: MONGODB_OPLOG_USER
+              valueFrom:
+                secretKeyRef:
+                  key: MONGO_OPLOG_USER
+                  name: mongodb-secret-{{ .Release.Name }}-env
+            - name: MONGODB_OPLOG_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: MONGO_OPLOG_PASSWORD
+                  name: mongodb-secret-{{ .Release.Name }}-env
+          command:
+            - /bin/bash
+            - -c
+            - >
+              mongosh "mongodb://$MONGODB_USERNAME:$MONGODB_PASSWORD@mongodb.{{ .Release.Namespace }}:27017"
+              --eval
+              "db = db.getSiblingDB('oplog');
+              db.createUser({
+                user: '$MONGODB_OPLOG_USER',
+                pwd: '$MONGODB_OPLOG_PASSWORD',
+                roles: [{ role: 'read', db: 'local' }]});"
+      restartPolicy: Never
+  backoffLimit: 1
+{{- end }}

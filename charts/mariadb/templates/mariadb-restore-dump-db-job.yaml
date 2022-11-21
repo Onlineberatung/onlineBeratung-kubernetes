@@ -1,0 +1,48 @@
+{{- if .Values.global.initializeDummyData }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: restore-mariadb-database
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "2"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: wait-for-mongo
+          env:
+            - name: MARIADB_HOST
+              value: {{ .Values.global.mariaDbHost | default "mariadb" | quote }}
+          image: busybox
+          command: [ "sh", "-c", "until nc -z $MARIADB_HOST 3306 > /dev/null; do echo Waiting for maria.; sleep 5; done;" ]
+      containers:
+        - name: restore-mariadb-database
+          image: {{ .Values.mariadbImageName }}:{{ .Values.mariadbVersion }}
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: MYSQL_ROOT_PASSWORD
+                  name: mariadb-secret-{{ .Release.Name }}-env
+            - name: MARIADB_HOST
+              value: {{ .Values.global.mariaDbHost | default "mariadb" | quote }}
+          command:
+            - /bin/bash
+            - -c
+            - >
+              cp /dump/mariadb.dump.sql.gz /tmp/mariadb.dump.sql.gz;
+              cd /tmp;
+              gunzip -k mariadb.dump.sql.gz;
+              mariadb -uroot -h$MARIADB_HOST -p$MYSQL_ROOT_PASSWORD < /tmp/mariadb.dump.sql;
+          volumeMounts:
+            - mountPath: /dump
+              name: mariadb-dump
+      restartPolicy: Never
+      volumes:
+        - name: mariadb-dump
+          configMap:
+            name: mariadb-dump-{{ .Release.Name }}-configmap
+  backoffLimit: 5
+{{- end }}

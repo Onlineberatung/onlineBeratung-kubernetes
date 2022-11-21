@@ -1,0 +1,34 @@
+{{- if .Values.global.adminConsoleEnabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: adminconsole
+  namespace: {{ .Release.Namespace }}
+spec:
+  ingressClassName: nginx
+  rules:
+  {{- if .Values.global.multitenancyEnabled }}
+  {{- if not .Values.global.multitenancyWithSingleDomainEnabled }}
+    - host: "*.{{ .Values.global.domainName }}"
+      http:
+        paths:
+          - backend:
+              service:
+                name: adminconsole
+                port:
+                  number: 80
+            path: /admin
+            pathType: Prefix
+  {{- end }}
+  {{- end }}
+    - host: {{ .Values.global.domainName }}
+      http:
+        paths:
+          - backend:
+              service:
+                name: adminconsole
+                port:
+                  number: 80
+            path: /admin
+            pathType: Prefix
+{{- end }}

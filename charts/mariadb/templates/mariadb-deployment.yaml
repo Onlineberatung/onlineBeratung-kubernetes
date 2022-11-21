@@ -1,0 +1,52 @@
+{{- if not .Values.global.useExternalMariaDb }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.network/database_network: "true"
+    io.kompose.service: mariadb
+  name: mariadb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mariadb
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.network/database_network: "true"
+        io.kompose.service: mariadb
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: MYSQL_ROOT_PASSWORD
+                  name: mariadb-secret-{{ .Release.Name }}-env
+          image: {{ .Values.mariadbImageName }}:{{ .Values.mariadbVersion }}
+          name: mariadb
+          ports:
+            - containerPort: 3306
+          resources: {}
+          volumeMounts:
+            - mountPath: /docker-entrypoint-initdb.d/
+              name: init-sql
+            - mountPath: /var/lib/mysql
+              name: mariadb-data
+            - mountPath: /etc/mysql/conf.d
+              name: mariadb-config
+      restartPolicy: Always
+      volumes:
+        - name: init-sql
+          configMap:
+            name: init-sql-{{ .Release.Name }}-configmap
+        - name: mariadb-data
+          persistentVolumeClaim:
+            claimName: mariadb-data
+        - name: mariadb-config
+          persistentVolumeClaim:
+            claimName: mariadb-config
+{{- end }}

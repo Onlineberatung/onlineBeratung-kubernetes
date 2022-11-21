@@ -1,0 +1,45 @@
+{{- if .Values.global.initializeDummyData }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: openldap-init-dump
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "0"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    spec:
+      containers:
+        - name: openldap-init-dump
+          image: "bash"
+          command: [ "/usr/local/bin/bash", "-c" ]
+          args:
+            - >
+              base64 -d /openldap/dump/binaryData > ~/dump.tar;
+              cd ~;
+              tar -zxvf dump.tar;
+              cp -R data /bitnami/openldap;
+              mkdir /bitnami/openldap/slapd.d;
+              cp -R slapd.d/* /bitnami/openldap/slapd.d/ >> /init/data/ldap-database-initialized.lock;
+              chmod -R 777 /bitnami/openldap;
+          volumeMounts:
+            - mountPath: /bitnami/openldap
+              name: openldap-data
+            - mountPath: /openldap/dump
+              name: openldap-dump
+            - mountPath: /init/data
+              name: plattform-init-data
+      restartPolicy: Never
+      volumes:
+        - name: openldap-data
+          persistentVolumeClaim:
+            claimName: openldap-data
+        - name: openldap-dump
+          configMap:
+            name: openldap-dump-{{ .Release.Name }}-configmap
+        - name: plattform-init-data
+          persistentVolumeClaim:
+            claimName: plattform-initialization-data
+  backoffLimit: 1
+{{- end }}

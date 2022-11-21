@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1$2
+  name: statisticsservice
+  namespace: {{ .Release.Namespace }}
+spec:
+  ingressClassName: nginx
+  rules:
+  {{- if .Values.global.multitenancyWithSingleDomainEnabled }}
+    - host: {{ .Values.global.domainName }}
+  {{- else if .Values.global.multitenancyEnabled }}
+    - host: "*.{{ .Values.global.domainName }}"
+  {{- else }}
+    - host: {{ .Values.global.domainName }}
+  {{- end }}
+      http:
+        paths:
+          - backend:
+              service:
+                name: statisticsservice
+                port:
+                  number: 8080
+            path: /service/(statistics)(.*)
+            pathType: Prefix

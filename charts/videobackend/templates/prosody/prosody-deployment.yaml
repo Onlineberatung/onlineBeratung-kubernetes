@@ -1,0 +1,185 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: prosody
+  name: prosody
+  namespace: jitsi
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      k8s-app: prosody
+  template:
+    metadata:
+      labels:
+        k8s-app: prosody
+    spec:
+      containers:
+        - name: prosody
+          image: {{ .Values.prosodyImageName }}:{{ .Values.prosodyVersion }}
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 5222
+          - containerPort: 5280
+          - containerPort: 5347
+          - containerPort: 5269
+          env:
+            - name: XMPP_DOMAIN
+              value: meet.jitsi
+            - name: LOG_LEVEL
+              value: debug              
+            - name: XMPP_AUTH_DOMAIN
+              value: auth.meet.jitsi
+            - name: XMPP_MUC_DOMAIN
+              value: muc.meet.jitsi
+            - name: XMPP_INTERNAL_MUC_DOMAIN
+              value: internal-muc.meet.jitsi
+            - name: TZ
+              value: UTC
+            - name: JVB_TCP_HARVESTER_DISABLED
+              value: "true"
+            - name: ENABLE_XMPP_WEBSOCKET
+              value: "1"
+            - name: AUTH_TYPE
+              value: "jwt"
+            - name: ENABLE_AUTH
+              value: "1"
+            - name: ENABLE_GUESTS
+              value: "0"
+            - name: ENABLE_LOBBY
+              value: "1"
+            - name: XMPP_GUEST_DOMAIN
+              value: "guest.meet.jitsi"
+            - name: XMPP_INTERNAL_MUC_MODULES
+              value: ""
+            - name: XMPP_MODULES
+              value: ""
+            - name: XMPP_MUC_MODULES
+              value: "token_moderation,close_room,create_room"
+            - name: XMPP_RECORDER_DOMAIN
+              value: "recorder.meet.jitsi"
+            - name: JICOFO_COMPONENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: JICOFO_COMPONENT_SECRET
+                  name: jitsi-secret-{{ .Release.Name }}-env
+            - name: JVB_AUTH_USER
+              valueFrom:
+                secretKeyRef:
+                  key: JVB_AUTH_USER
+                  name: jitsi-secret-{{ .Release.Name }}-env
+            - name: JVB_AUTH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: JVB_AUTH_PASSWORD
+                  name: jitsi-secret-{{ .Release.Name }}-env
+            - name: JICOFO_AUTH_USER
+              valueFrom:
+                secretKeyRef:
+                  key: JICOFO_AUTH_USER
+                  name: jitsi-secret-{{ .Release.Name }}-env
+            - name: JICOFO_AUTH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: JICOFO_AUTH_PASSWORD
+                  name: jitsi-secret-{{ .Release.Name }}-env
+            - name: JIBRI_RECORDER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: JIBRI_RECORDER_PASSWORD
+                  name: jitsi-secret-{{ .Release.Name }}-env
+            - name: JIBRI_RECORDER_USER
+              valueFrom:
+                secretKeyRef:
+                  key: JIBRI_RECORDER_USER
+                  name: jitsi-secret-{{ .Release.Name }}-env
+            - name: JIBRI_XMPP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: JIBRI_XMPP_PASSWORD
+                  name: jitsi-secret-{{ .Release.Name }}-env
+            - name: JIBRI_XMPP_USER
+              valueFrom:
+                secretKeyRef:
+                  key: JIBRI_XMPP_USER
+                  name: jitsi-secret-{{ .Release.Name }}-env
+            - name: JIGASI_XMPP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: JIGASI_XMPP_PASSWORD
+                  name: jitsi-secret-{{ .Release.Name }}-env
+            - name: JIGASI_XMPP_USER
+              valueFrom:
+                secretKeyRef:
+                  key: JIGASI_XMPP_USER
+                  name: jitsi-secret-{{ .Release.Name }}-env
+            - name: JWT_ACCEPTED_AUDIENCES
+              valueFrom:
+                secretKeyRef:
+                  key: JWT_ACCEPTED_AUDIENCES
+                  name: jitsi-secret-{{ .Release.Name }}-env
+            - name: JWT_ACCEPTED_ISSUERS
+              valueFrom:
+                secretKeyRef:
+                  key: JWT_ACCEPTED_ISSUERS
+                  name: jitsi-secret-{{ .Release.Name }}-env
+            - name: JWT_APP_ID
+              valueFrom:
+                secretKeyRef:
+                  key: JWT_APP_ID
+                  name: jitsi-secret-{{ .Release.Name }}-env
+            - name: JWT_APP_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: JWT_APP_SECRET
+                  name: jitsi-secret-{{ .Release.Name }}-env
+            - name: PUBLIC_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: VIDEOCALL_SERVER_URL
+                  name: jitsi-prosody-{{ .Release.Name }}-env
+            - name: TURNS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: TURN_HOST
+                  name: jitsi-prosody-{{ .Release.Name }}-env
+            - name: TURNS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: TURN_PORT
+                  name: jitsi-prosody-{{ .Release.Name }}-env
+            - name: TURN_CREDENTIALS
+              valueFrom:
+                secretKeyRef:
+                  key: TURN_CREDENTIALS
+                  name: jitsi-secret-{{ .Release.Name }}-env
+            - name: TURN_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: TURN_HOST
+                  name: jitsi-prosody-{{ .Release.Name }}-env
+            - name: TURN_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: TURN_PORT
+                  name: jitsi-prosody-{{ .Release.Name }}-env
+
+          volumeMounts:
+            - mountPath: /prosody-plugins-custom/
+              name: prosody-plugins-custom
+            - mountPath: /prosody-plugins/mod_muc_lobby_rooms.lua
+              name: prosody-plugins-custom
+              subPath: "mod_muc_lobby_rooms.lua"
+            - mountPath: /config/conf.d/statistics.cfg.lua
+              name: prosody-statistics-plugin
+              subPath: "statistics.cfg.lua"
+      volumes:
+        - name: prosody-plugins-custom
+          configMap:
+            name: prosody-custom-plugins-{{ .Release.Name }}-configmap
+        - name: prosody-statistics-plugin
+          configMap:
+            name: prosody-statistics-plugin-{{ .Release.Name }}-configmap

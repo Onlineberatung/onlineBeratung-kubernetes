@@ -1,0 +1,14 @@
+{{- if .Values.useHostpathUploadStorage }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    io.kompose.service: rocketchat-app-uploads
+  name: rocketchat-app-uploads
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+{{- end }}

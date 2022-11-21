@@ -1,0 +1,19 @@
+mongoImageName: "mongo"
+mongoVersion: "6.0"
+mongoSharedKey: "default"
+
+mongoDbDataStorage: "1Gi"
+
+global:
+  mongoInitDbRootUsername: "admin"
+  mongoInitDbRootPassword: "admin"
+  nosqlclientMongoUsername: "nosqlclient"
+  nosqlclientMongoPassword: "nosqlclient"
+  rocketchatMongoUsername: "rocketchat"
+  rocketchatMongoPassword: "rocketchat"
+  oplogMongoUsername: "oplog"
+  oplogMongoPassword: "oplog"
+  statisticsMongoUser: "statistics"
+  statisticsMongoPass: "statistics"
+  consultingTypeMongoUser: "consulting_types"
+  consultingTypeMongoPass: "consulting_types"

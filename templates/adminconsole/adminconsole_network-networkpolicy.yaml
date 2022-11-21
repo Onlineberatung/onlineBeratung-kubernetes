@@ -1,0 +1,15 @@
+{{- if .Values.global.adminConsoleEnabled }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: adminconsole-network
+spec:
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              io.kompose.network/adminconsole-network: "true"
+  podSelector:
+    matchLabels:
+      io.kompose.network/adminconsole-network: "true"
+{{- end }}

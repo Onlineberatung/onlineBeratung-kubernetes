@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: statisticsservice
+  name: statisticsservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: statisticsservice
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.network/database_network: "true"
+        io.kompose.network/frontend_network: "true"
+        io.kompose.network/service_network: "true"
+        io.kompose.service: statisticsservice
+    spec:
+      hostAliases:
+        - ip: {{ .Values.global.dockerHostIp }}
+          hostnames:
+            - {{ .Values.global.domainName }}
+      initContainers:
+        - name: wait-for-keycloak
+          image: busybox
+          command: [ "sh", "-c", "until nc -z keycloak 8080 > /dev/null; do echo Waiting for keycloak.; sleep 5; done;" ]
+      containers:
+        - env:
+            - name: KEYCLOAK_AUTH_SERVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: KEYCLOAK_AUTH_SERVER_URL
+                  name: statisticsservice-{{ .Release.Name }}-env
+            - name: KEYCLOAK_REALM
+              valueFrom:
+                configMapKeyRef:
+                  key: KEYCLOAK_REALM
+                  name: statisticsservice-{{ .Release.Name }}-env
+            - name: KEYCLOAK_PRINCIPAL_ATTRIBUTE
+              valueFrom:
+                configMapKeyRef:
+                  key: KEYCLOAK_PRINCIPAL_ATTRIBUTE
+                  name: statisticsservice-{{ .Release.Name }}-env
+            - name: KEYCLOAK_RESOURCE
+              valueFrom:
+                configMapKeyRef:
+                  key: KEYCLOAK_RESOURCE
+                  name: statisticsservice-{{ .Release.Name }}-env
+            - name: KEYCLOAK_CORS
+              valueFrom:
+                configMapKeyRef:
+                  key: KEYCLOAK_CORS
+                  name: statisticsservice-{{ .Release.Name }}-env
+            - name: CSRF_HEADER_PROPERTY
+              valueFrom:
+                configMapKeyRef:
+                  key: CSRF_HEADER_PROPERTY
+                  name: statisticsservice-{{ .Release.Name }}-env
+            - name: CSRF_COOKIE_PROPERTY
+              valueFrom:
+                configMapKeyRef:
+                  key: CSRF_COOKIE_PROPERTY
+                  name: statisticsservice-{{ .Release.Name }}-env
+            - name: SPRING_RABBITMQ_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: SPRING_RABBITMQ_USERNAME
+                  name: statisticsservice-secret-{{ .Release.Name }}-env
+            - name: SPRING_RABBITMQ_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: SPRING_RABBITMQ_PASSWORD
+                  name: statisticsservice-secret-{{ .Release.Name }}-env
+            - name: SPRING_DATA_MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  key: SPRING_DATA_MONGODB_URI
+                  name: statisticsservice-secret-{{ .Release.Name }}-env
+            - name: MULTITENANCY_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: MULTITENANCY_ENABLED
+                  name: statisticsservice-{{ .Release.Name }}-env
+            - name: FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED
+                  name: statisticsservice-{{ .Release.Name }}-env
+            - name: TENANT_SERVICE_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  key:  TENANT_SERVICE_API_URL
+                  name: statisticsservice-{{ .Release.Name }}-env
+          image: {{ .Values.statisticsServiceImageName }}:{{ .Values.statisticsServiceImageVersion }}
+          name: statisticsservice
+          ports:
+            - containerPort: 8080
+          resources: { }
+      imagePullSecrets:
+        - name: registry-secret
+      restartPolicy: Always

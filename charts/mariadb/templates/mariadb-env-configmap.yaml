@@ -1,0 +1,68 @@
+{{- if not .Values.global.useExternalMariaDb }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: init-sql-{{ .Release.Name }}-configmap
+data:
+  init.sql: |
+    CREATE USER IF NOT EXISTS '{{ .Values.global.keycloakDbUser }}'@'%' IDENTIFIED BY '{{ .Values.global.keycloakDbPassword }}';
+    CREATE DATABASE IF NOT EXISTS keycloak CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+    GRANT ALTER, CREATE, CREATE VIEW, DELETE, DROP, INDEX, INSERT, REFERENCES, SELECT, SHOW VIEW, TRIGGER, UPDATE, ALTER ROUTINE, EXECUTE ON keycloak.* TO '{{ .Values.global.keycloakDbUser }}'@'%';
+    FLUSH PRIVILEGES;
+
+    CREATE USER IF NOT EXISTS '{{ .Values.global.userServiceSpringDatasourceUsername }}'@'%' IDENTIFIED BY '{{ .Values.global.userServiceSpringDatasourcePassword }}';
+    CREATE DATABASE IF NOT EXISTS userservice CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+    GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER ON userservice.* TO '{{ .Values.global.userServiceSpringDatasourceUsername }}'@'%';
+    FLUSH PRIVILEGES;
+
+    CREATE USER IF NOT EXISTS '{{ .Values.global.agencyServiceSpringDatasourceUsername }}'@'%' IDENTIFIED BY '{{ .Values.global.agencyServiceSpringDatasourcePassword }}';
+    CREATE DATABASE IF NOT EXISTS agencyservice CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+    GRANT SELECT, INSERT, UPDATE, DELETE ON agencyservice.* TO '{{ .Values.global.agencyServiceSpringDatasourceUsername }}'@'%';
+    FLUSH PRIVILEGES;
+
+    CREATE USER IF NOT EXISTS '{{ .Values.global.messageServiceSpringDatasourceUsername }}'@'%' IDENTIFIED BY '{{ .Values.global.messageServiceSpringDatasourcePassword }}';
+    CREATE DATABASE IF NOT EXISTS messageservice CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+    GRANT SELECT, INSERT, UPDATE, DELETE ON messageservice.* TO '{{ .Values.global.messageServiceSpringDatasourceUsername }}'@'%';
+    FLUSH PRIVILEGES;
+
+    CREATE USER IF NOT EXISTS '{{ .Values.global.uploadServiceSpringDatasourceUsername }}'@'%' IDENTIFIED BY '{{ .Values.global.uploadServiceSpringDatasourcePassword }}';
+    CREATE DATABASE IF NOT EXISTS uploadservice CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+    GRANT SELECT, INSERT, UPDATE, DELETE ON uploadservice.* TO '{{ .Values.global.uploadServiceSpringDatasourceUsername }}'@'%';
+    FLUSH PRIVILEGES;
+
+    CREATE USER IF NOT EXISTS '{{ .Values.global.tenantServiceSpringDatasourceUsername }}'@'%' IDENTIFIED BY '{{ .Values.global.tenantServiceSpringDatasourcePassword }}';
+    CREATE DATABASE IF NOT EXISTS tenantservice CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+    GRANT SELECT, INSERT, UPDATE, DELETE ON tenantservice.* TO '{{ .Values.global.tenantServiceSpringDatasourceUsername }}'@'%';
+    FLUSH PRIVILEGES;
+
+    CREATE USER IF NOT EXISTS '{{ .Values.global.consultingTypeServiceSpringDatasourceUsername }}'@'%' IDENTIFIED BY '{{ .Values.global.consultingTypeServiceSpringDatasourcePassword }}';
+    CREATE DATABASE IF NOT EXISTS consultingtypeservice CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+    GRANT SELECT, INSERT, UPDATE, DELETE ON consultingtypeservice.* TO '{{ .Values.global.consultingTypeServiceSpringDatasourceUsername }}'@'%';
+    FLUSH PRIVILEGES;
+
+    CREATE USER IF NOT EXISTS '{{ .Values.global.appointmentServiceSpringDatasourceUsername }}'@'%' IDENTIFIED BY '{{ .Values.global.appointmentServiceSpringDatasourcePassword }}';
+    CREATE DATABASE IF NOT EXISTS appointmentservice CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+    GRANT SELECT, INSERT, UPDATE, DELETE, ALTER ON appointmentservice.* TO '{{ .Values.global.appointmentServiceSpringDatasourceUsername }}'@'%';
+    FLUSH PRIVILEGES;
+
+    CREATE USER IF NOT EXISTS '{{ .Values.global.caldavDatabaseUsername }}'@'%' IDENTIFIED BY '{{ .Values.global.caldavDatabasePassword }}';
+    CREATE DATABASE IF NOT EXISTS caldav CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+    GRANT SELECT, INSERT, UPDATE, DELETE, ALTER ON caldav.* TO '{{ .Values.global.caldavDatabaseUsername }}'@'%';
+    FLUSH PRIVILEGES;
+
+    CREATE USER IF NOT EXISTS '{{ .Values.global.counselingToolsServiceSpringDatasourceUsername }}'@'%' IDENTIFIED BY '{{ .Values.global.counselingToolsServiceSpringDatasourcePassword }}';
+    CREATE DATABASE IF NOT EXISTS counselingtoolsservice CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+    GRANT SELECT, INSERT, UPDATE, DELETE, ALTER ON counselingtoolsservice.* TO '{{ .Values.global.counselingToolsServiceSpringDatasourceUsername }}'@'%';
+    FLUSH PRIVILEGES;
+
+    CREATE USER IF NOT EXISTS '{{ .Values.global.springLiquibaseUser }}'@'%' IDENTIFIED BY '{{ .Values.global.springLiquibasePassword }}';
+    GRANT ALTER, CREATE, CREATE VIEW, DELETE, DROP, INDEX, INSERT, REFERENCES, SELECT, SHOW VIEW, TRIGGER, UPDATE, ALTER ROUTINE, EXECUTE ON userservice.* TO '{{ .Values.global.springLiquibaseUser }}'@'%';
+    GRANT ALTER, CREATE, CREATE VIEW, DELETE, DROP, INDEX, INSERT, REFERENCES, SELECT, SHOW VIEW, TRIGGER, UPDATE, ALTER ROUTINE, EXECUTE ON agencyservice.* TO '{{ .Values.global.springLiquibaseUser }}'@'%';
+    GRANT ALTER, CREATE, CREATE VIEW, DELETE, DROP, INDEX, INSERT, REFERENCES, SELECT, SHOW VIEW, TRIGGER, UPDATE, ALTER ROUTINE, EXECUTE ON uploadservice.* TO '{{ .Values.global.springLiquibaseUser }}'@'%';
+    GRANT ALTER, CREATE, CREATE VIEW, DELETE, DROP, INDEX, INSERT, REFERENCES, SELECT, SHOW VIEW, TRIGGER, UPDATE, ALTER ROUTINE, EXECUTE ON messageservice.* TO '{{ .Values.global.springLiquibaseUser }}'@'%';
+    GRANT ALTER, CREATE, CREATE VIEW, DELETE, DROP, INDEX, INSERT, REFERENCES, SELECT, SHOW VIEW, TRIGGER, UPDATE, ALTER ROUTINE, EXECUTE ON tenantservice.* TO '{{ .Values.global.springLiquibaseUser }}'@'%';
+    GRANT ALTER, CREATE, CREATE VIEW, DELETE, DROP, INDEX, INSERT, REFERENCES, SELECT, SHOW VIEW, TRIGGER, UPDATE, ALTER ROUTINE, EXECUTE ON consultingtypeservice.* TO '{{ .Values.global.springLiquibaseUser }}'@'%';
+    GRANT ALTER, CREATE, CREATE VIEW, DELETE, DROP, INDEX, INSERT, REFERENCES, SELECT, SHOW VIEW, TRIGGER, UPDATE, ALTER ROUTINE, EXECUTE ON appointmentservice.* TO '{{ .Values.global.springLiquibaseUser }}'@'%';
+    GRANT ALTER, CREATE, CREATE VIEW, DELETE, DROP, INDEX, INSERT, REFERENCES, SELECT, SHOW VIEW, TRIGGER, UPDATE, ALTER ROUTINE, EXECUTE ON counselingtoolsservice.* TO '{{ .Values.global.springLiquibaseUser }}'@'%';
+    FLUSH PRIVILEGES;
+  {{- end }}

@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.network/frontend_network: "true"
+    io.kompose.network/ldap_network: "true"
+    io.kompose.network/rocket_database_network: "true"
+    io.kompose.service: rocketchat
+  name: rocketchat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: rocketchat
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose-windows-amd64.exe convert -c
+        kompose.version: 1.26.0 (40646f47)
+        "helm.sh/hook": post-install, post-upgrade
+        "helm.sh/hook-weight": "8"
+      labels:
+        io.kompose.network/frontend_network: "true"
+        io.kompose.network/ldap_network: "true"
+        io.kompose.network/rocket_database_network: "true"
+        io.kompose.service: rocketchat
+    spec:
+      {{- if .Values.global.initializeDummyData }}
+      initContainers:
+        - name: wait-for-mongo
+          image: {{ .Values.rocketchatImageName }}:{{ .Values.rocketchatVersion }}
+          args:
+            - /bin/sh
+            - -c
+            - >
+              set -x;
+              while [ ! -f /init/data/mongo-rocketchat-database-restored.lock ]; do
+                sleep 15;
+              done
+          volumeMounts:
+            - mountPath: /init/data
+              name: plattform-init-data
+      {{- end }}
+      containers:
+        - env:
+            - name: MONGO_OPLOG_URL
+              valueFrom:
+                secretKeyRef:
+                  key: MONGO_OPLOG_URL
+                  name: rocketchat-secret-{{ .Release.Name }}-env
+            - name: MONGO_URL
+              valueFrom:
+                secretKeyRef:
+                  key: MONGO_URL
+                  name: rocketchat-secret-{{ .Release.Name }}-env
+            - name: ROOT_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: ROOT_URL
+                  name: rocketchat-{{ .Release.Name }}-env
+          image: {{ .Values.rocketchatImageName }}:{{ .Values.rocketchatVersion }}
+          name: rocketchat
+          resources: {}
+          {{- if .Values.useHostpathUploadStorage }}
+          volumeMounts:
+            - mountPath: /app/uploads
+              name: rocketchat-app-uploads
+            - mountPath: /app/user_uploads
+              name: rocketchat-user-uploads
+          {{- end }}
+      restartPolicy: Always
+      {{- if .Values.global.initializeDummyData }}
+      volumes:
+        {{- if .Values.useHostpathUploadStorage }}
+        - name: rocketchat-app-uploads
+          persistentVolumeClaim:
+            claimName: rocketchat-app-uploads
+        - name: rocketchat-user-uploads
+          persistentVolumeClaim:
+            claimName: rocketchat-user-uploads
+        {{- end }}
+        - name: plattform-init-data
+          persistentVolumeClaim:
+            claimName: plattform-initialization-data
+      {{- end }}

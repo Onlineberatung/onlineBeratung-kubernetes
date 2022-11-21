@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.network/frontend_network: "true"
+    io.kompose.service: frontend
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.network/frontend_network: "true"
+        io.kompose.network/service_network: "true"
+        io.kompose.service: frontend
+    spec:
+      containers:
+        - image:  {{ .Values.frontendImageName }}:{{ .Values.frontendImageVersion }}
+          name: frontend
+          ports:
+            - containerPort: 80
+          resources: {}
+          {{- if .Values.useCustomIncomingCallRingtone }}
+          volumeMounts:
+            - mountPath: "/usr/share/nginx/html/static/media/incomingCall.mp3"
+              name: incoming-call
+              subPath: "incomingCall.mp3"
+          readinessProbe:
+            exec:
+              command:
+                - /bin/bash
+                - -c
+                - cp /usr/share/nginx/html/static/media/incomingCall.mp3 /usr/share/nginx/html/static/media/incomingCall.*.mp3
+          {{- end }}
+      imagePullSecrets:
+        - name: registry-secret
+      restartPolicy: Always
+      {{- if .Values.useCustomIncomingCallRingtone }}
+      volumes:
+        - name: incoming-call
+          configMap:
+            name: frontend-incoming-mp3-{{ .Release.Name }}-configmap
+      {{- end }}

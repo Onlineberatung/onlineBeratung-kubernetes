@@ -19,6 +19,10 @@ spec:
         io.kompose.network/ldap_network: "true"
         io.kompose.service: keycloak
     spec:
+      initContainers:
+        - name: wait-for-rocketchat
+          image: busybox
+          command: [ "sh", "-c", "until nc -z rocketchat 3000 > /dev/null; do echo Waiting for rocketchat.; sleep 5; done;" ]
       containers:
         - env:
             - name: KC_DB

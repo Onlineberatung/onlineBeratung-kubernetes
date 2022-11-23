@@ -1,10 +1,10 @@
 global:
-  domainName: "app.onlineberatung.local"
+  domainName: "onlineberatung.localhost"
   dockerHostIp: "192.168.65.2"
   enableTls: false
   multitenancyEnabled: false
   statisticsEnabled: "true"
-  topicsEnabled: "true"
+  topicsEnabled: "false"
   demographicsEnabled: "false"
   appointmentsEnabled: false
   counselingToolsEnabled: false
@@ -57,7 +57,7 @@ csrfCookieProperty: "CSRF-TOKEN"
 csrfHeaderProperty: "X-CSRF-TOKEN"
 # Keycloak
 keycloakRealm: "online-beratung"
-keycloakAuthServerUrl: "http://app.onlineberatung.local/auth"
+keycloakAuthServerUrl: "http://onlineberatung.localhost/auth"
 keycloakPrincipalAttribute: "preferred_username"
 keycloakserviceAdminClientid: "admin-cli"
 keycloakserviceAppClientid: "app"
@@ -83,16 +83,14 @@ consultingTypeServiceImageVersion: "develop_20221116_164336"
 consultingTypeServiceKeycloakResource: "consultingtype-service"
 
 # Frontend
-#frontendImageName: "docker.pkg.github.com/virtualidentityag/vi-saas-frontend-theme/vi-saas-frontend-theme"
-#frontendImageVersion: "dockerImage.v.037-develop"
 frontendImageName: "ghcr.io/onlineberatung/onlineberatung-frontend/onlineberatung-frontend"
-frontendImageVersion: "develop_20221121_122116"
+frontendImageVersion: "develop_20221122_142452"
 
 # Live service
 liveServiceImageName: "ghcr.io/onlineberatung/onlineberatung-liveservice/onlineberatung-liveservice"
 liveServiceImageVersion: "develop_20221117_114908"
 liveServiceSpringProfilesActive: "prod"
-liveServiceAppBaseUrl: "http://app.onlineberatung.local"
+liveServiceAppBaseUrl: "http://onlineberatung.localhost"
 
 # Mail service
 mailServiceSpringProfilesActive: "dev"
@@ -103,8 +101,8 @@ springMailProtocol: "smtp"
 springMailDefaultEncoding:  "UTF-8"
 mailSender:  "noreply@app.onlineberatung.local"
 mailErrorRecipients: "admin@onlineberatung.local"
-appImprintUrl: "http://app.onlineberatung.local/impressum"
-appDataprivacyUrl: "http://app.onlineberatung.local/datenschutz"
+appImprintUrl: "http://onlineberatung.localhost/impressum"
+appDataprivacyUrl: "http://onlineberatung.localhost/datenschutz"
 mailServiceLoggingLevelRoot:  "DEBUG"
 mailServiceImageName: "ghcr.io/onlineberatung/onlineberatung-mailservice/onlineberatung-mailservice"
 mailServiceImageVersion: "develop_20221116_164215"

@@ -82,8 +82,8 @@ consultingTypeServiceImageVersion: "develop_20221116_164336"
 consultingTypeServiceKeycloakResource: "consultingtype-service"
 
 # Frontend
-frontendImageName: "ghcr.io/onlineberatung/onlineberatung-frontend/onlineberatung-frontend"
-frontendImageVersion: "develop_20221122_142452"
+frontendImageName: "ghcr.io/onlineberatung/onlineberatung-frontend-theme/onlineberatung-frontend-theme"
+frontendImageVersion: "develop_20221125_101426"
 
 # Live service
 liveServiceImageName: "ghcr.io/onlineberatung/onlineberatung-liveservice/onlineberatung-liveservice"

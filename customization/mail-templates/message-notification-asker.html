@@ -18,9 +18,7 @@
                <table style="table-layout: fixed; width: 100%" cellspacing='0' cellpadding='0' border="0">
                   <thead style='background-color: #273270;'>
                      <td style='padding: 30px 30px 10px; text-align: center; width: 100%;'>
-                        <h1 style='color: #FFFFFF; font-size: 30px; font-weight: bold; line-height: 40px; padding: 0; margin: 0;'
-                           data-th-text="${tenant_name}"></h1>
-                        <div style='color: #FFFFFF; font-size: 16px; line-height: 22px;' data-th-text="${tenant_claim}">
+                        <h1 style='color: #FFFFFF; font-size: 30px; font-weight: bold; line-height: 40px; padding: 0; margin: 0;'>Onlineberatung</h1>
                         </div>
                      </td>
                   </thead>
@@ -66,7 +64,7 @@
                            <div
                               style="margin: 0 20px 60px; font-size: 16px; line-height: 21px; font-family: Nunito, 'Arial', 'sans-serif';">
                               Liebe Grüße<br>
-                              Ihr Team von <span data-th-text="${tenant_name}" /><br>
+                              Ihr Team von der Onlineberatung<br>
                            </div>
                         </td>
                      </tr>
@@ -78,25 +76,6 @@
             </td>
          </tr>
       </table>
-
-      <table style="width: 100%; border-spacing: 0; max-width: 580px;">
-         <tr>
-            <td style="width: 5%"></td>
-            <td style='text-align: center; padding: 0;'>
-               <div
-                  style="text-align: center; padding: 8px 0; background-color: #f2efea; text-transform: uppercase; font-weight: bold;">
-                  <a data-th-href="${tenant_urlimpressum}"
-                     style="color: #666; text-decoration: none; font-size: 14px; line-height: 19px;">Impressum</a>
-                  <span style="color: #666; text-decoration: none; font-size: 14px; line-height: 19px;">&nbsp; |
-                     &nbsp;</span>
-                  <a data-th-href="${tenant_urldatenschutz}"
-                     style="color: #666; text-decoration: none; font-size: 14px; line-height: 19px;">Datenschutz</a>
-               </div>
-            </td>
-            <td style="width: 5%"></td>
-         </tr>
-      </table>
    </div>
 </body>
-
 </html>

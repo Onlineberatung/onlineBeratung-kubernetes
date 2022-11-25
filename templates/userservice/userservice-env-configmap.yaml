@@ -84,7 +84,7 @@ data:
   IDENTITY_OTP_ALLOWED_FOR_SINGLE_TENANT_ADMINS: "true"
   IDENTITY_OTP_ALLOWED_FOR_TENANT_SUPER_ADMINS: "true"
   # logstash
-  LOGSTASH_HOST: {{ .Values.logstashHost }}
+  LOGSTASH_HOST: {{ .Values.logstashHost | default "null" | quote }}
   FEATURE_APPOINTMENT_ENABLED: {{ .Values.global.appointmentsEnabled | quote }}
   FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED: {{ .Values.global.multitenancyWithSingleDomainEnabled | quote }}
   # Regular notification of open enquiries

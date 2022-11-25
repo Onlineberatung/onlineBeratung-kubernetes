@@ -13,8 +13,6 @@
 	],
 	"templateDataFields": 
 		[
-			"tenant_name",
-			"tenant_claim",
 			"consultantName",
 			"askerName"
 		]

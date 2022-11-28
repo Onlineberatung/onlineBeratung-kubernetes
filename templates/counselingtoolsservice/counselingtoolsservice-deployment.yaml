@@ -27,7 +27,7 @@ spec:
       initContainers:
         - name: wait-for-keycloak
           image: busybox
-          command: [ "sh", "-c", "until nc -z keylcoak 8080 > /dev/null; do echo Waiting for keycloak.; sleep 5; done;" ]
+          command: [ "sh", "-c", "until nc -z keycloak 8080 > /dev/null; do echo Waiting for keycloak.; sleep 5; done;" ]
       containers:
         - env:
             - name: IDENTITY_OPENID_CONNECT_URL

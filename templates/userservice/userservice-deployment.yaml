@@ -441,6 +441,10 @@ spec:
                 configMapKeyRef:
                   key: USER_ACCOUNT_DELETEWORKFLOW_CRON
                   name: userservice-{{ .Release.Name }}-env
+            - name: IDENTITY_EMAIL-DUMMY-SUFFIX
+              valueFrom:
+                configMapKeyRef:
+                  key: IDENTITY_EMAIL-DUMMY-SUFFIX
           image: {{ .Values.userServiceImageName }}:{{ .Values.userServiceImageVersion }}
           name: userservice
           ports:

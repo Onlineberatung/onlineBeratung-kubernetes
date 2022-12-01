@@ -445,6 +445,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: IDENTITY_EMAIL-DUMMY-SUFFIX
+                  name: userservice-{{ .Release.Name }}-env
           image: {{ .Values.userServiceImageName }}:{{ .Values.userServiceImageVersion }}
           name: userservice
           ports:

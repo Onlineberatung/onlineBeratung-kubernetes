@@ -131,7 +131,7 @@ askerImportWelcomeMessageFilename: "import/welcome_consulting_type_[ConsultingTy
 askerImportWelcomeMessageFilenameReplaceValue: "[ConsultingType]"
 userServiceSpringProfilesActive: "dev"
 userServiceKeycloakResource: "user-service"
-identityEmailDummySuffix: "@onlineberatung.net"
+identityEmailDummySuffix: "onlineberatung.net"
 firebaseConfigurationCredentialsFilePath: "/firebase/firebase-credentials.json"
 firebaseConfigurationNotificationMessage: "Du hast eine neue Nachricht erhalten"
 userAnonymousDeleteworkflowCron: "* * * * * ?"

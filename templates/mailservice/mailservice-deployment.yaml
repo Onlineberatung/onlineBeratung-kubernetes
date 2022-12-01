@@ -194,6 +194,18 @@ spec:
             - mountPath: /mailserviceTemplates/free-text.json
               name: mailservice-templates
               subPath: free-text.json
+            - mountPath: /mailserviceTemplates/daily-enquiry-notification.json
+              name: mailservice-templates
+              subPath: daily-enquiry-notification.json
+            - mountPath: /mailserviceTemplates/daily-enquiry-notification.html
+              name: mailservice-templates
+              subPath: daily-enquiry-notification.html
+            - mountPath: /mailserviceTemplates/direct-enquiry-notification-consultant.json
+              name: mailservice-templates
+              subPath: direct-enquiry-notification-consultant.json
+            - mountPath: /mailserviceTemplates/direct-enquiry-notification-consultant.html
+              name: mailservice-templates
+              subPath: direct-enquiry-notification-consultant.html
             - mountPath: /mailserviceTemplates/images/illustration-bottom.png
               name: mailservice-templates-images
               subPath: "illustration-bottom.png"

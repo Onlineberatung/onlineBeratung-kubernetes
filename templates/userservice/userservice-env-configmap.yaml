@@ -94,6 +94,7 @@ data:
   VIDEOCHAT_E2E-ENCRYPTION-ENABLED: {{ .Values.videochatE2eEncryptionEnabled | default "false" | quote }}
   IDENTITY_DISPLAY_NAME_ALLOWED_FOR_CONSULTANTS: {{ .Values.displayNameAllowedForConsultants | default "false" | quote }}
   USER_ACCOUNT_DELETEWORKFLOW_CRON: {{ .Values.userAccountDeleteWorkflowCron | default "0 0 7 * * ?" | quote }}
+  IDENTITY_EMAIL-DUMMY-SUFFIX: "{{ .Values.identityEmailDummySuffix }}"
 
 kind: ConfigMap
 metadata:

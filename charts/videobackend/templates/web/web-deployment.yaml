@@ -53,52 +53,40 @@ spec:
               value: "1"
             - name: JVB_TCP_HARVESTER_DISABLED
               value: "true"
+            - name: ENABLE_END_CONFERENCE
+              value: "0"
             - name: PUBLIC_URL
               valueFrom:
                 configMapKeyRef:
                   key: VIDEOCALL_SERVER_URL
                   name: jitsi-prosody-{{ .Release.Name }}-env
           volumeMounts:
-            - mountPath: /usr/share/jitsi-meet/css/styles-merged.css
-              name: jitsi-web-css
-              subPath: "styles-merged.css"
-            - mountPath: /usr/share/jitsi-meet/fonts/custom/Nunito/static
-              name: jitsi-web-fonts
-            - mountPath: /usr/share/jitsi-meet/images/custom
-              name: jitsi-web-images
-            - mountPath: /usr/share/jitsi-meet/static/authError.html
-              name: jitsi-web-static
-              subPath: "authError.html"
-            - mountPath: /usr/share/jitsi-meet/static/close2.html
-              name: jitsi-web-static
-              subPath: "close2.html"
-            - mountPath: /usr/share/jitsi-meet/static/close3.html
-              name: jitsi-web-static
-              subPath: "close3.html"
-            - mountPath: /usr/share/jitsi-meet/static/js/
-              name: jitsi-web-static
-            - mountPath: /usr/share/jitsi-meet/dynamicBranding.json
-              name: jitsi-web-html
-              subPath: "dynamicBranding.json"
-            - mountPath: /usr/share/jitsi-meet/body.html
-              name: jitsi-web-html
-              subPath: "body.html"
-            - mountPath: /usr/share/jitsi-meet/title.html
-              name: jitsi-web-html
-              subPath: "title.html"
             - mountPath: /config/custom-config.js
               name: jitsi-web-config
               subPath: "custom-config.js"
             - mountPath: /config/custom-interface_config.js
               name: jitsi-web-config
               subPath: "custom-interface_config.js"
+            - mountPath: /usr/share/jitsi-meet/images/custom
+              name: jitsi-web-images
+            - mountPath: /usr/share/jitsi-meet/body.html
+              name: jitsi-web-html
+              subPath: "body.html"
+            - mountPath: /usr/share/jitsi-meet/static
+              name: jitsi-web-static
+            - mountPath: /usr/share/jitsi-meet/dynamicBranding.json
+              name: jitsi-web-html
+              subPath: "dynamicBranding.json"
+            - mountPath: /usr/share/jitsi-meet/css/styles.css
+              name: jitsi-web-css
+              subPath: "styles.css"
+            - mountPath: /usr/share/jitsi-meet/css/styles.css.map
+              name: jitsi-web-css
+              subPath: "styles.css.map"
       volumes:
             - name: jitsi-web-css
               configMap:
                 name: jitsi-web-css-{{ .Release.Name }}-configmap
-            - name: jitsi-web-fonts
-              configMap:
-                name: web-custom-fonts-{{ .Release.Name }}-configmap
             - name: jitsi-web-images
               configMap:
                 name: jitsi-web-images-{{ .Release.Name }}-configmap

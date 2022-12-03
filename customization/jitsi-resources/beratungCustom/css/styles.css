@@ -1,0 +1,68 @@
+#new-toolbox .share-url-button {
+  /* custom share URL button */
+}
+#new-toolbox .share-url-button button.shareUrlButton {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  font-size: 0;
+  color: #ffffff;
+  z-index: 500;
+  cursor: pointer;
+}
+#new-toolbox .share-url-button button.shareUrlButton::before {
+  content: "";
+  display: inline-block;
+  height: 22px;
+  width: 48px;
+  background-image: url("../images/custom/icons/link.svg");
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+#new-toolbox .share-url-button button.shareUrlButton + .shareUrlButton__tooltip {
+  display: none;
+  position: absolute;
+  font-size: 14px;
+  line-height: 19px;
+  bottom: 70px;
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: left;
+  padding: 12px 8px;
+  border-radius: 4px;
+  cursor: auto;
+}
+#new-toolbox .share-url-button button.shareUrlButton--copied + .shareUrlButton__tooltip {
+  display: inline-block;
+}
+
+.settings-dialog .profile-pane #login_button, .settings-dialog .profile-pane .auth-name, .settings-dialog .profile-pane .mock-atlaskit-label {
+  display: none;
+}
+.settings-dialog input[name=disableSelfView] ~ * {
+  display: none;
+}
+
+.premeeting-screen [data-testid="lobby.enterPasswordButton"] {
+  display: none;
+}
+
+.subject {
+  display: none !important;
+}
+
+#local-video-menu-trigger {
+  display: none;
+}
+
+.watermark {
+  width: 200px;
+  height: 51px;
+  filter: drop-shadow(0 0 15px #000000);
+  max-width: 200px !important;
+  max-height: 51px !important;
+}
+
+/*# sourceMappingURL=styles.css.map */

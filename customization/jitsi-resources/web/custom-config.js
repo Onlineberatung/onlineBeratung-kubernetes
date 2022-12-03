@@ -1,7 +1,10 @@
 config.tokenAuthUrl = 'static/authError.html';
 config.disableDeepLinking = true;
+config.enableWelcomePage = false;
 config.enableClosePage = true;
+config.enableLobbyChat = false;
 config.defaultLanguage = 'de';
+config.enableEncodedTransformSupport = false;
 config.toolbarButtons = [
     'microphone',
     'camera',
@@ -14,6 +17,9 @@ config.toolbarButtons = [
 config.defaultLocalDisplayName = 'Ich';
 config.defaultRemoteDisplayName = 'Ratsuchender';
 config.disableModeratorIndicator = true;
+config.remoteVideoMenu = {
+    disableGrantModerator: true,
+}
 config.connectionIndicators = {
     disabled: true,
     disableDetails: true,
@@ -23,11 +29,9 @@ config.toolbarConfig = {
     alwaysVisible: false,
     timeout: 4000,
 };
-config.dynamicBrandingUrl = '/dynamicBranding.json';
-config.remoteVideoMenu = {
-    disableGrantModerator: true,
-}
 config.disabledSounds = [
     'E2EE_OFF_SOUND',
     'E2EE_ON_SOUND'
 ];
+config.channelLastN = 5;
+config.dynamicBrandingUrl = '/dynamicBranding.json';

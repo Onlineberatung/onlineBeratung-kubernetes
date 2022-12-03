@@ -56,11 +56,13 @@ spec:
             - name: XMPP_INTERNAL_MUC_MODULES
               value: ""
             - name: XMPP_MODULES
-              value: ""
+              value: "persistent_lobby"
             - name: XMPP_MUC_MODULES
-              value: "token_moderation,close_room,create_room"
+              value: "create_room,token_moderation,token_lobby_bypass,close_room,lobby_autostart"
             - name: XMPP_RECORDER_DOMAIN
               value: "recorder.meet.jitsi"
+            - name: ENABLE_END_CONFERENCE
+              value: "0"
             - name: JICOFO_COMPONENT_SECRET
               valueFrom:
                 secretKeyRef:
@@ -170,9 +172,6 @@ spec:
           volumeMounts:
             - mountPath: /prosody-plugins-custom/
               name: prosody-plugins-custom
-            - mountPath: /prosody-plugins/mod_muc_lobby_rooms.lua
-              name: prosody-plugins-custom
-              subPath: "mod_muc_lobby_rooms.lua"
             - mountPath: /config/conf.d/statistics.cfg.lua
               name: prosody-statistics-plugin
               subPath: "statistics.cfg.lua"

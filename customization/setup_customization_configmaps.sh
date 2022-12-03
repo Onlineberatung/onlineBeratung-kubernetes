@@ -38,14 +38,12 @@ kubectl create configmap keycloak-theme-email-text-$2-configmap --from-file=./ke
 
 # Jitsi theming customization
 kubectl create namespace jitsi
-kubectl delete configmap web-custom-fonts-$2-configmap -n jitsi
-kubectl create configmap web-custom-fonts-$2-configmap --from-file=./jitsi-resources/beratungCustom/fonts/custom/Nunito/static -n jitsi
 
 kubectl delete configmap jitsi-web-css-$2-configmap -n jitsi
 kubectl create configmap jitsi-web-css-$2-configmap --from-file=./jitsi-resources/beratungCustom/css -n jitsi
 
 kubectl delete configmap jitsi-web-images-$2-configmap -n jitsi
-kubectl create configmap jitsi-web-images-$2-configmap --from-file=./jitsi-resources/beratungCustom/images/custom --from-file=./jitsi-resources/beratungCustom/images/custom/icons -n jitsi
+kubectl create configmap jitsi-web-images-$2-configmap --from-file=./jitsi-resources/beratungCustom/images/custom -n jitsi
 
 kubectl delete configmap web-custom-static-$2-configmap -n jitsi
 kubectl create configmap web-custom-static-$2-configmap --from-file=./jitsi-resources/beratungCustom/static --from-file=./jitsi-resources/beratungCustom/static/js -n jitsi

@@ -34,6 +34,8 @@ spec:
               value: UTC
             - name: JVB_BREWERY_MUC
               value: jvbbrewery
+            - name: ENABLE_AUTO_OWNER
+              value: "0"
             - name: JICOFO_COMPONENT_SECRET
               valueFrom:
                 secretKeyRef:

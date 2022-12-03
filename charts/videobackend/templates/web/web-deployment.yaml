@@ -45,6 +45,8 @@ spec:
               value: UTC
             - name: ENABLE_CLOSE_PAGE
               value: "1"
+            - name: ENABLE_AUTH
+              value: "1"
             - name: ENABLE_GUESTS
               value: "0"
             - name: ENABLE_PREJOIN_PAGE
@@ -53,61 +55,69 @@ spec:
               value: "1"
             - name: JVB_TCP_HARVESTER_DISABLED
               value: "true"
+            - name: ENABLE_END_CONFERENCE
+              value: "0"
             - name: PUBLIC_URL
               valueFrom:
                 configMapKeyRef:
                   key: VIDEOCALL_SERVER_URL
                   name: jitsi-prosody-{{ .Release.Name }}-env
           volumeMounts:
-            - mountPath: /usr/share/jitsi-meet/css/styles.css
-              name: jitsi-web-css
-              subPath: "styles.css"
-            - mountPath: /usr/share/jitsi-meet/fonts/custom/Nunito/static
-              name: jitsi-web-fonts
+            - mountPath: /config
+              name: jitsi-web-config
             - mountPath: /usr/share/jitsi-meet/images/custom
               name: jitsi-web-images
-            - mountPath: /usr/share/jitsi-meet/static/authError.html
-              name: jitsi-web-static
-              subPath: "authError.html"
-            - mountPath: /usr/share/jitsi-meet/static/close2.html
-              name: jitsi-web-static
-              subPath: "close2.html"
-            - mountPath: /usr/share/jitsi-meet/static/close3.html
-              name: jitsi-web-static
-              subPath: "close3.html"
-            - mountPath: /usr/share/jitsi-meet/static/js/
-              name: jitsi-web-static
-            - mountPath: /usr/share/jitsi-meet/dynamicBranding.json
+            - mountPath: /usr/share/jitsi-meet
               name: jitsi-web-html
-              subPath: "dynamicBranding.json"
-            - mountPath: /usr/share/jitsi-meet/body.html
-              name: jitsi-web-html
-              subPath: "body.html"
-            - mountPath: /usr/share/jitsi-meet/title.html
-              name: jitsi-web-html
-              subPath: "title.html"
-            - mountPath: /config/custom-config.js
-              name: jitsi-web-config
-              subPath: "custom-config.js"
-            - mountPath: /config/custom-interface_config.js
-              name: jitsi-web-config
-              subPath: "custom-interface_config.js"
+            - mountPath: /usr/share/jitsi-meet/static
+              name: jitsi-web-static
+            - mountPath: /usr/share/jitsi-meet/static/js
+              name: jitsi-web-static-js
+            - mountPath: /usr/share/jitsi-meet/css
+              name: jitsi-web-css
       volumes:
             - name: jitsi-web-css
               configMap:
                 name: jitsi-web-css-{{ .Release.Name }}-configmap
-            - name: jitsi-web-fonts
-              configMap:
-                name: web-custom-fonts-{{ .Release.Name }}-configmap
+                items:
+                  - key: styles.css
+                    path: "styles.css"
+                  - key: styles.css.map
+                    path: "styles.css.map"
             - name: jitsi-web-images
               configMap:
                 name: jitsi-web-images-{{ .Release.Name }}-configmap
             - name: jitsi-web-static
               configMap:
                 name: web-custom-static-{{ .Release.Name }}-configmap
+                items:
+                  - key: authError.html
+                    path: "authError.html"
+                  - key: close2.html
+                    path: "close2.html"
+                  - key: close3.html
+                    path: "close3.html"
+                  - key: no_e2ee.html
+                    path: "no_e2ee.html"
+            - name: jitsi-web-static-js
+              configMap:
+                name: web-custom-static-{{ .Release.Name }}-configmap
+                items:
+                  - key: script.js
+                    path: "script.js"
             - name: jitsi-web-html
               configMap:
                 name: web-custom-html-{{ .Release.Name }}-configmap
+                items:
+                  - key: body.html
+                    path: "body.html"
+                  - key: dynamicBranding.json
+                    path: "dynamicBranding.json"
             - name: jitsi-web-config
               configMap:
                 name: web-{{ .Release.Name }}-configmap
+                items:
+                  - key: custom-config.js
+                    path: "custom-config.js"
+                  - key: custom-interface_config.js
+                    path: "custom-interface_config.js"

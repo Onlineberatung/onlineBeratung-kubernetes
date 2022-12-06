@@ -59,9 +59,9 @@ spec:
                   key: VIDEOCALL_SERVER_URL
                   name: jitsi-prosody-{{ .Release.Name }}-env
           volumeMounts:
-            - mountPath: /usr/share/jitsi-meet/css/styles-merged.css
+            - mountPath: /usr/share/jitsi-meet/css/onlineberatung-merged.css
               name: jitsi-web-css
-              subPath: "styles-merged.css"
+              subPath: "onlineberatung-merged.css"
             - mountPath: /usr/share/jitsi-meet/fonts/custom/Nunito/static
               name: jitsi-web-fonts
             - mountPath: /usr/share/jitsi-meet/images/custom
@@ -86,12 +86,12 @@ spec:
             - mountPath: /usr/share/jitsi-meet/title.html
               name: jitsi-web-html
               subPath: "title.html"
-            - mountPath: /config/custom-config.js
+            - mountPath: /config/config.js
               name: jitsi-web-config
-              subPath: "custom-config.js"
-            - mountPath: /config/custom-interface_config.js
+              subPath: "config.js"
+            - mountPath: /config/interface_config.js
               name: jitsi-web-config
-              subPath: "custom-interface_config.js"
+              subPath: "interface_config.js"
       volumes:
             - name: jitsi-web-css
               configMap:

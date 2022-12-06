@@ -86,12 +86,12 @@ spec:
             - mountPath: /usr/share/jitsi-meet/title.html
               name: jitsi-web-html
               subPath: "title.html"
-            - mountPath: /config/config.js
+            - mountPath: /config/custom-config.js
               name: jitsi-web-config
-              subPath: "config.js"
-            - mountPath: /config/interface_config.js
+              subPath: "custom-config.js"
+            - mountPath: /config/custom-interface_config.js
               name: jitsi-web-config
-              subPath: "interface_config.js"
+              subPath: "custom-interface_config.js"
       volumes:
             - name: jitsi-web-css
               configMap:

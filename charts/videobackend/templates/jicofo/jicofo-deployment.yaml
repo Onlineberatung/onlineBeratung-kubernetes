@@ -34,6 +34,10 @@ spec:
               value: UTC
             - name: JVB_BREWERY_MUC
               value: jvbbrewery
+            - name: ENABLE_AUTH
+              value: "1"
+            - name: AUTH_TYPE
+              value: "jwt"
             - name: JICOFO_COMPONENT_SECRET
               valueFrom:
                 secretKeyRef:

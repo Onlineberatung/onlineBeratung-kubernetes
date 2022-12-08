@@ -3,10 +3,10 @@ jvbImageName: 'jitsi/jvb'
 prosodyImageName: 'jitsi/prosody'
 webImageName: 'jitsi/web'
 
-jicofoVersion: 'stable-8044'
-jvbVersion: 'stable-8044'
-prosodyVersion: 'stable-8044'
-webVersion: 'stable-8044'
+jicofoVersion: 'stable-8044-1'
+jvbVersion: 'stable-8044-1'
+prosodyVersion: 'stable-8044-1'
+webVersion: 'stable-8044-1'
 
 jicofoComponentSecret: 9ea69e051020adb6524bbec8d88e670f
 jicofoAuthUser: focus

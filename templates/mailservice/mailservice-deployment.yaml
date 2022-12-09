@@ -146,66 +146,8 @@ spec:
           image:  {{ .Values.mailServiceImageName }}:{{ .Values.mailServiceImageVersion }}
           resources: {}
           volumeMounts:
-            - mountPath: /mailserviceTemplates/assign-enquiry-notification.html
+            - mountPath: /mailserviceTemplates/
               name: mailservice-templates
-              subPath: assign-enquiry-notification.html
-            - mountPath: /mailserviceTemplates/assign-enquiry-notification.json
-              name: mailservice-templates
-              subPath: assign-enquiry-notification.json
-            - mountPath: /mailserviceTemplates/enquiry-notification-consultant.html
-              name: mailservice-templates
-              subPath: enquiry-notification-consultant.html
-            - mountPath: /mailserviceTemplates/enquiry-notification-consultant.json
-              name: mailservice-templates
-              subPath: enquiry-notification-consultant.json
-            - mountPath: /mailserviceTemplates/feedback-message-notification.html
-              name: mailservice-templates
-              subPath: feedback-message-notification.html
-            - mountPath: /mailserviceTemplates/feedback-message-notification.json
-              name: mailservice-templates
-              subPath: feedback-message-notification.json
-            - mountPath: /mailserviceTemplates/message-notification-asker.html
-              name: mailservice-templates
-              subPath: message-notification-asker.html
-            - mountPath: /mailserviceTemplates/message-notification-asker.json
-              name: mailservice-templates
-              subPath: message-notification-asker.json
-            - mountPath: /mailserviceTemplates/message-notification-consultant.html
-              name: mailservice-templates
-              subPath: message-notification-consultant.html
-            - mountPath: /mailserviceTemplates/message-notification-consultant.json
-              name: mailservice-templates
-              subPath: message-notification-consultant.json
-            - mountPath: /mailserviceTemplates/reassign-confirmation-notification.html
-              name: mailservice-templates
-              subPath: reassign-confirmation-notification.html
-            - mountPath: /mailserviceTemplates/reassign-confirmation-notification.json
-              name: mailservice-templates
-              subPath: reassign-confirmation-notification.json
-            - mountPath: /mailserviceTemplates/reassign-request-notification.html
-              name: mailservice-templates
-              subPath: reassign-request-notification.html
-            - mountPath: /mailserviceTemplates/reassign-request-notification.json
-              name: mailservice-templates
-              subPath: reassign-request-notification.json
-            - mountPath: /mailserviceTemplates/free-text.html
-              name: mailservice-templates
-              subPath: free-text.html
-            - mountPath: /mailserviceTemplates/free-text.json
-              name: mailservice-templates
-              subPath: free-text.json
-            - mountPath: /mailserviceTemplates/daily-enquiry-notification.json
-              name: mailservice-templates
-              subPath: daily-enquiry-notification.json
-            - mountPath: /mailserviceTemplates/daily-enquiry-notification.html
-              name: mailservice-templates
-              subPath: daily-enquiry-notification.html
-            - mountPath: /mailserviceTemplates/direct-enquiry-notification-consultant.json
-              name: mailservice-templates
-              subPath: direct-enquiry-notification-consultant.json
-            - mountPath: /mailserviceTemplates/direct-enquiry-notification-consultant.html
-              name: mailservice-templates
-              subPath: direct-enquiry-notification-consultant.html
             - mountPath: /mailserviceTemplates/images/
               name: mailservice-templates-images
       imagePullSecrets:

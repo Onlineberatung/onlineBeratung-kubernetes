@@ -4,7 +4,7 @@ config.enableWelcomePage = false;
 config.enableClosePage = true;
 config.enableLobbyChat = false;
 config.defaultLanguage = 'de';
-config.enableEncodedTransformSupport = false;
+config.enableEncodedTransformSupport = true;
 config.toolbarButtons = [
     'microphone',
     'camera',

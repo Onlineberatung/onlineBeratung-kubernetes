@@ -206,12 +206,8 @@ spec:
             - mountPath: /mailserviceTemplates/direct-enquiry-notification-consultant.html
               name: mailservice-templates
               subPath: direct-enquiry-notification-consultant.html
-            - mountPath: /mailserviceTemplates/images/illustration-bottom.png
+            - mountPath: /mailserviceTemplates/images/
               name: mailservice-templates-images
-              subPath: "illustration-bottom.png"
-            - mountPath: /mailserviceTemplates/images/illustration-top.png
-              name: mailservice-templates-images
-              subPath: "illustration-top.png"
       imagePullSecrets:
         - name: registry-secret
       restartPolicy: Always

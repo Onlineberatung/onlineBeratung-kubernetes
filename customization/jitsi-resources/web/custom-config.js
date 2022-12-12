@@ -34,4 +34,5 @@ config.disabledSounds = [
     'E2EE_ON_SOUND'
 ];
 config.channelLastN = 5;
+config.hideConferenceSubject = true;
 config.dynamicBrandingUrl = '/dynamicBranding.json';

@@ -6,6 +6,6 @@ metadata:
 data:
   statistics.cfg.lua: |
     enable_statistics = {{ .Values.global.statisticsEnabled }}
-    rabbit_url = "http://rabbitmq.{{ .Release.Namespace }}:15672/api/exchanges/%2F/statistics.topic/publish"
+    rabbit_url = "http://rabbitmq.{{ .Release.Namespace }}.svc.cluster.local:15672/api/exchanges/%2F/statistics.topic/publish"
     rabbit_username = "{{ .Values.global.rabbitStatisticsUser }}"
     rabbit_password = "{{ .Values.global.rabbitStatisticsPassword }}"

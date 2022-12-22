@@ -68,12 +68,13 @@ spec:
           image: {{ .Values.keycloakImageName }}:{{ .Values.keycloakVersion }}
           command: ["/opt/keycloak/bin/kc.sh"]
           args:
-            - start
-            - --auto-build
+            - start-dev
+            - --debug
           imagePullPolicy: IfNotPresent
           name: keycloak
           ports:
             - containerPort: 8080
+            - containerPort: 8787
           resources: {}
           volumeMounts:
             - mountPath: /opt/keycloak/themes/custom-theme/login/info.ftl

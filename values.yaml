@@ -121,7 +121,7 @@ uploadServiceKeycloakResource:  "upload-service"
 
 # User service
 userServiceImageName: "ghcr.io/onlineberatung/onlineberatung-userservice/onlineberatung-userservice"
-userServiceImageVersion: "develop_20221118_105158"
+userServiceImageVersion: "develop_20221222_153248"
 consultantImportFilename: "import/consultants.csv"
 consultantImportProtocolFilename: "import/consultants-import.txt"
 askerImportFilename: "import/askers.csv"

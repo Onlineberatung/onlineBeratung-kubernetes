@@ -1,5 +1,5 @@
-keycloakImageName: "ghcr.io/caritasdeutschland/caritas-onlineberatung-keycloak-otp/caritas-onlineberatung-keycloak-otp"
-keycloakVersion: "develop_20221201_112744"
+keycloakImageName: "ghcr.io/onlineberatung/onlineberatung-keycloak-otp/onlineberatung-keycloak-otp"
+keycloakVersion: "develop_20221121_165617"
 
 dbVendor: "MARIADB"
 dbDatabase: "keycloak"

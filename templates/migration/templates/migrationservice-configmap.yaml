@@ -1,3 +1,4 @@
+{{- if .Values.global.migrationToolEnabled }}
 apiVersion: v1
 kind: ConfigMap
 data:
@@ -8,3 +9,4 @@ metadata:
   labels:
     io.kompose.service: migrationtool-{{ .Release.Name }}-env
   name: migrationtool-{{ .Release.Name }}-env
+{{- end }}

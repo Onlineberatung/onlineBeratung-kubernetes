@@ -13,6 +13,7 @@ global:
   initializeDummyData: true
   useExternalMariaDb: false
   settingMainTenantSubdomainForSingleDomainMultitenancy: "not-needed"
+  migrationToolEnabled: false
 
   # Secrets MariaDB
   mysqlRootPassword: "root"
@@ -209,3 +210,6 @@ online-counseling-videobackend:
 online-counseling-rabbitmq:
   rabbitDefaultPass: "admin"
   rabbitDefaultUser: "admin"
+
+migrationToolImageName: "ghcr.io/onlineberatung/onlineberatung-migrationtool/onlineberatung-migrationtool"
+migrationToolImageVersion: "dockerImage.v.3"

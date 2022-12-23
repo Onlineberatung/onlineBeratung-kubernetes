@@ -1,0 +1,62 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migrationtool
+  annotations:
+    "helm.sh/hook": "post-install,post-upgrade"
+spec:
+  template:
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "ghcr.io/onlineberatung/onlineberatung-migrationtool/onlineberatung-migrationtool:dockerImage.v.2"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_DATASOURCE_URL
+                  name: migrationtool-{{ .Release.Name }}-env
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: SPRING_DATASOURCE_PASSWORD
+                  name: migrationtool-secret-{{ .Release.Name }}-env
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: SPRING_DATASOURCE_USERNAME
+                  name: migrationtool-secret-{{ .Release.Name }}-env
+            - name: KEYCLOAK_AUTH_SERVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: KEYCLOAK_AUTH_SERVER_URL
+                  name: migrationtool-{{ .Release.Name }}-env
+            - name: KEYCLOAK_CONFIG_ADMIN_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: KEYCLOAK_CONFIG_ADMIN_USERNAME
+                  name: migrationtool-secret-{{ .Release.Name }}-env
+            - name: KEYCLOAK_CONFIG_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: KEYCLOAK_CONFIG_ADMIN_PASSWORD
+                  name: migrationtool-secret-{{ .Release.Name }}-env
+            - name: ROCKETCHAT_CONFIG_SERVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: ROCKETCHAT_CONFIG_SERVER_URL
+                  name: migrationtool-{{ .Release.Name }}-env
+            - name: ROCKETCHAT_CONFIG_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: ROCKETCHAT_CONFIG_ADMIN_PASSWORD
+                  name: migrationtool-secret-{{ .Release.Name }}-env
+            - name: ROCKETCHAT_CONFIG_ADMIN_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: ROCKETCHAT_CONFIG_ADMIN_USERNAME
+                  name: migrationtool-secret-{{ .Release.Name }}-env
+      restartPolicy: OnFailure
+      imagePullSecrets:
+      - name: registry-secret

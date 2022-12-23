@@ -1,6 +1,0 @@
-name: online-counseling-migration-tool
-description: The chart providing tool to execute different kind of migrations
-version: 0.0.1
-apiVersion: v1
-keywords:
- - online-counseling-migration

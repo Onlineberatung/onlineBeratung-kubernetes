@@ -58,6 +58,11 @@ spec:
                 secretKeyRef:
                   key: ROCKETCHAT_CONFIG_ADMIN_USERNAME
                   name: migrationtool-secret-{{ .Release.Name }}-env
+            - name: SPRING_DATA_MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  key: SPRING_DATA_MONGODB_URI
+                  name: migrationtool-secret-{{ .Release.Name }}-env
       restartPolicy: OnFailure
       imagePullSecrets:
       - name: registry-secret

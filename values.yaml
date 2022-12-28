@@ -33,6 +33,8 @@ global:
   consultingTypeServiceSpringDatasourcePassword: "consultingtypeservice"
   appointmentServiceSpringDatasourceUsername: "appointmenteservice"
   appointmentServiceSpringDatasourcePassword: "appointmenteservice"
+  migrationServiceSpringDatasourceUsername: "migrationservice"
+  migrationServiceSpringDatasourcePassword: "migrationservice"
   keycloakDbUser: "keycloak"
   keycloakDbPassword: "keycloak"
   # Secrets MongoDB

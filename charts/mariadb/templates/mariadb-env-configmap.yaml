@@ -54,6 +54,11 @@ data:
     CREATE DATABASE IF NOT EXISTS counselingtoolsservice CHARACTER SET utf8 COLLATE utf8_unicode_ci;
     GRANT SELECT, INSERT, UPDATE, DELETE, ALTER ON counselingtoolsservice.* TO '{{ .Values.global.counselingToolsServiceSpringDatasourceUsername }}'@'%';
     FLUSH PRIVILEGES;
+    
+    CREATE USER IF NOT EXISTS '{{ .Values.global.migrationServiceSpringDatasourceUsername }}'@'%' IDENTIFIED BY '{{ .Values.global.migrationServiceSpringDatasourceUsername }}';
+    CREATE DATABASE IF NOT EXISTS migrationservice CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+    GRANT SELECT, INSERT, UPDATE, DELETE, ALTER ON migrationservice.* TO '{{ .Values.global.migrationServiceSpringDatasourceUsername }}'@'%';
+    FLUSH PRIVILEGES;
 
     CREATE USER IF NOT EXISTS '{{ .Values.global.springLiquibaseUser }}'@'%' IDENTIFIED BY '{{ .Values.global.springLiquibasePassword }}';
     GRANT ALTER, CREATE, CREATE VIEW, DELETE, DROP, INDEX, INSERT, REFERENCES, SELECT, SHOW VIEW, TRIGGER, UPDATE, ALTER ROUTINE, EXECUTE ON userservice.* TO '{{ .Values.global.springLiquibaseUser }}'@'%';
@@ -64,5 +69,6 @@ data:
     GRANT ALTER, CREATE, CREATE VIEW, DELETE, DROP, INDEX, INSERT, REFERENCES, SELECT, SHOW VIEW, TRIGGER, UPDATE, ALTER ROUTINE, EXECUTE ON consultingtypeservice.* TO '{{ .Values.global.springLiquibaseUser }}'@'%';
     GRANT ALTER, CREATE, CREATE VIEW, DELETE, DROP, INDEX, INSERT, REFERENCES, SELECT, SHOW VIEW, TRIGGER, UPDATE, ALTER ROUTINE, EXECUTE ON appointmentservice.* TO '{{ .Values.global.springLiquibaseUser }}'@'%';
     GRANT ALTER, CREATE, CREATE VIEW, DELETE, DROP, INDEX, INSERT, REFERENCES, SELECT, SHOW VIEW, TRIGGER, UPDATE, ALTER ROUTINE, EXECUTE ON counselingtoolsservice.* TO '{{ .Values.global.springLiquibaseUser }}'@'%';
+    GRANT ALTER, CREATE, CREATE VIEW, DELETE, DROP, INDEX, INSERT, REFERENCES, SELECT, SHOW VIEW, TRIGGER, UPDATE, ALTER ROUTINE, EXECUTE ON migrationservice.* TO '{{ .Values.global.springLiquibaseUser }}'@'%';
     FLUSH PRIVILEGES;
   {{- end }}

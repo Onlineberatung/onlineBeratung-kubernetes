@@ -1,5 +1,5 @@
-keycloakImageName: "keycloak"
-keycloakVersion: "dockerimage.v.2022-12-28.m1"
+keycloakImageName: "ghcr.io/onlineberatung/onlineberatung-keycloak-otp/onlineberatung-keycloak-otp"
+keycloakVersion: "develop_20221121_165617"
 
 dbVendor: "MARIADB"
 dbDatabase: "keycloak"

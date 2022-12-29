@@ -182,6 +182,8 @@ rocketTechnicalUsername: "rocket-chat-technical-user"
 rocketTechnicalPassword: "technical"
 rocketSystemuserUsername: "system1"
 rocketSystemuserPassword: "system"
+rocketAdminUsername: "local-admin"
+rocketAdminPassword: "local-admin"
 
 mailExchangeUser: ""
 mailExchangePassword: ''

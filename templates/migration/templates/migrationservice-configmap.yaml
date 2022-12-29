@@ -5,6 +5,7 @@ data:
   SPRING_DATASOURCE_URL: "jdbc:mariadb://mariadb.{{ .Release.Namespace }}:3306/migrationservice"
   KEYCLOAK_AUTH_SERVER_URL: {{ .Values.keycloakAuthServerUrl}}
   ROCKETCHAT_CONFIG_SERVER_URL: "http://rocketchat.{{ .Release.Namespace }}:3000/api"
+  KEYCLOAK_AUTH_SERVER_URL: "http://keycloak.{{ .Release.Namespace }}/auth"
 metadata:
   labels:
     io.kompose.service: migrationtool-{{ .Release.Name }}-env

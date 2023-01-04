@@ -21,6 +21,7 @@ spec:
     spec:
       containers:
         - image:  {{ .Values.frontendImageName }}:{{ .Values.frontendImageVersion }}
+          imagePullPolicy: Always
           name: frontend
           ports:
             - containerPort: 80

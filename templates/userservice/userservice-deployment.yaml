@@ -447,6 +447,7 @@ spec:
                   key: IDENTITY_EMAIL-DUMMY-SUFFIX
                   name: userservice-{{ .Release.Name }}-env
           image: {{ .Values.userServiceImageName }}:{{ .Values.userServiceImageVersion }}
+          imagePullPolicy: Always
           name: userservice
           ports:
             - containerPort: 8080

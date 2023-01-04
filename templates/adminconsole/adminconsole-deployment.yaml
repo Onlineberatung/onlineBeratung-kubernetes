@@ -22,6 +22,7 @@ spec:
     spec:
       containers:
         - image:  {{ .Values.adminconsoleImageName }}:{{ .Values.adminconsoleImageVersion }}
+          imagePullPolicy: Always
           name: adminconsole
           ports:
             - containerPort: 80

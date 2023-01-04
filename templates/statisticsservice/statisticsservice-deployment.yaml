@@ -95,6 +95,7 @@ spec:
                   key:  TENANT_SERVICE_API_URL
                   name: statisticsservice-{{ .Release.Name }}-env
           image: {{ .Values.statisticsServiceImageName }}:{{ .Values.statisticsServiceImageVersion }}
+          imagePullPolicy: Always
           name: statisticsservice
           ports:
             - containerPort: 8080

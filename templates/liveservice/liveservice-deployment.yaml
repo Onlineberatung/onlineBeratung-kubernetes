@@ -63,6 +63,7 @@ spec:
           ports:
             - containerPort: 8080
           image:  {{ .Values.liveServiceImageName }}:{{ .Values.liveServiceImageVersion }}
+          imagePullPolicy: Always
           resources: {}
       imagePullSecrets:
         - name: registry-secret

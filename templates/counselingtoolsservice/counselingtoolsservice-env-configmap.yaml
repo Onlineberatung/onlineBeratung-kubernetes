@@ -31,6 +31,8 @@ data:
   CSRF_COOKIE_PROPERTY: {{ .Values.csrfCookieProperty}}
   BUDIBASE_API_URL: {{ .Values.budibaseApiUrl}}
   BUDIBASE_API_KEY: {{ .Values.budibaseApiKey}}
+  BUDIBASE_PUBLIC_URL: {{ .Values.budibasePublicUrl}}
+  BUDIBASE_PROXY_WHITELISTED: {{ .Values.budibaseProxyWhitelisted}}
   BUDIBASE_APPSAPP_ID: {{ .Values.budibaseAppsAppId}}
   BUDIBASE_APPS_QUERY_ID: {{ .Values.budibaseAppsQueryId}}
   BUDIBASE_EXPORTAPP_ID: {{ .Values.budibaseExportAppId}}
@@ -44,4 +46,4 @@ metadata:
   labels:
     io.kompose.service: counselingtoolsservice-{{ .Release.Name }}-env
   name: counselingtoolsservice-{{ .Release.Name }}-env
-{{- end }}
+  {{- end }}

@@ -55,6 +55,16 @@ spec:
                 configMapKeyRef:
                   key: BUDIBASE_API_URL
                   name: counselingtoolsservice-{{ .Release.Name }}-env
+            - name: BUDIBASE_PUBLIC_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: BUDIBASE_PUBLIC_URL
+                  name: counselingtoolsservice-{{ .Release.Name }}-env
+            - name: BUDIBASE_PROXY_WHITELISTED
+              valueFrom:
+                configMapKeyRef:
+                  key: BUDIBASE_PROXY_WHITELISTED
+                  name: counselingtoolsservice-{{ .Release.Name }}-env
             - name: BUDIBASE_API_KEY
               valueFrom:
                 configMapKeyRef:
@@ -193,4 +203,4 @@ spec:
       imagePullSecrets:
         - name: registry-secret
       restartPolicy: Always
-{{- end }}
+  {{- end }}

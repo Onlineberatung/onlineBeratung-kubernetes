@@ -33,6 +33,7 @@ data:
   BUDIBASE_API_KEY: {{ .Values.budibaseApiKey}}
   BUDIBASE_PUBLIC_URL: {{ .Values.budibasePublicUrl}}
   BUDIBASE_PROXY_WHITELISTED: {{ .Values.budibaseProxyWhitelisted}}
+  BUDIBASE_PROXY_HOST: {{ .Values.budibaseProxyHost}}
   BUDIBASE_APPSAPP_ID: {{ .Values.budibaseAppsAppId}}
   BUDIBASE_APPS_QUERY_ID: {{ .Values.budibaseAppsQueryId}}
   BUDIBASE_EXPORTAPP_ID: {{ .Values.budibaseExportAppId}}

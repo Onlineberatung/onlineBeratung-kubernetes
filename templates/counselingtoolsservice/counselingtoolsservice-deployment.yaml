@@ -65,6 +65,11 @@ spec:
                 configMapKeyRef:
                   key: BUDIBASE_PROXY_WHITELISTED
                   name: counselingtoolsservice-{{ .Release.Name }}-env
+            - name: BUDIBASE_PROXY_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: BUDIBASE_PROXY_HOST
+                  name: counselingtoolsservice-{{ .Release.Name }}-env
             - name: BUDIBASE_API_KEY
               valueFrom:
                 configMapKeyRef:

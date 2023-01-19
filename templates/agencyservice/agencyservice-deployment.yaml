@@ -163,6 +163,7 @@ spec:
           ports:
             - containerPort: 8080
           image:  {{ .Values.agencyServiceImageName }}:{{ .Values.agencyServiceImageVersion }}
+          imagePullPolicy: Always
           resources: {}
       imagePullSecrets:
         - name: registry-secret

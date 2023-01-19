@@ -13,6 +13,7 @@ global:
   initializeDummyData: true
   useExternalMariaDb: false
   settingMainTenantSubdomainForSingleDomainMultitenancy: "not-needed"
+  migrationToolEnabled: false
 
   # Secrets MariaDB
   mysqlRootPassword: "root"
@@ -32,6 +33,8 @@ global:
   consultingTypeServiceSpringDatasourcePassword: "consultingtypeservice"
   appointmentServiceSpringDatasourceUsername: "appointmenteservice"
   appointmentServiceSpringDatasourcePassword: "appointmenteservice"
+  migrationServiceSpringDatasourceUsername: "migrationservice"
+  migrationServiceSpringDatasourcePassword: "migrationservice"
   keycloakDbUser: "keycloak"
   keycloakDbPassword: "keycloak"
   # Secrets MongoDB
@@ -179,6 +182,8 @@ rocketTechnicalUsername: "rocket-chat-technical-user"
 rocketTechnicalPassword: "technical"
 rocketSystemuserUsername: "system1"
 rocketSystemuserPassword: "system"
+rocketAdminUsername: "local-admin"
+rocketAdminPassword: "local-admin"
 
 mailExchangeUser: ""
 mailExchangePassword: ''
@@ -209,3 +214,6 @@ online-counseling-videobackend:
 online-counseling-rabbitmq:
   rabbitDefaultPass: "admin"
   rabbitDefaultUser: "admin"
+
+migrationToolImageName: "ghcr.io/onlineberatung/onlineberatung-migrationtool/onlineberatung-migrationtool"
+migrationToolImageVersion: "dockerImage.v.3"

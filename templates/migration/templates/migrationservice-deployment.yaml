@@ -1,3 +1,4 @@
+{{- if .Values.global.migrationToolEnabled }}
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -9,7 +10,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "ghcr.io/onlineberatung/onlineberatung-migrationtool/onlineberatung-migrationtool:dockerImage.v.2"
+          image: {{ .Values.migrationToolImageName }}:{{ .Values.migrationToolImageVersion }}
           imagePullPolicy: IfNotPresent
           env:
             - name: SPRING_DATASOURCE_URL
@@ -57,6 +58,12 @@ spec:
                 secretKeyRef:
                   key: ROCKETCHAT_CONFIG_ADMIN_USERNAME
                   name: migrationtool-secret-{{ .Release.Name }}-env
+            - name: SPRING_DATA_MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  key: SPRING_DATA_MONGODB_URI
+                  name: migrationtool-secret-{{ .Release.Name }}-env
       restartPolicy: OnFailure
       imagePullSecrets:
       - name: registry-secret
+{{- end }}

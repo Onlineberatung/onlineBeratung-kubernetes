@@ -185,6 +185,7 @@ spec:
                   key: FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED
                   name: uploadservice-{{ .Release.Name }}-env
           image: {{ .Values.uploadServiceImageName }}:{{ .Values.uploadServiceImageVersion }}
+          imagePullPolicy: Always
           name: uploadservice
           ports:
             - containerPort: 8080

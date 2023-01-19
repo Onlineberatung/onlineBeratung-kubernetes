@@ -141,6 +141,7 @@ spec:
                   name: consultingtypeservice-{{ .Release.Name }}-env
 
           image:  {{ .Values.consultingTypeServiceImageName }}:{{ .Values.consultingTypeServiceImageVersion }}
+          imagePullPolicy: Always
           name: consultingtypeservice
           ports:
             - containerPort: 8080

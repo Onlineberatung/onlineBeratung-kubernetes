@@ -155,6 +155,7 @@ spec:
                   key: FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED
                   name: videoservice-{{ .Release.Name }}-env
           image: {{ .Values.videoServiceImageName }}:{{ .Values.videoServiceImageVersion }}
+          imagePullPolicy: Always
           name: videoservice
           ports:
             - containerPort: 8080

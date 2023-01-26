@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/enable-cors: "{{ .Values.enableCors }}"
     nginx.ingress.kubernetes.io/cors-allow-origin: "{{ .Values.corsAllowOrigin }}"
     nginx.ingress.kubernetes.io/cors-allow-headers: "{{ .Values.corsAllowHeaders }}"
-    nginx.ingress.kubernetes.io/proxy-body-size: 16m
+    nginx.ingress.kubernetes.io/proxy-body-size: 25m
   name: uploadservice
   namespace: {{ .Release.Namespace }}
 spec:

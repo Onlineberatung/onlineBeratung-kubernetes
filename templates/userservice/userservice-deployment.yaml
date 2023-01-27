@@ -386,6 +386,11 @@ spec:
                 secretKeyRef:
                   key: SPRING_RABBITMQ_PASSWORD
                   name: statisticsservice-secret-{{ .Release.Name }}-env
+            - name: ROCKET_CHAT_MONGO_URL
+              valueFrom:
+                secretKeyRef:
+                  key: ROCKET_CHAT_MONGO_URL
+                  name: userservice-secret-{{ .Release.Name }}-env
             - name: FEATURE_APPOINTMENT_ENABLED
               valueFrom:
                 configMapKeyRef:

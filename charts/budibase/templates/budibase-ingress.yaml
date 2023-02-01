@@ -24,11 +24,88 @@ spec:
     - host: "{{ .Values.budibaseHost }}"
       http:
         paths:
-          - backend:
+          - path: /
+            pathType: Prefix
+            backend:
               service:
                 name: proxy-service
                 port:
                   number: 10000
-            path: /
+          - path: /api
             pathType: Prefix
-{{- end }}
+            backend:
+              service:
+                name: vi-proxy-service
+                port:
+                  number: 8080
+          - path: /api/self
+            pathType: Prefix
+            backend:
+              service:
+                name: proxy-service
+                port:
+                  number: 10000
+          - path: /api/bbtel/ping
+            pathType: Prefix
+            backend:
+              service:
+                name: proxy-service
+                port:
+                  number: 10000
+          - path: /api/routing/client
+            pathType: Prefix
+            backend:
+              service:
+                name: proxy-service
+                port:
+                  number: 10000
+          - path: /api/system/environment
+            pathType: Prefix
+            backend:
+              service:
+                name: proxy-service
+                port:
+                  number: 10000
+          - path: /api/applications
+            pathType: Prefix
+            backend:
+              service:
+                name: proxy-service
+                port:
+                  number: 10000
+          - path: /api/global/self
+            pathType: Prefix
+            backend:
+              service:
+                name: proxy-service
+                port:
+                  number: 10000
+          - path: /api/global/auth
+            pathType: Prefix
+            backend:
+              service:
+                name: proxy-service
+                port:
+                  number: 10000
+          - path: /api/global/configs
+            pathType: Prefix
+            backend:
+              service:
+                name: proxy-service
+                port:
+                  number: 10000
+          - path: /api/tables
+            pathType: Prefix
+            backend:
+              service:
+                name: proxy-service
+                port:
+                  number: 10000
+          - path: /api/queries
+            pathType: Prefix
+            backend:
+              service:
+                name: proxy-service
+                port:
+                  number: 10000
+  {{- end }}

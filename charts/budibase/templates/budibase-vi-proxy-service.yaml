@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vi-proxy-service
+  namespace: budibase
+spec:
+  type: ExternalName
+  externalName: counselingtoolsservice.staging.svc.cluster.local

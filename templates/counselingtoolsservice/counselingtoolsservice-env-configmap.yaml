@@ -36,6 +36,8 @@ data:
   BUDIBASE_PROXY_HOST: {{ .Values.budibaseProxyHost}}
   BUDIBASE_APPSAPP_ID: {{ .Values.budibaseAppsAppId}}
   BUDIBASE_APPS_QUERY_ID: {{ .Values.budibaseAppsQueryId}}
+  BUDIBASE_CONSULTANTVIEW_APP_ID: {{ .Values.budibaseConsultantViewAppId}}
+  BUDIBASE_CONSULTANTVIEW_QUERY_ID: {{ .Values.budibaseConsultantViewAppQueryId}}
   BUDIBASE_EXPORTAPP_ID: {{ .Values.budibaseExportAppId}}
   BUDIBASE_EXPORT_QUERY_ID: {{ .Values.budibaseExportQueryId}}
   # Spring/Database

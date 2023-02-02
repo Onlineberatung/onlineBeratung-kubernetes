@@ -12,6 +12,7 @@ data:
     MULTITENANCY_ENABLED: {{ .Values.global.multitenancyEnabled | quote }}
     FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED: {{ .Values.global.multitenancyWithSingleDomainEnabled | quote }}
     TENANT_SERVICE_API_URL: "http://tenantservice.{{ .Release.Namespace }}:8080"
+    CONSULTING_TYPE_SERVICE_API_URL: "http://consultingtypeservice.{{ .Release.Namespace }}:8080"
 
 kind: ConfigMap
 metadata:

@@ -8,6 +8,7 @@ config.enableEncodedTransformSupport = true;
 config.toolbarButtons = [
     'camera',
     //'chat', -> Disabled no e2ee support
+    'desktop',
     //'etherpad', -> Disabled no e2ee support
     'filmstrip',
     'fullscreen',
@@ -42,7 +43,8 @@ config.toolbarConfig = {
 };
 config.disabledSounds = [
     'E2EE_OFF_SOUND',
-    'E2EE_ON_SOUND'
+    'E2EE_ON_SOUND',
+    'REACTION_SOUND'
 ];
 config.hideConferenceSubject = true;
 config.dynamicBrandingUrl = '/dynamicBranding.json';

@@ -63,6 +63,11 @@ spec:
                 configMapKeyRef:
                   key: ROCKETCHAT_CONFIG_SERVER_URL
                   name: migrationtool-{{ .Release.Name }}-env
+            - name: SPRING_PROFILES_ACTIVE
+              valueFrom:
+                configMapKeyRef:
+                  key: MIGRATION_SPRING_PROFILE
+                  name: migrationtool-{{ .Release.Name }}-env
             - name: ROCKETCHAT_CONFIG_ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:

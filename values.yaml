@@ -75,6 +75,7 @@ rocketCredentialschedulerCron: "0 0 0/1 * * ?"
 agencyServiceKeycloakResource: "agency-service"
 
 agencyServiceSpringProfilesActive: "dev"
+agencyServiceDeleteWorkflowCron: "0 0 * * * ?"
 agencyServiceImageName: "ghcr.io/onlineberatung/onlineberatung-agencyservice/onlineberatung-agencyservice"
 agencyServiceImageVersion: "develop_20221117_173329"
 

@@ -159,6 +159,11 @@ spec:
                 configMapKeyRef:
                   key:  FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED
                   name: agencyservice-{{ .Release.Name }}-env
+            - name: AGENCY_DELETEWORKFLOW_CRON
+              valueFrom:
+                configMapKeyRef:
+                  key: AGENCY_DELETEWORKFLOW_CRON
+                  name: agencyservice-{{ .Release.Name }}-env
           name: agencyservice
           ports:
             - containerPort: 8080

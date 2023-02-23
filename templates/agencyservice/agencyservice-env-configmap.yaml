@@ -15,6 +15,7 @@ data:
   SPRING_DATASOURCE_URL: "jdbc:mariadb://mariadb.{{ .Release.Namespace }}:3306/agencyservice"
   {{- end }}
   SPRING_PROFILES_ACTIVE: {{ .Values.agencyServiceSpringProfilesActive }}
+  AGENCY_DELETEWORKFLOW_CRON: {{ .Values.agencyServiceDeleteWorkflowCron }}
   CONSULTING_TYPE_SERVICE_API_URL: "http://consultingtypeservice.{{ .Release.Namespace }}:8080"
   TENANT_SERVICE_API_URL: "http://tenantservice.{{ .Release.Namespace }}:8080"
   MULTITENANCY_ENABLED: {{ .Values.global.multitenancyEnabled | quote }}
@@ -25,7 +26,6 @@ data:
   FEATURE_APPOINTMENT_ENABLED: {{ .Values.global.appointmentsEnabled | quote }}
   APPOINTMENT_SERVICE_API_URL: "http://appointmentservice.{{ .Release.Namespace }}:8080"
   FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED: {{ .Values.global.multitenancyWithSingleDomainEnabled | quote }}
-
   {{- if .Values.global.enableTls }}
   APP_BASE_URL: "https://{{ .Values.global.domainName }}"
 {{- else }}

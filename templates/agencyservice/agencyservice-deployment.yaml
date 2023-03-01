@@ -164,6 +164,11 @@ spec:
                 configMapKeyRef:
                   key: AGENCY_DELETEWORKFLOW_CRON
                   name: agencyservice-{{ .Release.Name }}-env
+            - name: TOMCAT_UTIL_HTTP_PARSER_HTTPPARSER_REQUESTTARGETALLOW
+              valueFrom:
+                configMapKeyRef:
+                  key: TOMCAT_UTIL_HTTP_PARSER_HTTPPARSER_REQUESTTARGETALLOW
+                  name: agencyservice-{{ .Release.Name }}-env
           name: agencyservice
           ports:
             - containerPort: 8080

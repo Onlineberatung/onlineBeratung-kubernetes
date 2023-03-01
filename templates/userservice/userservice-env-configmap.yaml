@@ -83,6 +83,8 @@ data:
   IDENTITY_OTP_ALLOWED_FOR_CONSULTANTS: "true"
   IDENTITY_OTP_ALLOWED_FOR_SINGLE_TENANT_ADMINS: "true"
   IDENTITY_OTP_ALLOWED_FOR_TENANT_SUPER_ADMINS: "true"
+  IDENTITY_OTP_ALLOWED_FOR_TENANT_SUPER_ADMINS: "true"
+  IDENTITY_DISPLAY_NAME_ALLOWED_FOR_CONSULTANTS: {{ .Values.displayNameAllowedForConsultants | default "false" | quote }}
   # logstash
   LOGSTASH_HOST: {{ .Values.logstashHost | default "null" | quote }}
   FEATURE_APPOINTMENT_ENABLED: {{ .Values.global.appointmentsEnabled | quote }}

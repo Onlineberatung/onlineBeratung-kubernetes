@@ -451,6 +451,11 @@ spec:
                 configMapKeyRef:
                   key: IDENTITY_EMAIL-DUMMY-SUFFIX
                   name: userservice-{{ .Release.Name }}-env
+            - name: IDENTITY_DISPLAY_NAME_ALLOWED_FOR_CONSULTANTS
+              valueFrom:
+                configMapKeyRef:
+                  key: IDENTITY_DISPLAY_NAME_ALLOWED_FOR_CONSULTANTS
+                  name: userservice-{{ .Release.Name }}-env
           image: {{ .Values.userServiceImageName }}:{{ .Values.userServiceImageVersion }}
           imagePullPolicy: Always
           name: userservice

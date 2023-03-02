@@ -6,5 +6,5 @@ metadata:
   namespace: budibase
 spec:
   type: ExternalName
-  externalName: counselingtoolsservice.staging.svc.cluster.local
+  externalName: counselingtoolsservice.{{ .Release.Namespace }}.svc.cluster.local
 {{- end }}

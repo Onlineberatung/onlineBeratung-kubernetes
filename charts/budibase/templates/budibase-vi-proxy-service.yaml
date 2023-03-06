@@ -1,4 +1,4 @@
-{{- if .Values.global.counselingToolsEnabled (ne .Release.Namespace "develop") }}
+{{- if and (.Values.global.counselingToolsEnabled) (ne .Release.Namespace "develop") }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -7,4 +7,14 @@ metadata:
 spec:
   type: ExternalName
   externalName: counselingtoolsservice.{{ .Release.Namespace }}.svc.cluster.local
+{{- end }}
+{{- if and (.Values.global.counselingToolsEnabled) (eq .Release.Namespace "develop") }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: vi-proxy-service
+  namespace: budibase
+spec:
+  type: ExternalName
+  externalName: counselingtoolsservice.staging.svc.cluster.local
 {{- end }}

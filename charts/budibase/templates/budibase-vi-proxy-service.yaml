@@ -1,4 +1,4 @@
-{{- if .Values.global.counselingToolsEnabled }}
+{{- if .Values.global.counselingToolsEnabled (ne .Release.Namespace "develop") }}
 apiVersion: v1
 kind: Service
 metadata:

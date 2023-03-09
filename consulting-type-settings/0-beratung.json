@@ -3,7 +3,6 @@
   "id": 0,
   "slug": "beratung",
   "excludeNonMainConsultantsFromTeamSessions": false,
-  "lockedAgencies": false,
   "consultantBoundedToConsultingType": false,
   "welcomeMessage": {
     "sendWelcomeMessage": false,

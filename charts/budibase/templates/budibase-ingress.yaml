@@ -77,7 +77,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: proxy-service
+                name: vi-proxy-service
                 port:
                   number: 10000
           - path: /api/global/auth
@@ -91,7 +91,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: proxy-service
+                name: vi-proxy-service
                 port:
                   number: 10000
           - path: /api/tables

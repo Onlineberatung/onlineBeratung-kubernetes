@@ -79,7 +79,7 @@ spec:
               service:
                 name: vi-proxy-service
                 port:
-                  number: 10000
+                  number: 8080
           - path: /api/global/auth
             pathType: Prefix
             backend:
@@ -92,6 +92,20 @@ spec:
             backend:
               service:
                 name: vi-proxy-service
+                port:
+                  number: 8080
+          - path: /api/global/configs/public
+            pathType: Prefix
+            backend:
+              service:
+                name: proxy-service
+                port:
+                  number: 10000
+          - path: /api/global/configs/checklist
+            pathType: Prefix
+            backend:
+              service:
+                name: proxy-service
                 port:
                   number: 10000
           - path: /api/tables

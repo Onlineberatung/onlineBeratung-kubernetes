@@ -42,9 +42,9 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: proxy-service
+                name: vi-proxy-service
                 port:
-                  number: 10000
+                  number: 8080
           - path: /api/bbtel/ping
             pathType: Prefix
             backend:
@@ -56,9 +56,9 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: proxy-service
+                name: vi-proxy-service
                 port:
-                  number: 10000
+                  number: 8080
           - path: /api/system/environment
             pathType: Prefix
             backend:

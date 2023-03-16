@@ -6,6 +6,9 @@ data:
     KEYCLOAK_PRINCIPAL_ATTRIBUTE: {{ .Values.keycloakPrincipalAttribute }}
     KEYCLOAK_RESOURCE: "statistics-service"
     KEYCLOAK_CORS: "false"
+    # logstash
+    LOGSTASH_HOST: {{ .Values.logstashHost | default "null" | quote }}
+
     # CSRF
     CSRF_HEADER_PROPERTY: {{ .Values.csrfHeaderProperty }}
     CSRF_COOKIE_PROPERTY: {{ .Values.csrfCookieProperty }}

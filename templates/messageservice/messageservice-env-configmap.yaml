@@ -16,6 +16,9 @@ data:
   KEYCLOAK_CORS: "false"
   KEYCLOAKSERVICE_ADMIN_CLIENTID: {{ .Values.keycloakserviceAdminClientid }}
   KEYCLOAKSERVICE_APP_CLIENTID: {{ .Values.keycloakserviceAppClientid}}
+  # logstash
+  LOGSTASH_HOST: {{ .Values.logstashHost | default "null" | quote }}
+
   # Rocket.Chat
   ROCKET_CHAT_API_URL: "http://rocketchat.{{ .Release.Namespace }}:3000/api/v1"
   ROCKET_SYSTEMUSER_ID: {{ .Values.rocketSystemuserId}}

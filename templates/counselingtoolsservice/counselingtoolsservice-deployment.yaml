@@ -155,6 +155,11 @@ spec:
                 configMapKeyRef:
                   key: KEYCLOAK_RESOURCE
                   name: counselingtoolsservice-{{ .Release.Name }}-env
+            - name: LOGSTASH_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: LOGSTASH_HOST
+                  name: counselingtoolsservice-{{ .Release.Name }}-env
             - name: SPRING_PROFILES_ACTIVE
               valueFrom:
                 configMapKeyRef:

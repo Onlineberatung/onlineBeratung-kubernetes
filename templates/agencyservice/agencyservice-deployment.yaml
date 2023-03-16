@@ -74,6 +74,11 @@ spec:
                 configMapKeyRef:
                   key: KEYCLOAK_RESOURCE
                   name: agencyservice-{{ .Release.Name }}-env
+            - name: LOGSTASH_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: LOGSTASH_HOST
+                  name: agencyservice-{{ .Release.Name }}-env
             - name: SPRING_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:

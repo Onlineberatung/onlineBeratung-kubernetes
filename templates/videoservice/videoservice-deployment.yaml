@@ -69,6 +69,11 @@ spec:
                 configMapKeyRef:
                   key: KEYCLOAK_RESOURCE
                   name: videoservice-{{ .Release.Name }}-env
+            - name: LOGSTASH_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: LOGSTASH_HOST
+                  name: videoservice-{{ .Release.Name }}-env
             - name: LIVE_SERVICE_API_URL
               valueFrom:
                 configMapKeyRef:

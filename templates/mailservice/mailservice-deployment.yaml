@@ -5,6 +5,8 @@ metadata:
     io.kompose.service: mailservice
   name: mailservice
 spec:
+  {{.Files.Get ""| indent 4}}
+
   replicas: 1
   selector:
     matchLabels:
@@ -124,6 +126,11 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: SPRING_PROFILES_ACTIVE
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: LOGSTASH_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: LOGSTASH_HOST
                   name: mailservice-{{ .Release.Name }}-env
             - name: TEMPLATE_USE_CUSTOM_RESOURCES_PATH
               valueFrom:

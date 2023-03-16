@@ -17,6 +17,9 @@ data:
   KEYCLOAK_RESOURCE: {{ .Values.consultingTypeServiceKeycloakResource }}
   KEYCLOAKSERVICE_ADMIN_CLIENTID: {{ .Values.keycloakserviceAdminClientid }}
   KEYCLOAKSERVICE_APP_CLIENTID: {{ .Values.keycloakserviceAppClientid }}
+  # logstash
+  LOGSTASH_HOST: {{ .Values.logstashHost | default "null" | quote }}
+
 {{- if .Values.global.multitenancyWithSingleDomainEnabled }}
   MULTITENANCY_ENABLED: "false"
 {{- else }}

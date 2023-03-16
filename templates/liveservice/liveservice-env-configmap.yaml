@@ -6,6 +6,9 @@ data:
   KEYCLOAK_RESOURCE:  {{ .Values.agencyServiceKeycloakResource }}
   APP_BASE_URL: "*"
   SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING: "true"
+  # logstash
+  LOGSTASH_HOST: {{ .Values.logstashHost | default "null" | quote }}
+
 kind: ConfigMap
 metadata:
   labels:

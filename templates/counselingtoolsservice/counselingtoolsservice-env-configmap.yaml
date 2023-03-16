@@ -22,6 +22,9 @@ data:
   KEYCLOAK_CONFIG_ADMIN_CLIENTID: {{ .Values.keycloakserviceAdminClientid}}
   KEYCLOAK_CONFIG_APP_CLIENTID: {{ .Values.keycloakserviceAppClientid}}
   KEYCLOAKSERVICE_TECHUSER_ID: {{ .Values.keycloakserviceTechuserId}}
+  # logstash
+  LOGSTASH_HOST: {{ .Values.logstashHost | default "null" | quote }}
+
   # Services
   USER_SERVICE_API_URL: "http://userservice.{{ .Release.Namespace }}:8080"
   USER_ADMIN_SERVICE_API_URL: "http://userservice.{{ .Release.Namespace }}:8080"

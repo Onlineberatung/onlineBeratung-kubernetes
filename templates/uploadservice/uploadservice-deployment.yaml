@@ -84,6 +84,11 @@ spec:
                 configMapKeyRef:
                   key: KEYCLOAK_RESOURCE
                   name: uploadservice-{{ .Release.Name }}-env
+            - name: LOGSTASH_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: LOGSTASH_HOST
+                  name: uploadservice-{{ .Release.Name }}-env
             - name: ROCKET_CHAT_API_URL
               valueFrom:
                 configMapKeyRef:

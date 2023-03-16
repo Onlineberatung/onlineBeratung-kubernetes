@@ -25,6 +25,8 @@ data:
   FEATURE_APPOINTMENT_ENABLED: {{ .Values.global.appointmentsEnabled | quote }}
   APPOINTMENT_SERVICE_API_URL: "http://appointmentservice.{{ .Release.Namespace }}:8080"
   FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED: {{ .Values.global.multitenancyWithSingleDomainEnabled | quote }}
+  # logstash
+  LOGSTASH_HOST: {{ .Values.logstashHost | default "null" | quote }}
 
   {{- if .Values.global.enableTls }}
   APP_BASE_URL: "https://{{ .Values.global.domainName }}"

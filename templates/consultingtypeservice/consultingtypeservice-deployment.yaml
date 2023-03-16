@@ -129,6 +129,11 @@ spec:
                 configMapKeyRef:
                  key: KEYCLOAK_RESOURCE
                  name: consultingtypeservice-{{ .Release.Name }}-env
+            - name: LOGSTASH_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: LOGSTASH_HOST
+                  name: consultingtypeservice-{{ .Release.Name }}-env
             - name: FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED
               valueFrom:
                 configMapKeyRef:

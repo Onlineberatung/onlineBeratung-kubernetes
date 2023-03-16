@@ -20,6 +20,9 @@ data:
   LOGGING_LEVEL_ROOT: {{ .Values.mailServiceLoggingLevelRoot }}
   TEMPLATE_USE_CUSTOM_RESOURCES_PATH: {{ .Values.useCustomResourcePath | default "true" | quote }}
   TEMPLATE_CUSTOM_RESOURCES_PATH: "mailserviceTemplates/"
+  # logstash
+  LOGSTASH_HOST: {{ .Values.logstashHost | default "null" | quote }}
+
 kind: ConfigMap
 metadata:
   labels:

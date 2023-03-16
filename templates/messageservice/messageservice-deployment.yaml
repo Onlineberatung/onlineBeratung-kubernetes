@@ -119,6 +119,11 @@ spec:
                 secretKeyRef:
                   key: ROCKET_TECHNICAL_PASSWORD
                   name: messageservice-secret-{{ .Release.Name }}-env
+            - name: LOGSTASH_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: LOGSTASH_HOST
+                  name: messageservice-{{ .Release.Name }}-env
             - name: SERVICE_ENCRYPTION_APPKEY
               valueFrom:
                 secretKeyRef:

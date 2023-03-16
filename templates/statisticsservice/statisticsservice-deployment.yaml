@@ -54,6 +54,11 @@ spec:
                 configMapKeyRef:
                   key: KEYCLOAK_CORS
                   name: statisticsservice-{{ .Release.Name }}-env
+            - name: LOGSTASH_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: LOGSTASH_HOST
+                  name: statisticsservice-{{ .Release.Name }}-env
             - name: CSRF_HEADER_PROPERTY
               valueFrom:
                 configMapKeyRef:

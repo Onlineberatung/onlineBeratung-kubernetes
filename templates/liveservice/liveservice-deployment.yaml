@@ -54,6 +54,11 @@ spec:
                 configMapKeyRef:
                   key: KEYCLOAK_RESOURCE
                   name: liveservice-{{ .Release.Name }}-env
+            - name: LOGSTASH_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: LOGSTASH_HOST
+                  name: liveservice-{{ .Release.Name }}-env
             - name: SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING
               valueFrom:
                 configMapKeyRef:

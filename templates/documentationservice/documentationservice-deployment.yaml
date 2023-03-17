@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: documentationservice
+  name: documentationservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: documentationservice
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.network/database_network: "true"
+        io.kompose.network/frontend_network: "true"
+        io.kompose.network/service_network: "true"
+        io.kompose.service: documentationservice
+    spec:
+      hostAliases:
+        - ip: {{ .Values.global.dockerHostIp }}
+          hostnames:
+            - {{ .Values.global.domainName }}
+      containers:
+        - env:
+            - name: APP_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: APP_BASE_URL
+                  name: documentationservice-{{ .Release.Name }}-env
+          image:  {{ .Values.documentationServiceImageName }}:{{ .Values.consultingTypeServiceImageVersion }}
+          imagePullPolicy: Always
+          name: documentationservice
+          ports:
+            - containerPort: 8080
+          resources: {}
+      imagePullSecrets:
+        - name: registry-secret
+      restartPolicy: Always
+      livenessProbe:
+        failureThreshold: 15
+        httpGet:
+          path: /
+          port: 3000
+        initialDelaySeconds: 20
+        periodSeconds: 15
+        timeoutSeconds: 5
+        ports:
+          - containerPort: 80
+            name: http
+            protocol: TCP
+      readinessProbe:
+          failureThreshold: 15
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 20
+          periodSeconds: 15
+          timeoutSeconds: 5
+      resources:
+          limits:
+            cpu: "500m"
+            memory: 384Mi
+          requests:
+            cpu: "500m"
+            memory: 384Mi

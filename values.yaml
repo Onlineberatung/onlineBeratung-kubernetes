@@ -163,6 +163,10 @@ adminconsoleImageVersion: "dockerImage.v.341.release-2022-11-21"
 statisticsServiceImageName: "ghcr.io/onlineberatung/onlineberatung-statisticsservice/onlineberatung-statisticsservice"
 statisticsServiceImageVersion: "develop_20221117_155914"
 
+# Documentation Service
+documentationServiceImageName: "ghcr.io/onlineberatung/onlineberatung-docs/onlineberatung-documentationservice"
+documentationServiceImageVersion: "develop"
+
 # Default secrets, for production use please overwrite all values
 # Keycloak
 keycloakserviceAdminUsername: "realmadmin"

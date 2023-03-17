@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: documentationservice
+  name: documentationservice
+spec:
+  ports:
+    - name: "3000"
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
+    - name: "5005"
+      port: 5005
+      targetPort: 5005
+  selector:
+    io.kompose.service: documentationservice
+    app: documentationservice
+status:
+  loadBalancer: {}

@@ -30,29 +30,13 @@ spec:
                 configMapKeyRef:
                   key: APP_BASE_URL
                   name: documentationservice-{{ .Release.Name }}-env
-          image:  {{ .Values.documentationServiceImageName }}:{{ .Values.consultingTypeServiceImageVersion }}
+          image:  {{ .Values.documentationServiceImageName }}:{{ .Values.documentationServiceImageVersion }}
           imagePullPolicy: Always
           name: documentationservice
           ports:
             - containerPort: 3000
               name: http
               protocol: TCP
-          livenessProbe:
-            failureThreshold: 15
-            httpGet:
-              path: /
-              port: 3000
-            initialDelaySeconds: 20
-            periodSeconds: 15
-            timeoutSeconds: 5
-          readinessProbe:
-            failureThreshold: 15
-            httpGet:
-              path: /
-              port: 3000
-            initialDelaySeconds: 20
-            periodSeconds: 15
-            timeoutSeconds: 5
           resources:
             limits:
               cpu: "500m"

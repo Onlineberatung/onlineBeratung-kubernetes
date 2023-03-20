@@ -30,7 +30,7 @@ spec:
                 configMapKeyRef:
                   key: APP_BASE_URL
                   name: documentationservice-{{ .Release.Name }}-env
-          image:  {{ .Values.documentationServiceImageName }}:{{ .Values.consultingTypeServiceImageVersion }}
+          image:  {{ .Values.documentationServiceImageName }}:{{ .Values.documentationServiceImageVersion }}
           imagePullPolicy: Always
           name: documentationservice
           ports:

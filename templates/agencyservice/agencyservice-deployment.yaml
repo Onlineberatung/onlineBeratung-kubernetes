@@ -173,14 +173,14 @@ spec:
             httpGet:
               path: /actuator/health/liveness
               port: 8080
-              initialDelaySeconds: 50
-              periodSeconds: 5
+            initialDelaySeconds: 50
+            periodSeconds: 5
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
               port: 8080
-              initialDelaySeconds: 50
-              periodSeconds: 5
+            initialDelaySeconds: 50
+            periodSeconds: 5
           resources: {}
       imagePullSecrets:
         - name: registry-secret

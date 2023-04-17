@@ -196,6 +196,18 @@ spec:
                   name: messageservice-{{ .Release.Name }}-env
           image: {{ .Values.messageServiceImageName }}:{{ .Values.messageServiceImageVersion }}
           imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 5
           name: messageservice
           ports:
             - containerPort: 8080

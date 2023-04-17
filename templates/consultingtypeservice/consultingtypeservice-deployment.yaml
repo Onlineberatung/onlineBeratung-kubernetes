@@ -142,18 +142,6 @@ spec:
 
           image:  {{ .Values.consultingTypeServiceImageName }}:{{ .Values.consultingTypeServiceImageVersion }}
           imagePullPolicy: Always
-          livenessProbe:
-            httpGet:
-              path: /actuator/health/liveness
-              port: 8080
-            initialDelaySeconds: 22
-            periodSeconds: 5
-          readinessProbe:
-            httpGet:
-              path: /actuator/health/readiness
-              port: 8080
-            initialDelaySeconds: 22
-            periodSeconds: 5
           name: consultingtypeservice
           ports:
             - containerPort: 8080

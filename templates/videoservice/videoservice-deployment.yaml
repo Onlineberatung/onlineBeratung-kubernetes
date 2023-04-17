@@ -156,6 +156,18 @@ spec:
                   name: videoservice-{{ .Release.Name }}-env
           image: {{ .Values.videoServiceImageName }}:{{ .Values.videoServiceImageVersion }}
           imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 12
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 12
+            periodSeconds: 5
           name: videoservice
           ports:
             - containerPort: 8080

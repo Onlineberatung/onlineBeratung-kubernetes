@@ -10,7 +10,6 @@
   },
   "sendFurtherStepsMessage": true,
   "sendSaveSessionDataMessage": false,
-  "isSetEmailAllowed": true,
   "isVideoCallAllowed": true,
   "showAskerProfile": true,
   "isSubsequentRegistrationAllowed": false,

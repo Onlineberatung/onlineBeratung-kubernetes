@@ -219,3 +219,7 @@ online-counseling-rabbitmq:
 migrationToolImageName: "ghcr.io/onlineberatung/onlineberatung-migrationtool/onlineberatung-migrationtool"
 migrationToolImageVersion: "dockerImage.v.3"
 migrationToolSpringProfile: ""
+
+# Integrity checks
+integritychecks:
+  enabled: false

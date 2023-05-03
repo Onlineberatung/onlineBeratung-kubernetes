@@ -7,3 +7,7 @@ keywords:
 sources:
   - https://github.com/Onlineberatung/onlineBeratung-kubernetes.git
 type: application
+dependencies:
+  - name: integritychecks
+    version: 0.0.1
+    condition: integritychecks.enabled

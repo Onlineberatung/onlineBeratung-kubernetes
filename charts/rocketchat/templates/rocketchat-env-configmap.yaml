@@ -1,6 +1,7 @@
 apiVersion: v1
 data:
   ROOT_URL: "http://{{ .Values.global.domainName }}:3000"
+  EXIT_UNHANDLEDPROMISEREJECTION: {{ .Values.exitUnhandledpromiserejection | default "0" | quote }}
 kind: ConfigMap
 metadata:
   labels:

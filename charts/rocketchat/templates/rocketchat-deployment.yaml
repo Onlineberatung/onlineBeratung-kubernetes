@@ -60,6 +60,8 @@ spec:
                 configMapKeyRef:
                   key: ROOT_URL
                   name: rocketchat-{{ .Release.Name }}-env
+            - name: EXIT_UNHANDLEDPROMISEREJECTION
+              value: "1"
           image: {{ .Values.rocketchatImageName }}:{{ .Values.rocketchatVersion }}
           name: rocketchat
           resources: {}

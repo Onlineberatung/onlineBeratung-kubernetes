@@ -158,7 +158,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: SPRING_DATASOURCE_URL
-                  name: userservice-{{ .Release.Name }}-env
+                  name: videoservice-{{ .Release.Name }}-env
             - name: SPRING_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:

@@ -7,6 +7,11 @@ data:
     APP_BASE_URL: "http://{{ .Values.global.domainName }}"
   {{- end }}
     # Spring
+  {{- if .Values.global.useExternalMariaDb } }
+    SPRING_DATASOURCE_URL: "jdbc:mariadb://{{ .Values.global.mariaDbHost }}:3306/videoservice"
+  {{- else }}
+    SPRING_DATASOURCE_URL: "jdbc:mariadb://mariadb.{{ .Release.Namespace }}:3306/videoservice"
+  {{- end }}
     SPRING_PROFILES_ACTIVE: {{ .Values.videoServiceSpringProfilesActive }}  "dev"
     # Keycloak
     KEYCLOAK_AUTH_SERVER_URL: {{ .Values.keycloakAuthServerUrl }}

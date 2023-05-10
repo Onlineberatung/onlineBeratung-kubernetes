@@ -79,9 +79,9 @@ data:
     FLUSH PRIVILEGES;
     
     use tenantservice;
-    alter sequence sequence_tenant start with 1;
+    ALTER SEQUENCE sequence_tenant start with 1;
     
     use userservice;
-    alter sequence sequence_session start with 1;
+    ALTER SEQUENCE sequence_session start with 1;
 
   {{- end }}

@@ -35,6 +35,8 @@ global:
   appointmentServiceSpringDatasourcePassword: "appointmenteservice"
   migrationServiceSpringDatasourceUsername: "migrationservice"
   migrationServiceSpringDatasourcePassword: "migrationservice"
+  videoServiceSpringDatasourceUsername: "videoservice"
+  videoServiceSpringDatasourcePassword: "videoservice"
   keycloakDbUser: "keycloak"
   keycloakDbPassword: "keycloak"
   # Secrets MongoDB

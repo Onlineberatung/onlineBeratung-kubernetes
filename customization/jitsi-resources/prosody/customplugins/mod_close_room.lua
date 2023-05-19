@@ -92,6 +92,20 @@ module:hook("muc-occupant-left", function(event)
             local utctimestamp = os.date("!%Y-%m-%dT%XZ");
             fireStatisticsEvent(utctimestamp, jid_node(room.jid));
           end
+
+          local persistent_rooms_enabled = module:get_option_boolean('enable_persistent_rooms')
+          module:log(LOGLEVEL, "[VI] Option enable_persistent_rooms is: ", persistent_rooms_enabled)
+
+          if persistent_rooms_enabled then
+            local authToken = getAuthToken()
+            if authToken then
+                module:log(LOGLEVEL, "[VI] Calling video service to stop the room: ", room.jid)
+                stopVideoCall(room.jid, authToken)
+                module:log(LOGLEVEL, "[VI] Video service called and room is stopped: ", room.jid)
+            else
+                print("Failed to obtain the authorization token.")
+            end
+          end
         else
           -- If owner is back (reload, rejoin) keep up the room
           module:log(LOGLEVEL, "[VI] A Moderator has rejoined the room %s. Room will not be terminated.", room.jid);
@@ -149,3 +163,66 @@ function fireStatisticsEvent(timestamp, room)
     module:log(LOGLEVEL, "[VI] Fire statistics failed because of missing room.");
   end
 end
+
+-- Function to make an authenticated HTTP request with the access token
+local function makeAuthenticatedRequest(url, method, requestBody, authToken)
+    local response = {}
+    local _, responseCode, _, _ = http.request {
+        url = url,
+        method = method,
+        headers = {
+            ["Content-Type"] = "application/json",
+            ["Authorization"] = "Bearer " .. authToken
+        },
+        source = ltn12.source.string(requestBody),
+        sink = ltn12.sink.table(response)
+    }
+
+    return table.concat(response), responseCode
+end
+
+-- Function to obtain an authorization token from Keycloak
+local function getAuthToken()
+
+    local keycloakAuthServerUrl = module:get_option_string('keycloak_auth_server_url');
+    local clientId = module:get_option_string('keycloak_app_client_id');
+    local username = module:get_option_string('jitsi_technical_username');
+    local password = module:get_option_string('jitsi_technical_password');
+    local tokenEndpoint = keycloakAuthServerUrl .. "/protocol/openid-connect/token"
+
+    -- Prepare the request body
+    local requestBody = "grant_type=password"
+        .. "&client_id=" .. clientId
+    --    .. "&client_secret=" .. clientSecret
+        .. "&username=" .. username
+        .. "&password=" .. password
+
+    module:log("info", "[VI] Making a call to keycloak to get auth token for username: %s", username);
+    -- Make the request to obtain the token
+    local response, responseCode = makeAuthenticatedRequest(tokenEndpoint, "POST", requestBody, nil)
+
+    local jsonResponse = json.decode(response)
+
+    -- Check if the response contains an access token
+    if responseCode == 200 and jsonResponse.access_token then
+        return jsonResponse.access_token
+    else
+        -- Handle the error case
+        print("Failed to obtain the authorization token. Response code: " .. responseCode)
+        return nil
+    end
+end
+
+local function stopVideoCall(roomId, authToken)
+    local videoUrl = module:get_option_string('videoserviceurl');
+    local stopEndpoint = videoUrl .. "/videocalls/stop/" .. roomId
+
+    local response, responseCode = makeAuthenticatedRequest(stopEndpoint, "POST", nil, authToken)
+
+    if responseCode == 200 then
+        module:log(LOGLEVEL, "[VI] Video call stopped successfully %s.", roomId);
+    else
+        module:log(LOGLEVEL, "[VI]Failed to stop the video call. Response code: " .. responseCode)
+    end
+end
+

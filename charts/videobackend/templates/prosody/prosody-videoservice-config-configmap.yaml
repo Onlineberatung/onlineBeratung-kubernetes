@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prosody-videoservice-plugin-{{ .Release.Name }}-configmap
+  namespace: jitsi
+data:
+  videoservice.cfg.lua: |
+    keycloak_auth_server_url = "{{ .Values.keycloakAuthServerUrl }}"
+    keycloak_app_client_id = "{{ .Values.keycloakserviceAppClientid }}"
+    jitsi_technical_username = "{{ .Values.jitsiTechnicalUser }}"
+    jitsi_technical_password = "{{ .Values.jitsiTechnicalUserPassword }}"

@@ -7,5 +7,6 @@ data:
   videoservice.cfg.lua: |
     keycloak_auth_server_url = {{ .Values.global.keycloakAuthServerUrl }}
     keycloak_app_client_id = {{ .Values.global.keycloakserviceAppClientid }}
-    jitsi_technical_username = {{ .Values.global.jitsiTechnicalUser }}
-    jitsi_technical_password = {{ .Values.global.jitsiTechnicalUserPassword }}
+    jitsi_technical_username = "{{ .Values.global.jitsiTechnicalUser }}"
+    jitsi_technical_password = "{{ .Values.global.jitsiTechnicalUserPassword }}"
+    enable_statistics = {{ .Values.global.statisticsEnabled }}

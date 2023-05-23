@@ -175,6 +175,10 @@ spec:
             - mountPath: /config/conf.d/statistics.cfg.lua
               name: prosody-statistics-plugin
               subPath: "statistics.cfg.lua"
+            - mountPath: /config/conf.d/videoservice.cfg.lua
+              name: prosody-videoservice-plugin
+              subPath: "videoservice.cfg.lua"
+
       volumes:
         - name: prosody-plugins-custom
           configMap:
@@ -182,3 +186,6 @@ spec:
         - name: prosody-statistics-plugin
           configMap:
             name: prosody-statistics-plugin-{{ .Release.Name }}-configmap
+        - name: prosody-videoservice-plugin
+          configMap:
+            name: prosody-videoservice-plugin-{{ .Release.Name }}-configmap

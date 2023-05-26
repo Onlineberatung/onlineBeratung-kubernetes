@@ -40,6 +40,8 @@ spec:
           - rs0
           - --keyFile
           - /data/key/replica.key
+          - --wiredTigerCacheSizeGB
+          - {{ .Values.wiredTigerCacheSizeGB }}
           env:
             - name: MONGO_INITDB_ROOT_PASSWORD
               valueFrom:

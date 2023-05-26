@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prosody-videoservice-plugin-{{ .Release.Name }}-configmap
+  namespace: jitsi
+data:
+  videoservice.cfg.lua: |
+    videoserviceurl = "http://videoservice.{{ .Release.Namespace }}:8080"
+    enable_persistent_rooms = {{ .Values.global.enablePersistentRooms }}
+    keycloak_auth_server_url = {{ .Values.global.keycloakAuthServerUrl }}
+    keycloak_app_client_id = {{ .Values.global.keycloakserviceAppClientid }}
+    jitsi_technical_username = "{{ .Values.global.jitsiTechnicalUser }}"
+    jitsi_technical_password = "{{ .Values.global.jitsiTechnicalUserPassword }}"

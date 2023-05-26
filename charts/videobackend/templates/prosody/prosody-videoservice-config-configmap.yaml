@@ -5,6 +5,7 @@ metadata:
   namespace: jitsi
 data:
   videoservice.cfg.lua: |
+    videoserviceurl = "http://videoservice.{{ .Release.Namespace }}:8080"
     enable_persistent_rooms = {{ .Values.global.enablePersistentRooms }}
     keycloak_auth_server_url = {{ .Values.global.keycloakAuthServerUrl }}
     keycloak_app_client_id = {{ .Values.global.keycloakserviceAppClientid }}

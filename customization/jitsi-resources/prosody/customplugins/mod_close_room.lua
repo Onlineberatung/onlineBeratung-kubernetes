@@ -3,7 +3,7 @@ local jid_node = require "util.jid".node;
 local timer = require "util.timer"
 
 -- How many seconds the room waits for owner to come back before it destroys the room
-local MIN = module:get_option_number("conference_timeout", 20)
+local MIN = module:get_option_number("conference_timeout", 5)
 local statistics_enabled = module:get_option_boolean('enable_statistics')
 local TIMEOUT = MIN
 local LOGLEVEL = "info";
@@ -165,41 +165,55 @@ function fireStatisticsEvent(timestamp, room)
 end
 
 -- Function to make an authenticated HTTP request with the access token
-local function makeAuthenticatedRequest(url, method, requestBody, authToken)
-    local response = {}
-    local _, responseCode, _, _ = http.request {
-        url = url,
-        method = method,
-        headers = {
-            ["Content-Type"] = "application/json",
-            ["Authorization"] = "Bearer " .. authToken
-        },
-        source = ltn12.source.string(requestBody),
-        sink = ltn12.sink.table(response)
-    }
+function makeAuthenticatedRequest(url, method, requestBody, authToken)
+  local response = {}
+  local http = require("socket.http")
+  local ltn12 = require("ltn12")
 
-    return table.concat(response), responseCode
+  if authToken == nil then
+    module:log(LOGLEVEL, "[VI] Auth token is nil, proceeding with logic x-www-form request path.");
+    source1 = ltn12.source.string(requestBody);
+
+    local response, responseCode, _, _ = http.request(url, requestBody);
+    return response, responseCode
+  else
+    local _, responseCode, _, _ = http.request {
+            url = url,
+            method = method,
+            headers = {
+                ["Content-Type"] = "application/json",
+                ["Authorization"] = "Bearer " .. authToken
+            },
+            source = ltn12.source.string(requestBody),
+            sink = ltn12.sink.table(response)
+        }
+        return table.concat(response), responseCode
+  end
 end
 
 -- Function to obtain an authorization token from Keycloak
-local function getAuthToken()
-
+ function getAuthToken()
+    local json = require("cjson")
     local keycloakAuthServerUrl = module:get_option_string('keycloak_auth_server_url');
     local clientId = module:get_option_string('keycloak_app_client_id');
     local username = module:get_option_string('jitsi_technical_username');
     local password = module:get_option_string('jitsi_technical_password');
-    local tokenEndpoint = keycloakAuthServerUrl .. "/protocol/openid-connect/token"
+    local tokenEndpoint = keycloakAuthServerUrl .. "/realms/online-beratung/protocol/openid-connect/token"
+    module:log("info", "[VI] Token endpoint: %s", tokenEndpoint);
+
 
     -- Prepare the request body
     local requestBody = "grant_type=password"
         .. "&client_id=" .. clientId
-    --    .. "&client_secret=" .. clientSecret
         .. "&username=" .. username
         .. "&password=" .. password
 
     module:log("info", "[VI] Making a call to keycloak to get auth token for username: %s", username);
+
     -- Make the request to obtain the token
     local response, responseCode = makeAuthenticatedRequest(tokenEndpoint, "POST", requestBody, nil)
+
+    module:log("info", "[VI] Received keycloak response. Response code %s", responseCode);
 
     local jsonResponse = json.decode(response)
 
@@ -213,16 +227,16 @@ local function getAuthToken()
     end
 end
 
-local function stopVideoCall(roomId, authToken)
+function stopVideoCall(roomId, authToken)
     local videoUrl = module:get_option_string('videoserviceurl');
-    local stopEndpoint = videoUrl .. "/videocalls/stop/" .. roomId
+    local stopEndpoint = videoUrl .. "/videocalls/event/stop/" .. roomId
 
     local response, responseCode = makeAuthenticatedRequest(stopEndpoint, "POST", nil, authToken)
 
     if responseCode == 200 then
-        module:log(LOGLEVEL, "[VI] Video call stopped successfully %s.", roomId);
+        module:log(LOGLEVEL, "[VI] Video call endpoint stop called successfully %s.", roomId);
     else
-        module:log(LOGLEVEL, "[VI]Failed to stop the video call. Response code: " .. responseCode)
+        module:log(LOGLEVEL, "[VI] Failed to stop the video call. Response code: " .. responseCode)
     end
 end
 

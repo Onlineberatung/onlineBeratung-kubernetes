@@ -3,6 +3,7 @@ mongoVersion: "6.0"
 mongoSharedKey: "default"
 
 mongoDbDataStorage: "1Gi"
+wiredTigerCacheSizeGB: "5"
 
 global:
   mongoInitDbRootUsername: "admin"

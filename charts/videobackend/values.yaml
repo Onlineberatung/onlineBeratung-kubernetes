@@ -27,3 +27,5 @@ jwtAppSecret: "ca464fd202c74dc92139765ac798980204c4c1d3e8b69494ef897313fe58b936"
 videoCallServerUrl: tbd
 videoCallServerHost: tbd
 turnCredentials: tbd
+
+enablePersistentRooms: false

@@ -36,8 +36,8 @@ data:
     MULTITENANCY_ENABLED: {{ .Values.global.multitenancyEnabled | quote }}
     TENANT_SERVICE_API_URL: "http://tenantservice.{{ .Release.Namespace }}:8080"
     FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED: {{ .Values.global.multitenancyWithSingleDomainEnabled | quote }}
-    VIDEOSERVICE_SPRING_DATASOURCE_PASSWORD: {{ .Values.videoServiceSpringDatasourcePassword }}
     VIDEOSERVICE_SPRING_DATASOURCE_USERNAME: {{ .Values.videoServiceSpringDatasourceUsername }}
+    VIDEOSERVICE_SPRING_DATASOURCE_PASSWORD: {{ .Values.videoServiceSpringDatasourcePassword }}
 kind: ConfigMap
 metadata:
   labels:

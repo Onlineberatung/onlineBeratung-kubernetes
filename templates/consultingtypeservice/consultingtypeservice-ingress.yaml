@@ -27,5 +27,5 @@ spec:
                 name: consultingtypeservice
                 port:
                   number: 8080
-            path: /service/(consultingtypes|consultingtypeadmin|topic|settings)(.*)
+            path: /service/(consultingtypes|consultingtypeadmin|topic|topic-groups|settings)(.*)
             pathType: Prefix

@@ -3,11 +3,12 @@ apiVersion: v1
 kind: ConfigMap
 data:
   SPRING_DATASOURCE_URL: "jdbc:mariadb://mariadb.{{ .Release.Namespace }}:3306/migrationservice"
-  KEYCLOAK_AUTH_SERVER_URL: {{ .Values.keycloakAuthServerUrl}}
   ROCKETCHAT_CONFIG_SERVER_URL: "http://rocketchat.{{ .Release.Namespace }}:3000/api"
   KEYCLOAK_AUTH_SERVER_URL: "http://keycloak.{{ .Release.Namespace }}:8080/auth"
   SPRING_DATASOURCE_USERSERVICE_URL: "jdbc:mariadb://mariadb.{{ .Release.Namespace }}:3306/userservice"
-  MIGRATION_SPRING_PROFILE: {{ .Values.migrationToolSpringProfile }}
+  SPRING_DATASOURCE_AGENCYSERVICE_URL: "jdbc:mariadb://mariadb.{{ .Release.Namespace }}:3306/agencyservice"
+  SPRING_DATASOURCE_TENANTSERVICE_URL: "jdbc:mariadb://mariadb.{{ .Release.Namespace }}:3306/tenantservice"
+  MIGRATION_SPRING_PROFILE: "{{ .Values.migrationToolSpringProfile }}"
 metadata:
   labels:
     io.kompose.service: migrationtool-{{ .Release.Name }}-env

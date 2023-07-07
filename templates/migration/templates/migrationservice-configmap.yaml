@@ -8,6 +8,7 @@ data:
   SPRING_DATASOURCE_USERSERVICE_URL: "jdbc:mariadb://mariadb.{{ .Release.Namespace }}:3306/userservice"
   SPRING_DATASOURCE_AGENCYSERVICE_URL: "jdbc:mariadb://mariadb.{{ .Release.Namespace }}:3306/agencyservice"
   SPRING_DATASOURCE_TENANTSERVICE_URL: "jdbc:mariadb://mariadb.{{ .Release.Namespace }}:3306/tenantservice"
+  SPRING_DATASOURCE_CONSULTINGTYPESERVICE_URL: "jdbc:mariadb://mariadb.{{ .Release.Namespace }}:3306/consultingtypeservice"
   MIGRATION_SPRING_PROFILE: "{{ .Values.migrationToolSpringProfile }}"
 metadata:
   labels:

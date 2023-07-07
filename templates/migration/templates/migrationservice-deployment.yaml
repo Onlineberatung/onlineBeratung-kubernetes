@@ -73,6 +73,21 @@ spec:
                 secretKeyRef:
                   key: SPRING_DATASOURCE_TENANTSERVICE_USERNAME
                   name: migrationtool-secret-{{ .Release.Name }}-env
+            - name: SPRING_DATASOURCE_CONSULTINGTYPESERVICE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_DATASOURCE_CONSULTINGTYPESERVICE_URL
+                  name: migrationtool-{{ .Release.Name }}-env
+            - name: SPRING_DATASOURCE_CONSULTINGTYPESERVICE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: SPRING_DATASOURCE_CONSULTINGTYPESERVICE_PASSWORD
+                  name: migrationtool-secret-{{ .Release.Name }}-env
+            - name: SPRING_DATASOURCE_CONSULTINGTYPESERVICE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: SPRING_DATASOURCE_CONSULTINGTYPESERVICE_USERNAME
+                  name: migrationtool-secret-{{ .Release.Name }}-env
             - name: KEYCLOAK_AUTH_SERVER_URL
               valueFrom:
                 configMapKeyRef:

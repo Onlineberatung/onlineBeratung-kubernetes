@@ -14,6 +14,7 @@ data:
   ASKER_IMPORT_WELCOME_MESSAGE_FILENAME: {{ .Values.askerImportWelcomeMessageFilename }}
   ASKER_IMPORT_WELCOME_MESSAGE_FILENAME_REPLACE_VALUE: "[ConsultingType]"
   # Spring/Database
+  SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: {{ .Values.global.springDatasourceHikariMaximumPoolSize | default 10 | quote }}
   SPRING_PROFILES_ACTIVE: {{ .Values.userServiceSpringProfilesActive }}
   {{- if .Values.global.useExternalMariaDb }}
   SPRING_DATASOURCE_URL: "jdbc:mariadb://{{ .Values.global.mariaDbHost }}:3306/userservice"

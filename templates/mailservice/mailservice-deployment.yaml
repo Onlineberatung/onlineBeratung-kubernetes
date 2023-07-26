@@ -80,25 +80,35 @@ spec:
                 configMapKeyRef:
                   key: MAIL_USESMTP
                   name: mailservice-{{ .Release.Name }}-env
-            - name: SPRING_MAIL_DEFAULT_ENCODING
-              valueFrom:
-                configMapKeyRef:
-                  key: SPRING_MAIL_DEFAULT_ENCODING
-                  name: mailservice-{{ .Release.Name }}-env
             - name: SPRING_MAIL_HOST
               valueFrom:
                 configMapKeyRef:
                   key: SPRING_MAIL_HOST
                   name: mailservice-{{ .Release.Name }}-env
-            - name: SPRING_MAIL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: SPRING_MAIL_PASSWORD
-                  name: mailservice-secret-{{ .Release.Name }}-env
             - name: SPRING_MAIL_PORT
               valueFrom:
                 configMapKeyRef:
                   key: SPRING_MAIL_PORT
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: SPRING_MAIL_PROTOCOL
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_MAIL_PROTOCOL
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: SPRING_MAIL_DEFAULT_ENCODING
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_MAIL_DEFAULT_ENCODING
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: SPRING_MAIL_PROPERTIES_MAIL_TRANSPORT_PROTOCOL
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_MAIL_PROPERTIES_MAIL_TRANSPORT_PROTOCOL
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_MAIL_PROPERTIES_MAIL_SMTP_PORT
                   name: mailservice-{{ .Release.Name }}-env
             - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH
               valueFrom:
@@ -110,15 +120,20 @@ spec:
                 configMapKeyRef:
                   key: SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE
                   name: mailservice-{{ .Release.Name }}-env
-            - name: SPRING_MAIL_PROTOCOL
+            - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_REQUIRED
               valueFrom:
                 configMapKeyRef:
-                  key: SPRING_MAIL_PROTOCOL
+                  key: SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_REQUIRED
                   name: mailservice-{{ .Release.Name }}-env
             - name: SPRING_MAIL_USERNAME
               valueFrom:
                 secretKeyRef:
                   key: SPRING_MAIL_USERNAME
+                  name: mailservice-secret-{{ .Release.Name }}-env
+            - name: SPRING_MAIL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: SPRING_MAIL_PASSWORD
                   name: mailservice-secret-{{ .Release.Name }}-env
             - name: SPRING_PROFILES_ACTIVE
               valueFrom:

@@ -1,12 +1,17 @@
 apiVersion: v1
 data:
   SPRING_PROFILES_ACTIVE: {{ .Values.mailServiceSpringProfilesActive }}
-  SPRING_MAIL_HOST: {{ .Values.springMailHost }}
-  SPRING_MAIL_PORT: "587"
-  SPRING_MAIL_PROTOCOL: {{ .Values.springMailProtocol }}
-  SPRING_MAIL_DEFAULT_ENCODING: {{ .Values.springMailDefaultEncoding }}
-  SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH:  {{ .Values.useSmtpAuth | default "false" | quote }}
-  SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE: {{ .Values.startTlsEnabled | default "false" | quote }}
+
+  SPRING_MAIL_HOST: {{ .Values.springMailHost | quote }}
+  SPRING_MAIL_PORT: {{ .Values.springMailPort | default "587" | quote }}
+  SPRING_MAIL_PROTOCOL: {{ .Values.springMailProtocol | default "smtp" | quote }}
+  SPRING_MAIL_DEFAULT_ENCODING: {{ .Values.springMailDefaultEncoding | default "UTF-8" | quote }}
+  SPRING_MAIL_PROPERTIES_MAIL_TRANSPORT_PROTOCOL: {{ .Values.springMailPropertiesMailTransportProtocol | default "smtp" | quote }}
+  SPRING_MAIL_PROPERTIES_MAIL_SMTP_PORT: {{ .Values.springMailPropertiesMailSmtpPort | default "587" | quote }}
+  SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH: {{ .Values.springMailPropertiesMailSmtpAuth | default "true" | quote }}
+  SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE: {{ .Values.springMailPropertiesMailSmtpStarttlsEnable | default "true" | quote }}
+  SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_REQUIRED: {{ .Values.springMailPropertiesMailSmtpStarttlsRequired | default "true" | quote }}
+
   MAIL_SENDER: {{ .Values.mailSender }}
   MAIL_ERROR_RECIPIENTS: {{ .Values.mailErrorRecipients }}
   MAIL_FIX_RECIPIENT: {{ .Values.fixRecipient | default "" | quote }}

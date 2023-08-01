@@ -19,6 +19,7 @@ global:
   mysqlRootPassword: "root"
   springLiquibasePassword: "liquibase"
   springLiquibaseUser: "liquibase"
+  springDatasourceHikariMaximumPoolSize: 10
   agencyServiceSpringDatasourcePassword: "agencyservice"
   agencyServiceSpringDatasourceUsername: "agencyservice"
   messageServiceSpringDatasourceUsername: "messageservice"

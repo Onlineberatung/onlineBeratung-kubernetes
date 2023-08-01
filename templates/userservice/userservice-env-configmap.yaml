@@ -96,6 +96,10 @@ data:
   IDENTITY_DISPLAY_NAME_ALLOWED_FOR_CONSULTANTS: {{ .Values.displayNameAllowedForConsultants | default "false" | quote }}
   USER_ACCOUNT_DELETEWORKFLOW_CRON: {{ .Values.userAccountDeleteWorkflowCron | default "0 0 7 * * ?" | quote }}
   IDENTITY_EMAIL-DUMMY-SUFFIX: {{ .Values.identityEmailDummySuffix  | quote }}
+  # Appointments
+  APPOINTMENTS_DELETE-JOB-CRON: {{ .Values.appointments.deleteJobCron | default "0 0 0 * * ?" | quote }}
+  APPOINTMENTS_DELETE-JOB-ENABLED: {{ .Values.appointments.deleteJobEnabled | default "false" | quote }}
+  APPOINTMENTS_LIFESPAN-IN-HOURS: {{ .Values.appointments.lifespanInHours | default "24" | quote }}
 
 kind: ConfigMap
 metadata:

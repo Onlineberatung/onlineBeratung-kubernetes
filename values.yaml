@@ -146,6 +146,7 @@ userAnonymousDeactivateworkflowCron: "* * * * * ?"
 sessionInactiveDeleteworkflowEnabled: "true"
 sessionInactiveDeleteworkflowCron: "0 0 * * * ?"
 sessionInactiveDeleteworkflowCheckDays: "30"
+appointments: {}
 
 # Video service
 videoServiceImageName: "ghcr.io/onlineberatung/onlineberatung-videoservice/onlineberatung-videoservice"

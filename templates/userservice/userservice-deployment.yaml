@@ -456,6 +456,21 @@ spec:
                 configMapKeyRef:
                   key: IDENTITY_EMAIL-DUMMY-SUFFIX
                   name: userservice-{{ .Release.Name }}-env
+            - name: APPOINTMENTS_DELETE-JOB-CRON
+              valueFrom:
+                configMapKeyRef:
+                  key: APPOINTMENTS_DELETE-JOB-CRON
+                  name: userservice-{{ .Release.Name }}-env
+            - name: APPOINTMENTS_DELETE-JOB-ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: APPOINTMENTS_DELETE-JOB-ENABLED
+                  name: userservice-{{ .Release.Name }}-env
+            - name: APPOINTMENTS_LIFESPAN-IN-HOURS
+              valueFrom:
+                configMapKeyRef:
+                  key: APPOINTMENTS_LIFESPAN-IN-HOURS
+                  name: userservice-{{ .Release.Name }}-env
           image: {{ .Values.userServiceImageName }}:{{ .Values.userServiceImageVersion }}
           imagePullPolicy: Always
           name: userservice

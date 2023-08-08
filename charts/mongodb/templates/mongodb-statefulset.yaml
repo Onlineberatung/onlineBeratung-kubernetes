@@ -17,6 +17,20 @@ spec:
         io.kompose.service: mongodb
     spec:
       initContainers:
+        {{- if .Values.maxMapCount }}
+        - name: init-sysctl
+          image: busybox
+          env:
+            - name: MAX_MAP_COUNT
+              value: {{ .Values.maxMapCount | quote }}
+          command:
+            - sysctl
+            - -w
+            - 'vm.max_map_count=$(MAX_MAP_COUNT)'
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+        {{- end }}
         - name: add-keyfile
           image: {{ .Values.mongoImageName }}:{{ .Values.mongoVersion }}
           command: ["bash", "-c"]
@@ -35,7 +49,7 @@ spec:
         - args:
           - --bind_ip_all
           - --oplogSize
-          - "128"
+          - {{ .Values.oplogSize | default "128" | quote }}
           - --replSet
           - rs0
           - --keyFile

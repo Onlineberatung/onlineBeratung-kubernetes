@@ -26,6 +26,9 @@ data:
   FEATURE_APPOINTMENT_ENABLED: {{ .Values.global.appointmentsEnabled | quote }}
   APPOINTMENT_SERVICE_API_URL: "http://appointmentservice.{{ .Release.Namespace }}:8080"
   FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED: {{ .Values.global.multitenancyWithSingleDomainEnabled | quote }}
+  SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI: "{{ .Values.keycloakAuthServerUrl }}/realms/{{ .Values.keycloakRealm }}"
+  SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI: "{{ .Values.keycloakAuthServerUrl }}/realms/{{ .Values.keycloakRealm }}/protocol/openid-connect/certs"
+  SPRING_JWT_AUTH_CONVERTER_RESOURCEID: "{{ .Values.keycloakserviceAppClientid }}"
   {{- if .Values.global.enableTls }}
   APP_BASE_URL: "https://{{ .Values.global.domainName }}"
 {{- else }}

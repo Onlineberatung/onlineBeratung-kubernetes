@@ -64,7 +64,27 @@ spec:
             - containerPort: 8080
           image:  {{ .Values.liveServiceImageName }}:{{ .Values.liveServiceImageVersion }}
           imagePullPolicy: Always
-          resources: {}
+          {{- if .Values.resources.liveservice }}
+          resources:
+            {{- if .Values.resources.liveservice.requests }}
+            requests:
+              {{- if .Values.resources.liveservice.requests.memory }}
+              memory: {{  .Values.resources.liveservice.requests.memory }}
+              {{- end}}
+              {{- if .Values.resources.liveservice.requests.cpu }}
+              cpu: {{ .Values.resources.liveservice.requests.cpu }}
+              {{- end}}
+            {{- end }}
+            {{- if .Values.resources.liveservice.limits }}
+            limits:
+              {{- if .Values.resources.liveservice.limits.memory }}
+              memory: {{ .Values.resources.liveservice.limits.memory }}
+              {{- end}}
+              {{- if .Values.resources.liveservice.limits.cpu }}
+              cpu: {{ .Values.resources.liveservice.limits.cpu }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
       imagePullSecrets:
         - name: registry-secret
       restartPolicy: Always

@@ -227,3 +227,12 @@ online-counseling-rabbitmq:
 migrationToolImageName: "ghcr.io/onlineberatung/onlineberatung-migrationtool/onlineberatung-migrationtool"
 migrationToolImageVersion: "dockerImage.v.3"
 migrationToolSpringProfile: ""
+
+resources:
+  documentationservice:
+    requests:
+      memory: 384Mi
+      cpu: "500m"
+    limits:
+      memory: 384Mi
+      cpu: "500m"

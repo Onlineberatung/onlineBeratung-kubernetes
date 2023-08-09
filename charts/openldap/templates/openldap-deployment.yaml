@@ -63,7 +63,27 @@ spec:
           name: openldap
           ports:
             - containerPort: 1389
-          resources: {}
+          {{- if .Values.resources }}
+          resources:
+            {{- if .Values.resources.requests }}
+            requests:
+              {{- if .Values.resources.requests.memory }}
+              memory: {{  .Values.resources.requests.memory }}
+              {{- end}}
+              {{- if .Values.resources.requests.cpu }}
+              cpu: {{ .Values.resources.requests.cpu }}
+              {{- end}}
+            {{- end }}
+            {{- if .Values.resources.limits }}
+            limits:
+              {{- if .Values.resources.limits.memory }}
+              memory: {{ .Values.resources.limits.memory }}
+              {{- end}}
+              {{- if .Values.resources.limits.cpu }}
+              cpu: {{ .Values.resources.limits.cpu }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
           volumeMounts:
             - mountPath: /bitnami/openldap
               name: openldap-data

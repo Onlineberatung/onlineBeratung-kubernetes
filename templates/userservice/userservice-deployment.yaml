@@ -476,7 +476,27 @@ spec:
           name: userservice
           ports:
             - containerPort: 8080
-          resources: {}
+          {{- if .Values.resources.userservice }}
+          resources:
+            {{- if .Values.resources.userservice.requests }}
+            requests:
+              {{- if .Values.resources.userservice.requests.memory }}
+              memory: {{  .Values.resources.userservice.requests.memory }}
+              {{- end}}
+              {{- if .Values.resources.userservice.requests.cpu }}
+              cpu: {{ .Values.resources.userservice.requests.cpu }}
+              {{- end}}
+            {{- end }}
+            {{- if .Values.resources.userservice.limits }}
+            limits:
+              {{- if .Values.resources.userservice.limits.memory }}
+              memory: {{ .Values.resources.userservice.limits.memory }}
+              {{- end}}
+              {{- if .Values.resources.userservice.limits.cpu }}
+              cpu: {{ .Values.resources.userservice.limits.cpu }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
           volumeMounts:
             - mountPath: /import
               name: userservice-import

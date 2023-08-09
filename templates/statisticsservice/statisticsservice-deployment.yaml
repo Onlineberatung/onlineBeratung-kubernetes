@@ -104,7 +104,27 @@ spec:
           name: statisticsservice
           ports:
             - containerPort: 8080
-          resources: { }
+          {{- if .Values.resources.statisticsservice }}
+          resources:
+            {{- if .Values.resources.statisticsservice.requests }}
+            requests:
+              {{- if .Values.resources.statisticsservice.requests.memory }}
+              memory: {{  .Values.resources.statisticsservice.requests.memory }}
+              {{- end}}
+              {{- if .Values.resources.statisticsservice.requests.cpu }}
+              cpu: {{ .Values.resources.statisticsservice.requests.cpu }}
+              {{- end}}
+            {{- end }}
+            {{- if .Values.resources.statisticsservice.limits }}
+            limits:
+              {{- if .Values.resources.statisticsservice.limits.memory }}
+              memory: {{ .Values.resources.statisticsservice.limits.memory }}
+              {{- end}}
+              {{- if .Values.resources.statisticsservice.limits.cpu }}
+              cpu: {{ .Values.resources.statisticsservice.limits.cpu }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
       imagePullSecrets:
         - name: registry-secret
       restartPolicy: Always

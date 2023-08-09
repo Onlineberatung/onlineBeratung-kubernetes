@@ -21,6 +21,29 @@ spec:
         - name: jicofo
           image: {{ .Values.jicofoImageName }}:{{ .Values.jicofoVersion }}
           imagePullPolicy: IfNotPresent
+          {{- if .Values.resources }}
+          {{- if .Values.resources.jicofo }}
+          resources:
+            {{- if .Values.resources.jicofo.requests }}
+            requests:
+              {{- if .Values.resources.jicofo.requests.memory }}
+              memory: {{  .Values.resources.jicofo.requests.memory }}
+              {{- end}}
+              {{- if .Values.resources.jicofo.requests.cpu }}
+              cpu: {{ .Values.resources.jicofo.requests.cpu }}
+              {{- end}}
+            {{- end }}
+            {{- if .Values.resources.jicofo.limits }}
+            limits:
+              {{- if .Values.resources.jicofo.limits.memory }}
+              memory: {{ .Values.resources.jicofo.limits.memory }}
+              {{- end}}
+              {{- if .Values.resources.jicofo.limits.cpu }}
+              cpu: {{ .Values.resources.jicofo.limits.cpu }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
+          {{- end }}
           env:
             - name: XMPP_SERVER
               value: prosody

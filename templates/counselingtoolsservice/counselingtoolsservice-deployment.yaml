@@ -214,7 +214,27 @@ spec:
           name: counselingtoolsservice
           ports:
             - containerPort: 8080
-          resources: {}
+          {{- if .Values.resources.counselingtoolsservice }}
+          resources:
+            {{- if .Values.resources.counselingtoolsservice.requests }}
+            requests:
+              {{- if .Values.resources.counselingtoolsservice.requests.memory }}
+              memory: {{  .Values.resources.counselingtoolsservice.requests.memory }}
+              {{- end}}
+              {{- if .Values.resources.counselingtoolsservice.requests.cpu }}
+              cpu: {{ .Values.resources.counselingtoolsservice.requests.cpu }}
+              {{- end}}
+            {{- end }}
+            {{- if .Values.resources.counselingtoolsservice.limits }}
+            limits:
+              {{- if .Values.resources.counselingtoolsservice.limits.memory }}
+              memory: {{ .Values.resources.counselingtoolsservice.limits.memory }}
+              {{- end}}
+              {{- if .Values.resources.counselingtoolsservice.limits.cpu }}
+              cpu: {{ .Values.resources.counselingtoolsservice.limits.cpu }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
       imagePullSecrets:
         - name: registry-secret
       restartPolicy: Always

@@ -199,6 +199,27 @@ spec:
           name: messageservice
           ports:
             - containerPort: 8080
+          {{- if .Values.resources.messageservice }}
+          resources:
+            {{- if .Values.resources.messageservice.requests }}
+            requests:
+              {{- if .Values.resources.messageservice.requests.memory }}
+              memory: {{  .Values.resources.messageservice.requests.memory }}
+              {{- end}}
+              {{- if .Values.resources.messageservice.requests.cpu }}
+              cpu: {{ .Values.resources.messageservice.requests.cpu }}
+              {{- end}}
+            {{- end }}
+            {{- if .Values.resources.messageservice.limits }}
+            limits:
+              {{- if .Values.resources.messageservice.limits.memory }}
+              memory: {{ .Values.resources.messageservice.limits.memory }}
+              {{- end}}
+              {{- if .Values.resources.messageservice.limits.cpu }}
+              cpu: {{ .Values.resources.messageservice.limits.cpu }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
         - name: set-masterkey
           image: badouralix/curl-jq
           env:

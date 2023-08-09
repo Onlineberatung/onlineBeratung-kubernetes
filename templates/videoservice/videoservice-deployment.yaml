@@ -184,7 +184,27 @@ spec:
           name: videoservice
           ports:
             - containerPort: 8080
-          resources: { }
+          {{- if .Values.resources.videoservice }}
+          resources:
+            {{- if .Values.resources.videoservice.requests }}
+            requests:
+              {{- if .Values.resources.videoservice.requests.memory }}
+              memory: {{  .Values.resources.videoservice.requests.memory }}
+              {{- end}}
+              {{- if .Values.resources.videoservice.requests.cpu }}
+              cpu: {{ .Values.resources.videoservice.requests.cpu }}
+              {{- end}}
+            {{- end }}
+            {{- if .Values.resources.videoservice.limits }}
+            limits:
+              {{- if .Values.resources.videoservice.limits.memory }}
+              memory: {{ .Values.resources.videoservice.limits.memory }}
+              {{- end}}
+              {{- if .Values.resources.videoservice.limits.cpu }}
+              cpu: {{ .Values.resources.videoservice.limits.cpu }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
       imagePullSecrets:
         - name: registry-secret
       restartPolicy: Always

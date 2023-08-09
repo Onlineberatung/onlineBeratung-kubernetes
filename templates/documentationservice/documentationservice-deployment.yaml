@@ -38,12 +38,12 @@ spec:
               name: http
               protocol: TCP
           resources:
-            limits:
-              cpu: "500m"
-              memory: 384Mi
             requests:
-              cpu: "500m"
-              memory: 384Mi
+              memory: {{  .Values.resources.documentationservice.requests.memory }}
+              cpu: {{ .Values.resources.documentationservice.requests.cpu }}
+            limits:
+              memory: {{ .Values.resources.documentationservice.limits.memory }}
+              cpu: {{ .Values.resources.documentationservice.limits.cpu }}
           livenessProbe:
             failureThreshold: 15
             httpGet:

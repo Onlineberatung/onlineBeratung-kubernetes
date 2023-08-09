@@ -145,10 +145,32 @@ spec:
           name: consultingtypeservice
           ports:
             - containerPort: 8080
-          resources: {}
           volumeMounts:
             - mountPath: /{{ .Values.consultingTypesJsonPath }}
               name: consulting-type-settings
+          {{- if .Values.consultingtypeservice }}
+          {{- if .Values.consultingtypeservice.resources }}
+          resources:
+            {{- if .Values.consultingtypeservice.resources.requests }}
+            requests:
+              {{- if .Values.consultingtypeservice.resources.requests.memory }}
+              memory: {{  .Values.consultingtypeservice.resources.requests.memory }}
+              {{- end}}
+              {{- if .Values.consultingtypeservice.resources.requests.cpu }}
+              cpu: {{ .Values.consultingtypeservice.resources.requests.cpu }}
+              {{- end}}
+            {{- end }}
+            {{- if .Values.consultingtypeservice.resources.limits }}
+            limits:
+              {{- if .Values.consultingtypeservice.resources.limits.memory }}
+              memory: {{ .Values.consultingtypeservice.resources.limits.memory }}
+              {{- end}}
+              {{- if .Values.consultingtypeservice.resources.limits.cpu }}
+              cpu: {{ .Values.consultingtypeservice.resources.limits.cpu }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
+          {{- end }}
       imagePullSecrets:
         - name: registry-secret
       restartPolicy: Always

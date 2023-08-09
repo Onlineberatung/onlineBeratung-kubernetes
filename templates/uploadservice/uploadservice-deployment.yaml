@@ -189,6 +189,29 @@ spec:
           name: uploadservice
           ports:
             - containerPort: 8080
+          {{- if .Values.uploadservice }}
+          {{- if .Values.uploadservice.resources }}
+          resources:
+            {{- if .Values.uploadservice.resources.requests }}
+            requests:
+              {{- if .Values.uploadservice.resources.requests.memory }}
+              memory: {{  .Values.uploadservice.resources.requests.memory }}
+              {{- end}}
+              {{- if .Values.uploadservice.resources.requests.cpu }}
+              cpu: {{ .Values.uploadservice.resources.requests.cpu }}
+              {{- end}}
+            {{- end }}
+            {{- if .Values.uploadservice.resources.limits }}
+            limits:
+              {{- if .Values.uploadservice.resources.limits.memory }}
+              memory: {{ .Values.uploadservice.resources.limits.memory }}
+              {{- end}}
+              {{- if .Values.uploadservice.resources.limits.cpu }}
+              cpu: {{ .Values.uploadservice.resources.limits.cpu }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
+          {{- end }}
         - name: set-masterkey
           image: badouralix/curl-jq
           env:

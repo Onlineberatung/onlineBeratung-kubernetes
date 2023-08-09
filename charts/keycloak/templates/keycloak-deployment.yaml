@@ -74,7 +74,27 @@ spec:
           name: keycloak
           ports:
             - containerPort: 8080
-          resources: {}
+          {{- if .Values.resources }}
+          resources:
+            {{- if .Values.resources.requests }}
+            requests:
+              {{- if .Values.resources.requests.memory }}
+              memory: {{  .Values.resources.requests.memory }}
+              {{- end}}
+              {{- if .Values.resources.requests.cpu }}
+              cpu: {{ .Values.resources.requests.cpu }}
+              {{- end}}
+            {{- end }}
+            {{- if .Values.resources.limits }}
+            limits:
+              {{- if .Values.resources.limits.memory }}
+              memory: {{ .Values.resources.limits.memory }}
+              {{- end}}
+              {{- if .Values.resources.limits.cpu }}
+              cpu: {{ .Values.resources.limits.cpu }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
           volumeMounts:
             - mountPath: /opt/keycloak/themes/custom-theme/login/info.ftl
               name: keycloak-theme-templates

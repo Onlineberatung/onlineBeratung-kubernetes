@@ -21,6 +21,29 @@ spec:
         - name: prosody
           image: {{ .Values.prosodyImageName }}:{{ .Values.prosodyVersion }}
           imagePullPolicy: IfNotPresent
+          {{- if .Values.resources }}
+          {{- if .Values.resources.prosody }}
+          resources:
+            {{- if .Values.resources.prosody.requests }}
+            requests:
+              {{- if .Values.resources.prosody.requests.memory }}
+              memory: {{  .Values.resources.prosody.requests.memory }}
+              {{- end}}
+              {{- if .Values.resources.prosody.requests.cpu }}
+              cpu: {{ .Values.resources.prosody.requests.cpu }}
+              {{- end}}
+            {{- end }}
+            {{- if .Values.resources.prosody.limits }}
+            limits:
+              {{- if .Values.resources.prosody.limits.memory }}
+              memory: {{ .Values.resources.prosody.limits.memory }}
+              {{- end}}
+              {{- if .Values.resources.prosody.limits.cpu }}
+              cpu: {{ .Values.resources.prosody.limits.cpu }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
+          {{- end }}
           ports:
           - containerPort: 5222
           - containerPort: 5280

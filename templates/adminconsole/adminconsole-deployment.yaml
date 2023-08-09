@@ -26,7 +26,29 @@ spec:
           name: adminconsole
           ports:
             - containerPort: 80
-          resources: {}
+          {{- if .Values.adminconsole }}
+          {{- if .Values.adminconsole.resources }}
+          resources:
+            {{- if .Values.adminconsole.resources.requests }}
+            requests:
+              {{- if .Values.adminconsole.resources.requests.memory }}
+              memory: {{  .Values.adminconsole.resources.requests.memory }}
+              {{- end}}
+              {{- if .Values.adminconsole.resources.requests.cpu }}
+              cpu: {{ .Values.adminconsole.resources.requests.cpu }}
+              {{- end}}
+            {{- end }}
+            {{- if .Values.adminconsole.resources.limits }}
+            limits:
+              {{- if .Values.adminconsole.resources.limits.memory }}
+              memory: {{ .Values.adminconsole.resources.limits.memory }}
+              {{- end}}
+              {{- if .Values.adminconsole.resources.limits.cpu }}
+              cpu: {{ .Values.adminconsole.resources.limits.cpu }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
+          {{- end }}
       imagePullSecrets:
         - name: registry-secret
       restartPolicy: Always

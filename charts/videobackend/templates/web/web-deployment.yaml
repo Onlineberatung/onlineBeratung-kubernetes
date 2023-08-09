@@ -24,6 +24,29 @@ spec:
           - containerPort: 443
           image: {{ .Values.webImageName }}:{{ .Values.webVersion }}
           imagePullPolicy: IfNotPresent
+          {{- if .Values.resources }}
+          {{- if .Values.resources.web }}
+          resources:
+            {{- if .Values.resources.web.requests }}
+            requests:
+              {{- if .Values.resources.web.requests.memory }}
+              memory: {{  .Values.resources.web.requests.memory }}
+              {{- end}}
+              {{- if .Values.resources.web.requests.cpu }}
+              cpu: {{ .Values.resources.web.requests.cpu }}
+              {{- end}}
+            {{- end }}
+            {{- if .Values.resources.web.limits }}
+            limits:
+              {{- if .Values.resources.web.limits.memory }}
+              memory: {{ .Values.resources.web.limits.memory }}
+              {{- end}}
+              {{- if .Values.resources.web.limits.cpu }}
+              cpu: {{ .Values.resources.web.limits.cpu }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
+          {{- end }}
           env:
             - name: XMPP_SERVER
               value: prosody

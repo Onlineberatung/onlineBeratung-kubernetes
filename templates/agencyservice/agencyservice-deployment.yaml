@@ -184,7 +184,29 @@ spec:
             - containerPort: 8080
           image:  {{ .Values.agencyServiceImageName }}:{{ .Values.agencyServiceImageVersion }}
           imagePullPolicy: Always
-          resources: {}
+          {{- if .Values.agencyservice }}
+          {{- if .Values.agencyservice.resources }}
+          resources:
+            {{- if .Values.agencyservice.resources.requests }}
+            requests:
+              {{- if .Values.agencyservice.resources.requests.memory }}
+              memory: {{  .Values.agencyservice.resources.requests.memory }}
+              {{- end}}
+              {{- if .Values.agencyservice.resources.requests.cpu }}
+              cpu: {{ .Values.agencyservice.resources.requests.cpu }}
+              {{- end}}
+            {{- end }}
+            {{- if .Values.agencyservice.resources.limits }}
+            limits:
+              {{- if .Values.agencyservice.resources.limits.memory }}
+              memory: {{ .Values.agencyservice.resources.limits.memory }}
+              {{- end}}
+              {{- if .Values.agencyservice.resources.limits.cpu }}
+              cpu: {{ .Values.agencyservice.resources.limits.cpu }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
+          {{- end }}
       imagePullSecrets:
         - name: registry-secret
       restartPolicy: Always

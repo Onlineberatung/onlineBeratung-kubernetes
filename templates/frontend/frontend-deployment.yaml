@@ -25,7 +25,29 @@ spec:
           name: frontend
           ports:
             - containerPort: 80
-          resources: {}
+          {{- if .Values.frontend }}
+          {{- if .Values.frontend.resources }}
+          resources:
+            {{- if .Values.frontend.resources.requests }}
+            requests:
+              {{- if .Values.frontend.resources.requests.memory }}
+              memory: {{  .Values.frontend.resources.requests.memory }}
+              {{- end}}
+              {{- if .Values.frontend.resources.requests.cpu }}
+              cpu: {{ .Values.frontend.resources.requests.cpu }}
+              {{- end}}
+            {{- end }}
+            {{- if .Values.frontend.resources.limits }}
+            limits:
+              {{- if .Values.frontend.resources.limits.memory }}
+              memory: {{ .Values.frontend.resources.limits.memory }}
+              {{- end}}
+              {{- if .Values.frontend.resources.limits.cpu }}
+              cpu: {{ .Values.frontend.resources.limits.cpu }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
+          {{- end }}
           {{- if .Values.useCustomIncomingCallRingtone }}
           volumeMounts:
             - mountPath: "/usr/share/nginx/html/static/media/incomingCall.mp3"

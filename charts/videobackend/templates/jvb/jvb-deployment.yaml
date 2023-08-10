@@ -24,7 +24,29 @@ spec:
               protocol: UDP
             - containerPort: 4443
           image: {{ .Values.jvbImageName }}:{{ .Values.jvbVersion }}
-          resources: {}
+          {{- if .Values.resources }}
+          {{- if .Values.resources.jvb }}
+          resources:
+            {{- if .Values.resources.jvb.requests }}
+            requests:
+              {{- if .Values.resources.jvb.requests.memory }}
+              memory: {{  .Values.resources.jvb.requests.memory }}
+              {{- end}}
+              {{- if .Values.resources.jvb.requests.cpu }}
+              cpu: {{ .Values.resources.jvb.requests.cpu }}
+              {{- end}}
+            {{- end }}
+            {{- if .Values.resources.jvb.limits }}
+            limits:
+              {{- if .Values.resources.jvb.limits.memory }}
+              memory: {{ .Values.resources.jvb.limits.memory }}
+              {{- end}}
+              {{- if .Values.resources.jvb.limits.cpu }}
+              cpu: {{ .Values.resources.jvb.limits.cpu }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
+          {{- end }}
           imagePullPolicy: IfNotPresent
           env:
             - name: XMPP_SERVER

@@ -160,7 +160,29 @@ spec:
             - containerPort: 8080
           image:  {{ .Values.mailServiceImageName }}:{{ .Values.mailServiceImageVersion }}
           imagePullPolicy: Always
-          resources: {}
+          {{- if .Values.mailservice }}
+          {{- if .Values.mailservice.resources }}
+          resources:
+            {{- if .Values.mailservice.resources.requests }}
+            requests:
+              {{- if .Values.mailservice.resources.requests.memory }}
+              memory: {{  .Values.mailservice.resources.requests.memory }}
+              {{- end}}
+              {{- if .Values.mailservice.resources.requests.cpu }}
+              cpu: {{ .Values.mailservice.resources.requests.cpu }}
+              {{- end}}
+            {{- end }}
+            {{- if .Values.mailservice.resources.limits }}
+            limits:
+              {{- if .Values.mailservice.resources.limits.memory }}
+              memory: {{ .Values.mailservice.resources.limits.memory }}
+              {{- end}}
+              {{- if .Values.mailservice.resources.limits.cpu }}
+              cpu: {{ .Values.mailservice.resources.limits.cpu }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
+          {{- end }}
           volumeMounts:
             - mountPath: /mailserviceTemplates/
               name: mailservice-templates

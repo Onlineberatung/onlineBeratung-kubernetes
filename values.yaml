@@ -228,6 +228,9 @@ migrationToolImageName: "ghcr.io/onlineberatung/onlineberatung-migrationtool/onl
 migrationToolImageVersion: "dockerImage.v.3"
 migrationToolSpringProfile: ""
 
+jitsiTechnicalEmail: "jitsi-technical@onlineberatung.net"
+jitsiTechnicalTenantId: "0"
+
 documentationservice:
   resources:
     requests:

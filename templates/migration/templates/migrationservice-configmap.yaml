@@ -10,6 +10,10 @@ data:
   SPRING_DATASOURCE_TENANTSERVICE_URL: "jdbc:mariadb://mariadb.{{ .Release.Namespace }}:3306/tenantservice"
   SPRING_DATASOURCE_CONSULTINGTYPESERVICE_URL: "jdbc:mariadb://mariadb.{{ .Release.Namespace }}:3306/consultingtypeservice"
   MIGRATION_SPRING_PROFILE: "{{ .Values.migrationToolSpringProfile }}"
+
+  USERS_JITSI_TECHNICAL_PASSWORD: "{{ .Values.jitsiTechnicalPassword }}"
+  USERS_JITSI_TECHNICAL_EMAIL: "{{ .Values.jitsiTechnicalEmail }}"
+  USERS_JITSI_TECHNICAL_TENANTID: "{{ .Values.jitsiTechnicalTenantId }}"
 metadata:
   labels:
     io.kompose.service: migrationtool-{{ .Release.Name }}-env

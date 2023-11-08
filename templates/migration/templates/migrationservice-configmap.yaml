@@ -14,6 +14,10 @@ data:
   USERS_JITSI_TECHNICAL_PASSWORD: "{{ .Values.jitsiTechnicalPassword }}"
   USERS_JITSI_TECHNICAL_EMAIL: "{{ .Values.jitsiTechnicalEmail }}"
   USERS_JITSI_TECHNICAL_TENANTID: "{{ .Values.jitsiTechnicalTenantId }}"
+
+  USERS_PUBLIC_PLAN_TECHNICAL_PASSWORD: "{{ .Values.publicPlanTechnicalPassword }}"
+  USERS_PUBLIC_PLAN_TECHNICAL_EMAIL: "{{ .Values.publicPlanTechnicalEmail }}"
+  USERS_PUBLIC_PLAN_TECHNICAL_TENANTID: "{{ .Values.publicPlanTechnicalTenantId }}"
 metadata:
   labels:
     io.kompose.service: migrationtool-{{ .Release.Name }}-env

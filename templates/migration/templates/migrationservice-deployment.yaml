@@ -128,6 +128,36 @@ spec:
                 secretKeyRef:
                   key: SPRING_DATA_MONGODB_URI
                   name: migrationtool-secret-{{ .Release.Name }}-env
+            - name: USERS_JITSI_TECHNICAL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: USERS_JITSI_TECHNICAL_PASSWORD
+                  name: migrationtool-secret-{{ .Release.Name }}-env
+            - name: USERS_JITSI_TECHNICAL_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  key: USERS_JITSI_TECHNICAL_EMAIL
+                  name: migrationtool-secret-{{ .Release.Name }}-env
+            - name: USERS_JITSI_TECHNICAL_TENANTID
+              valueFrom:
+                secretKeyRef:
+                  key: USERS_JITSI_TECHNICAL_TENANTID
+                  name: migrationtool-secret-{{ .Release.Name }}-env
+            - name: USERS_PUBLIC_PLAN_TECHNICAL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: USERS_PUBLIC_PLAN_TECHNICAL_PASSWORD
+                  name: migrationtool-secret-{{ .Release.Name }}-env
+            - name: USERS_PUBLIC_PLAN_TECHNICAL_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  key: USERS_PUBLIC_PLAN_TECHNICAL_EMAIL
+                  name: migrationtool-secret-{{ .Release.Name }}-env
+            - name: USERS_PUBLIC_PLAN_TECHNICAL_TENANTID
+              valueFrom:
+                secretKeyRef:
+                  key: USERS_PUBLIC_PLAN_TECHNICAL_TENANTID
+                  name: migrationtool-secret-{{ .Release.Name }}-env
       restartPolicy: OnFailure
       imagePullSecrets:
       - name: registry-secret

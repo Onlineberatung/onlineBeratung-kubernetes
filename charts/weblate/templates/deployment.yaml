@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "weblate.fullname" . }}
-  namespace: {{ .Release.Namespace }}
+  namespace: weblate-{{ .Release.Namespace }}
   labels:
 {{ include "weblate.labels" . | indent 4 }}
 spec:
@@ -55,7 +55,7 @@ spec:
             - name: POSTGRES_DATABASE
               value: {{ .Values.postgresql.auth.database | default (include "weblate.fullname" .) }}
             - name: POSTGRES_HOST
-              value: "{{ .Values.postgresql.postgresqlHost | default (include "weblate.postgresql.fullname" .) }}"
+              value: "{{ .Release.Name }}-postgresql"
             - name: POSTGRES_PORT
               value: {{ .Values.postgresql.service.ports.postgresql | quote }}
             - name: POSTGRES_USER
@@ -81,7 +81,7 @@ spec:
                   key: postgresql-password
                   {{- end }}
             - name: REDIS_HOST
-              value: "{{ .Values.redis.redisHost | default (include "weblate.redis.fullname" .) }}"
+              value: "{{ .Release.Name }}-redis-master"
             - name: REDIS_DB
               value: "{{ .Values.redis.db }}"
             - name: REDIS_PASSWORD

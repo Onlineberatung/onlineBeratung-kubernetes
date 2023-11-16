@@ -1,3 +1,4 @@
+{{- if .Values.global.translationManagementSystemEnabled }}
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "weblate.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
@@ -56,3 +57,5 @@ spec:
         {{- end }}
   {{- end }}
 {{- end }}
+{{- end }}
+

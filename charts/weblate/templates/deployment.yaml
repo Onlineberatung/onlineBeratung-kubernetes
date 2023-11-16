@@ -1,3 +1,4 @@
+{{- if .Values.global.translationManagementSystemEnabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -70,16 +71,8 @@ spec:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  {{ if and (not .Values.existingSecret) (not .Values.postgresql.auth.existingSecret) -}}
-                  name: {{ include "weblate.fullname" . }}
-                  key: postgresql-password
-                  {{ else if and (not .Values.existingSecret) (.Values.postgresql.auth.existingSecret) -}}
-                  name: {{ .Values.postgresql.auth.existingSecret }}
-                  key: {{ .Values.postgresql.auth.secretKeys.userPasswordKey }}
-                  {{- else }}
-                  name: {{ .Values.existingSecret }}
-                  key: postgresql-password
-                  {{- end }}
+                  name: {{ .Release.Name }}-postgresql
+                  key: postgres-password
             - name: REDIS_HOST
               value: "{{ .Release.Name }}-redis-master"
             - name: REDIS_DB
@@ -87,16 +80,8 @@ spec:
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  {{ if and (not .Values.existingSecret) (not .Values.redis.auth.existingSecret) -}}
-                  name: {{ include "weblate.fullname" . }}
+                  name: {{ .Release.Name }}-redis
                   key: redis-password
-                  {{ else if and (not .Values.existingSecret) (.Values.redis.auth.existingSecret) -}}
-                  name: {{ .Values.redis.auth.existingSecret }}
-                  key: {{ .Values.redis.auth.existingSecretPasswordKey }}
-                  {{ else }}
-                  name: {{ .Values.existingSecret }}
-                  key: redis-password
-                  {{- end }}
             - name: WEBLATE_ADMIN_EMAIL
               value: "{{ .Values.adminEmail }}"
             - name: WEBLATE_ADMIN_NAME
@@ -250,3 +235,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+{{- end }}

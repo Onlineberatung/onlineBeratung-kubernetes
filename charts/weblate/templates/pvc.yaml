@@ -1,3 +1,4 @@
+{{- if .Values.global.translationManagementSystemEnabled }}
 {{- if and .Values.persistence.enabled ( not .Values.persistence.existingClaim ) }}
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -17,6 +18,7 @@ spec:
   storageClassName: ""
 {{- else }}
   storageClassName: "{{ .Values.persistence.storageClass }}"
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}

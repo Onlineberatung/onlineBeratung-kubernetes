@@ -155,6 +155,26 @@ spec:
                 configMapKeyRef:
                   key: MAIL_FIX_RECIPIENT
                   name: mailservice-{{ .Release.Name }}-env
+            - name: WEBLATE_PROJECT
+              valueFrom:
+                configMapKeyRef:
+                  key: WEBLATE_PROJECT
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: WEBLATE_COMPONENT
+              valueFrom:
+                configMapKeyRef:
+                  key: WEBLATE_COMPONENT
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: WEBLATE_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: WEBLATE_API_URL
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: WEBLATE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: WEBLATE_API_KEY
+                  name: mailservice-secret-{{ .Release.Name }}-env
           name: mailservice
           ports:
             - containerPort: 8080

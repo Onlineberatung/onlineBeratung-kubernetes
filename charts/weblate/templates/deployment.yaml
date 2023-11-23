@@ -140,6 +140,8 @@ spec:
               value: "{{ .Values.allowedHosts }}"
             - name: WEBLATE_DEBUG
               value: "{{ .Values.debug }}"
+            - name: REGISTRATION_OPEN
+              value: "{{ .Values.registrationOpen | default false }}"
             {{- if (and .Values.caCertSecretName .Values.caCertSubPath )}}
             - name: REQUESTS_CA_BUNDLE
               value: /{{ .Values.caCertSubPath }}

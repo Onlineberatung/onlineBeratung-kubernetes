@@ -208,6 +208,11 @@ spec:
               name: mailservice-templates
             - mountPath: /mailserviceTemplates/images/
               name: mailservice-templates-images
+          {{- if .Values.mailServiceCacheConfigurationPath }}
+            - mountPath: /mailservice/config/
+              name: mailservice-config
+              readOnly: true
+            {{- end }}
       imagePullSecrets:
         - name: registry-secret
       restartPolicy: Always
@@ -218,3 +223,8 @@ spec:
         - name: mailservice-templates-images
           configMap:
             name: mailservice-templates-images-{{ .Release.Name }}-configmap
+      {{- if .Values.mailServiceCacheConfigurationPath }}
+        - name: mailservice-ehcache
+          configMap:
+            name: mailservice-ehcache-{{ .Release.Name }}-configmap
+      {{- end }}

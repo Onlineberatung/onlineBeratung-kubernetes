@@ -25,6 +25,7 @@ data:
   LOGGING_LEVEL_ROOT: {{ .Values.mailServiceLoggingLevelRoot }}
   TEMPLATE_USE_CUSTOM_RESOURCES_PATH: {{ .Values.useCustomResourcePath | default "true" | quote }}
   TEMPLATE_CUSTOM_RESOURCES_PATH: "mailserviceTemplates/"
+  SPRING_CACHE_JCACHE_CONFIG: {{ printf "%s%s" "file:/" .Values.mailServiceCacheConfigurationPath | default "classpath:ehcache.xml" | quote }}
 kind: ConfigMap
 metadata:
   labels:

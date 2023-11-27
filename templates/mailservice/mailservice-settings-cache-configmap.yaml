@@ -1,0 +1,9 @@
+{{- if .Values.mailServiceCacheConfigurationPath }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mailservice-settings-cache-{{ .Release.Name }}-configmap
+data:
+  {{- $path := printf "%s/**.xml" .Values.mailServiceCacheConfigurationPath }}
+  {{- (.Files.Glob $path).AsConfig | nindent 2 }}
+{{- end }}

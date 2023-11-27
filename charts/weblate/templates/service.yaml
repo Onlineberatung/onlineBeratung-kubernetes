@@ -1,8 +1,9 @@
+{{- if .Values.global.translationManagementSystemEnabled }}
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "weblate.fullname" . }}
-  namespace: {{ .Release.Namespace }}
+  namespace: weblate-{{ .Release.Namespace }}
   annotations:
     {{- range $key, $value := .Values.service.annotations }}
     {{ $key }}: {{ include "common.tplvalues.render" (dict "value" $value "context" $) | quote }}
@@ -19,3 +20,4 @@ spec:
   selector:
     app.kubernetes.io/name: {{ include "weblate.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}

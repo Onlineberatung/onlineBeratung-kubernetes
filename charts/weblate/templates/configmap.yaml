@@ -1,9 +1,11 @@
+{{- if .Values.global.translationManagementSystemEnabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ include "weblate.fullname" . }}
-  namespace: {{ .Release.Namespace }}
+  namespace: weblate-{{ .Release.Namespace }}
   labels:
 {{ include "weblate.labels" . | indent 4 }}
 data:
   settings-override.py: {{ toYaml .Values.configOverride | indent 2 }}
+{{- end }}

@@ -1,0 +1,34 @@
+{{- if .Values.global.translationManagementSystemEnabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: weblate
+  namespace: weblate-{{ .Release.Namespace }}
+spec:
+  ingressClassName: nginx
+  rules:
+  {{- if .Values.global.multitenancyEnabled }}
+  {{- if not .Values.global.multitenancyWithSingleDomainEnabled }}
+    - host: "*.{{ .Values.global.domainName }}"
+      http:
+        paths:
+          - backend:
+              service:
+                name: {{ include "weblate.fullname" . }}
+                port:
+                  number: 80
+            path: /weblate
+            pathType: Prefix
+  {{- end }}
+  {{- end }}
+    - host: {{ .Values.global.domainName }}
+      http:
+        paths:
+          - backend:
+              service:
+                name: {{ include "weblate.fullname" . }}
+                port:
+                  number: 80
+            path: /weblate
+            pathType: Prefix
+{{- end }}

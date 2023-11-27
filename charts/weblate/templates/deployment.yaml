@@ -1,8 +1,9 @@
+{{- if .Values.global.translationManagementSystemEnabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "weblate.fullname" . }}
-  namespace: {{ .Release.Namespace }}
+  namespace: weblate-{{ .Release.Namespace }}
   labels:
 {{ include "weblate.labels" . | indent 4 }}
 spec:
@@ -55,7 +56,7 @@ spec:
             - name: POSTGRES_DATABASE
               value: {{ .Values.postgresql.auth.database | default (include "weblate.fullname" .) }}
             - name: POSTGRES_HOST
-              value: "{{ .Values.postgresql.postgresqlHost | default (include "weblate.postgresql.fullname" .) }}"
+              value: "{{ .Release.Name }}-postgresql"
             - name: POSTGRES_PORT
               value: {{ .Values.postgresql.service.ports.postgresql | quote }}
             - name: POSTGRES_USER
@@ -70,33 +71,17 @@ spec:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  {{ if and (not .Values.existingSecret) (not .Values.postgresql.auth.existingSecret) -}}
-                  name: {{ include "weblate.fullname" . }}
-                  key: postgresql-password
-                  {{ else if and (not .Values.existingSecret) (.Values.postgresql.auth.existingSecret) -}}
-                  name: {{ .Values.postgresql.auth.existingSecret }}
-                  key: {{ .Values.postgresql.auth.secretKeys.userPasswordKey }}
-                  {{- else }}
-                  name: {{ .Values.existingSecret }}
-                  key: postgresql-password
-                  {{- end }}
+                  name: {{ .Release.Name }}-postgresql
+                  key: postgres-password
             - name: REDIS_HOST
-              value: "{{ .Values.redis.redisHost | default (include "weblate.redis.fullname" .) }}"
+              value: "{{ .Release.Name }}-redis-master"
             - name: REDIS_DB
               value: "{{ .Values.redis.db }}"
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  {{ if and (not .Values.existingSecret) (not .Values.redis.auth.existingSecret) -}}
-                  name: {{ include "weblate.fullname" . }}
+                  name: {{ .Release.Name }}-redis
                   key: redis-password
-                  {{ else if and (not .Values.existingSecret) (.Values.redis.auth.existingSecret) -}}
-                  name: {{ .Values.redis.auth.existingSecret }}
-                  key: {{ .Values.redis.auth.existingSecretPasswordKey }}
-                  {{ else }}
-                  name: {{ .Values.existingSecret }}
-                  key: redis-password
-                  {{- end }}
             - name: WEBLATE_ADMIN_EMAIL
               value: "{{ .Values.adminEmail }}"
             - name: WEBLATE_ADMIN_NAME
@@ -155,6 +140,8 @@ spec:
               value: "{{ .Values.allowedHosts }}"
             - name: WEBLATE_DEBUG
               value: "{{ .Values.debug }}"
+            - name: REGISTRATION_OPEN
+              value: "{{ .Values.registrationOpen | default false }}"
             {{- if (and .Values.caCertSecretName .Values.caCertSubPath )}}
             - name: REQUESTS_CA_BUNDLE
               value: /{{ .Values.caCertSubPath }}
@@ -250,3 +237,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+{{- end }}

@@ -1,3 +1,4 @@
+{{- if .Values.global.translationManagementSystemEnabled }}
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "weblate.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
@@ -12,7 +13,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: {{ $fullName }}
-  namespace: {{ .Release.Namespace }}
+  namespace: weblate-{{ .Release.Namespace }}
   labels:
 {{ include "weblate.labels" . | indent 4 }}
   {{- with .Values.ingress.annotations }}
@@ -56,3 +57,5 @@ spec:
         {{- end }}
   {{- end }}
 {{- end }}
+{{- end }}
+

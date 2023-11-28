@@ -1,4 +1,3 @@
-{{- if .Values.global.translationManagementSystemEnabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -20,4 +19,3 @@ spec:
   selector:
     app.kubernetes.io/name: {{ include "weblate.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end }}

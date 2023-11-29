@@ -1,5 +1,5 @@
 global:
-  domainName: "onlineberatung.localhost"
+  domainName: &globalDomainName "onlineberatung.localhost"
   dockerHostIp: "192.168.65.2"
   enableTls: false
   multitenancyEnabled: false
@@ -239,7 +239,7 @@ documentationservice:
 
 weblate:
   enabled: false
-  siteDomain: "onlineberatung.localhost"
+  siteDomain: *globalDomainName
   sitePrefix: "/weblate"
   redis:
     nameOverride: "weblate-redis"
@@ -248,22 +248,18 @@ weblate:
   ingress:
     enabled: false
     ingressClassName: nginx
-    # Ingres annotations
     annotations: { }
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-    # Host names
     tls:
-      - secretName: "onlineberatung.localhost"
+      - secretName: *globalDomainName
         hosts:
-            - "onlineberatung.localhost"
-            - "*.onlineberatung.localhost"
+            - *globalDomainName
+            - !concat ["*.", *globalDomainName]
     hosts:
-      - host: "onlineberatung.localhost"
+      - host: *globalDomainName
         paths:
           - path: /(weblate)(.*)
             pathType: Prefix
-      - host: "*.onlineberatung.localhost"
+      - host: !concat ["*.", *globalDomainName]
         paths:
           - path: /(weblate)(.*)
             pathType: Prefix

@@ -236,3 +236,36 @@ documentationservice:
     limits:
       memory: 384Mi
       cpu: "500m"
+
+weblate:
+  enabled: false
+  siteDomain: "onlineberatung.localhost"
+  sitePrefix: "/weblate"
+  redis:
+    nameOverride: "weblate-redis"
+  postgresql:
+    nameOverride: "weblate-postgresql"
+  ingress:
+    enabled: false
+    ingressClassName: nginx
+    # Ingres annotations
+    annotations: { }
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+    # Host names
+    tls:
+      - secretName: "onlineberatung.localhost"
+        hosts:
+            - "onlineberatung.localhost"
+            - "*.onlineberatung.localhost"
+    hosts:
+      - host: "onlineberatung.localhost"
+        paths:
+          - path: /(weblate)(.*)
+            pathType: Prefix
+      - host: "*.onlineberatung.localhost"
+        paths:
+          - path: /(weblate)(.*)
+            pathType: Prefix
+
+

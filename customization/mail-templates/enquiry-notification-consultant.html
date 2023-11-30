@@ -42,8 +42,7 @@
                               <b style="font-size: 20px; line-height: 28px; color: #333;"><span data-th-text="#{mail.label.dear}"/> <span
                                     data-th-text="${name}"></span>,</b>
                               <br /><br />
-                              in der Beratungsstelle <span data-th-text="${beratungsstelle}"></span> ist eine neue
-                              Erstanfrage eingegangen.
+                              <span data-th-text="#{mail.label.in.the.agency}"/> <span data-th-text="${beratungsstelle}"></span> <span data-th-text="#{mail.label.is.a.new.enquiry.received}"/>
                            </div>
                         </td>
                      </tr>
@@ -52,8 +51,7 @@
                         <td colspan='2' style='padding: 0; '>
                            <div style="margin: 30px 20px;">
                               <a data-th-href="${url} + '/login'"
-                                 style="display: inline-block; color: #fff; background: #273270; padding: 15px 20px; text-transform: uppercase; font-weight: bold; text-decoration: none; border-radius: 4px; line-height: 20px;">Anfrage
-                                 ansehen</a>
+                                 style="display: inline-block; color: #fff; background: #273270; padding: 15px 20px; text-transform: uppercase; font-weight: bold; text-decoration: none; border-radius: 4px; line-height: 20px;"><span data-th-text="#{mail.label.view.enquiry}"/></a>
                            </div>
                         </td>
                      </tr>

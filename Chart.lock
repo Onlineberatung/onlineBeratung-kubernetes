@@ -1,0 +1,6 @@
+dependencies:
+- name: weblate
+  repository: https://helm.weblate.org
+  version: 0.5.3
+digest: sha256:0cd5dbc51a08df915070cb7832a5d057f06b0aba7a1a0b9ab1c16695a2329bd7
+generated: "2023-11-29T15:00:35.760057391+01:00"

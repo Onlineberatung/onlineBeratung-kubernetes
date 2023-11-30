@@ -175,6 +175,11 @@ spec:
                 secretKeyRef:
                   key: WEBLATE_API_KEY
                   name: mailservice-secret-{{ .Release.Name }}-env
+            - name: SPRING_CACHE_JCACHE_CONFIG
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_CACHE_JCACHE_CONFIG
+                  name: mailservice-{{ .Release.Name }}-env
           name: mailservice
           ports:
             - containerPort: 8080

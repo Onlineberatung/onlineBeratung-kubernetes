@@ -28,8 +28,10 @@ data:
   WEBLATE_API_URL: {{ .Values.weblateApiUrl }}
   WEBLATE_PROJECT: {{ .Values.weblateProject }}
   WEBLATE_COMPONENT: {{ .Values.weblateMailComponent }}
+  {{- if .Values.mailServiceCacheConfigurationTargetDirectory }}
+  SPRING_CACHE_JCACHE_CONFIG: {{ printf "%s%s%s" "file:/" .Values.mailServiceCacheConfigurationTargetDirectory "/ehcache.xml" | quote }}
+  {{- end }}
 
-  SPRING_CACHE_JCACHE_CONFIG: {{ printf "%s%s" "file:/" .Values.mailServiceCacheConfigurationPath | default "classpath:ehcache.xml" | quote }}
 kind: ConfigMap
 metadata:
   labels:

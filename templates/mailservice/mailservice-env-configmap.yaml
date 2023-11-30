@@ -29,7 +29,7 @@ data:
   WEBLATE_PROJECT: {{ .Values.weblateProject }}
   WEBLATE_COMPONENT: {{ .Values.weblateMailComponent }}
   {{- if .Values.mailServiceCacheConfigurationTargetDirectory }}
-  SPRING_CACHE_JCACHE_CONFIG: {{ printf "%s%s%s" "file:/" .Values.mailServiceCacheConfigurationTargetDirectory "/ehcache.xml" | quote }}
+  SPRING_CACHE_JCACHE_CONFIG: {{ printf "%s%s%s" "file:" .Values.mailServiceCacheConfigurationTargetDirectory "/ehcache.xml" | quote }}
   {{- end }}
 
 kind: ConfigMap

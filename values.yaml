@@ -1,5 +1,5 @@
 global:
-  domainName: "onlineberatung.localhost"
+  domainName: &globalDomainName "onlineberatung.localhost"
   dockerHostIp: "192.168.65.2"
   enableTls: false
   multitenancyEnabled: false
@@ -239,3 +239,32 @@ documentationservice:
     limits:
       memory: 384Mi
       cpu: "500m"
+
+weblate:
+  enabled: false
+  siteDomain: *globalDomainName
+  sitePrefix: "/weblate"
+  redis:
+    nameOverride: "weblate-redis"
+  postgresql:
+    nameOverride: "weblate-postgresql"
+  ingress:
+    enabled: false
+    ingressClassName: nginx
+    annotations: { }
+    tls:
+      - secretName: *globalDomainName
+        hosts:
+            - *globalDomainName
+            - !concat ["*.", *globalDomainName]
+    hosts:
+      - host: *globalDomainName
+        paths:
+          - path: /(weblate)(.*)
+            pathType: Prefix
+      - host: !concat ["*.", *globalDomainName]
+        paths:
+          - path: /(weblate)(.*)
+            pathType: Prefix
+
+

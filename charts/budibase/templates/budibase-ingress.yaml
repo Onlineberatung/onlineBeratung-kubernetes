@@ -13,6 +13,11 @@ metadata:
     nginx.ingress.kubernetes.io/enable-cors: "true"
     nginx.ingress.kubernetes.io/cors-allow-origin: "{{ .Values.budibaseCorsAllowOrigin }}"
     nginx.ingress.kubernetes.io/cors-allow-headers: "{{ .Values.budibaseCorsAllowHeaders }}"
+    {{- if .Values.budibaseFrameAllowFromUrl }}
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "X-Frame-Options: ALLOW-FROM
+      {{ .Values.budibaseFrameAllowFromUrl }}";
+    {{- end }}
 spec:
   {{- if .Values.global.enableTls }}
   tls:

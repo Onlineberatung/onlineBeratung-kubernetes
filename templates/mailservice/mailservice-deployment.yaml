@@ -155,6 +155,31 @@ spec:
                 configMapKeyRef:
                   key: MAIL_FIX_RECIPIENT
                   name: mailservice-{{ .Release.Name }}-env
+            - name: WEBLATE_PROJECT
+              valueFrom:
+                configMapKeyRef:
+                  key: WEBLATE_PROJECT
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: WEBLATE_COMPONENT
+              valueFrom:
+                configMapKeyRef:
+                  key: WEBLATE_COMPONENT
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: WEBLATE_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: WEBLATE_API_URL
+                  name: mailservice-{{ .Release.Name }}-env
+            - name: WEBLATE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: WEBLATE_API_KEY
+                  name: mailservice-secret-{{ .Release.Name }}-env
+            - name: SPRING_CACHE_JCACHE_CONFIG
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_CACHE_JCACHE_CONFIG
+                  name: mailservice-{{ .Release.Name }}-env
           name: mailservice
           ports:
             - containerPort: 8080
@@ -188,6 +213,11 @@ spec:
               name: mailservice-templates
             - mountPath: /mailserviceTemplates/images/
               name: mailservice-templates-images
+          {{- if .Values.mailServiceCacheConfigurationTargetDirectory }}
+            - mountPath: {{ .Values.mailServiceCacheConfigurationTargetDirectory }}
+              name: mailservice-config
+              readOnly: true
+            {{- end }}
       imagePullSecrets:
         - name: registry-secret
       restartPolicy: Always
@@ -198,3 +228,8 @@ spec:
         - name: mailservice-templates-images
           configMap:
             name: mailservice-templates-images-{{ .Release.Name }}-configmap
+      {{- if .Values.mailServiceCacheConfigurationTargetDirectory }}
+        - name: mailservice-config
+          configMap:
+            name: mailservice-settings-cache-{{ .Release.Name }}-configmap
+      {{- end }}

@@ -18,7 +18,7 @@
                     <table style="table-layout: fixed; width: 100%" cellspacing='0' cellpadding='0' border="0">
                         <thead style='background-color: #273270;'>
                             <td style='padding: 30px 30px 10px; text-align: center; width: 100%;'>
-                                <h1 style='color: #FFFFFF; font-size: 30px; font-weight: bold; line-height: 40px; padding: 0; margin: 0;'>Onlineberatung</h1>
+                                <h1 style='color: #FFFFFF; font-size: 30px; font-weight: bold; line-height: 40px; padding: 0; margin: 0;'><span data-th-text="#{mail.label.header}"/></h1>
                             </td>
                         </thead>
 
@@ -41,16 +41,16 @@
                             <tr>
                                 <td cellspacing='0' cellpadding='0' style="padding: 0;" colspan="2">
                                     <div style="margin: 20px 20px 0; font-size: 16px; line-height: 21px;">
-                                        <b style="font-size: 20px; line-height: 28px; color: #333;">Liebe_r <span
+                                        <b style="font-size: 20px; line-height: 28px; color: #333;"><span data-th-text="#{mail.label.dear}"/> <span
                                                 data-th-text="${consultant_name}"></span>,</b>
                                         <br /><br />
                                         <div th:if="${enquiries} gt 1">
-                                            es liegen <span data-th-text="${enquiries}"></span> Erstanfragen in der
-                                            Beratungsstelle <span data-th-text="${agency_name}"></span> vor.
+                                            <span data-th-text="#{mail.label.there.are.present}"> <span data-th-text="${enquiries}"></span> <span data-th-text="#{mail.label.new.enquiries.in.agency}"> <span data-th-text="${agency_name}"></span> vor.
                                         </div>
                                         <div th:unless="${enquiries} gt 1">
-                                            es liegt eine Erstanfrage in der Beratungsstelle <span
-                                                data-th-text="${agency_name}"></span> vor.
+                                            <span data-th-text="#{mail.label.there.is.one.enquiry.in.agency.present}">
+                                                <span
+                                                data-th-text="${agency_name}"></span> <span data-th-text="#{mail.label.there.are.present.closure}">
                                         </div>
                                     </div>
                                 </td>
@@ -60,8 +60,7 @@
                                 <td colspan='2' style='padding: 0; '>
                                     <div style="margin: 30px 20px;">
                                         <a data-th-href="${url} + '/login'"
-                                            style="display: inline-block; color: #fff; background: #273270; padding: 15px 20px; text-transform: uppercase; font-weight: bold; text-decoration: none; border-radius: 4px; line-height: 20px;">Anfrage
-                                            ansehen</a>
+                                            style="display: inline-block; color: #fff; background: #273270; padding: 15px 20px; text-transform: uppercase; font-weight: bold; text-decoration: none; border-radius: 4px; line-height: 20px;"><span data-th-text="#{mail.label.view.enquiry}"/></a>
                                     </div>
                                 </td>
                             </tr>
@@ -70,8 +69,8 @@
                                 <td>
                                     <div
                                         style="margin: 0 20px 60px; font-size: 16px; line-height: 21px; font-family: Nunito, 'Arial', 'sans-serif';">
-                                        Liebe Grüße<br>
-                                        Dein Team von der Onlineberatung<br>
+                                        <span data-th-text="#{mail.label.best.regards}"/><br>
+                                        <span data-th-text="#{mail.label.your.team}"/><br>
                                     </div>
                                 </td>
                             </tr>

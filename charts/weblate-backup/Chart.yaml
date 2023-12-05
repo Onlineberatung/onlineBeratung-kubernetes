@@ -1,0 +1,6 @@
+name: weblate-backup
+description: The chart providing weblate backup pvc
+version: 0.0.1
+apiVersion: v1
+keywords:
+ - weblate-backup

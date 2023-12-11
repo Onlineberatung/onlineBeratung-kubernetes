@@ -1,0 +1,14 @@
+{
+  "branch": "develop",
+  "file_format": "json",
+  "filemask": "src/main/resources/i18n/mailservice.*.json",
+  "name": "mailservice",
+  "slug": "mailservice",
+  "repo": "https://github.com/virtualidentityag/vi-saas-mailService.git",
+  "template": "src/main/resources/i18n/mailservice.en.json",
+  "new_base": "",
+  "vcs": "git",
+  "manage_units": true,
+  "push": "",
+  "push_branch": ""
+}

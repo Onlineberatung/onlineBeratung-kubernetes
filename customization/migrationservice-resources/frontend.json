@@ -1,0 +1,14 @@
+{
+  "branch": "develop",
+  "file_format": "json",
+  "filemask": "*.json",
+  "name": "frontend",
+  "slug": "frontend",
+  "repo": "https://github.com/virtualidentityag/vi-saas-frontend-theme.git",
+  "template": "*.en.json",
+  "new_base": "",
+  "vcs": "git",
+  "manage_units": true,
+  "push": "",
+  "push_branch": ""
+}

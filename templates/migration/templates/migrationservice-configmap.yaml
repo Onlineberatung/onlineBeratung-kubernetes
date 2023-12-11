@@ -20,7 +20,6 @@ data:
   USERS_PUBLIC_PLAN_TECHNICAL_TENANTID: "{{ .Values.publicPlanTechnicalTenantId }}"
 
   WEBLATE_CONFIG_SERVER_URL: "{{ .Values.weblateServerUrl }}"
-  WEBLATE_CONFIG_API_KEY: "{{ .Values.weblateApiKey }}"
   WEBLATE_CONFIG_PROJECT_NAME: {{ .Values.weblateProjectName | default "onlineberatung" }}
   WEBLATE_CONFIG_PROJECT_SLUG: {{ .Values.weblateProjectSlug | default "onlineberatung" }}
   WEBLATE_CONFIG_WEB: "{{ .Values.weblateProjectWebUrl }}"

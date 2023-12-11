@@ -163,7 +163,14 @@ spec:
                 configMapKeyRef:
                   key: WEBLATE_CONFIG_CUSTOM_RESOURCES_PATH
                   name: migrationtool-{{ .Release.Name }}-env
+          volumeMounts:
+            - mountPath: {{ .Values.weblateCustomResourcesPath }}
+              name: migrationservice-resources
       restartPolicy: OnFailure
       imagePullSecrets:
       - name: registry-secret
+      volumes:
+        - name: migrationservice-resources
+          configMap:
+            name: migrationservice-resource-{{ .Release.Name }}-configmap
 {{- end }}

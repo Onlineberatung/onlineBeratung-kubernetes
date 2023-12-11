@@ -4,6 +4,6 @@ kind: ConfigMap
 metadata:
   name: migrationservice-resource-{{ .Release.Name }}-configmap
 data:
-  {{- $path := printf "%s/*.json" "resources/" }}
+  {{- $path := printf "%s/*.json" "customization/migrationservice-resources" }}
     {{- (.Files.Glob $path).AsConfig | nindent 2 }}
 {{- end }}

@@ -1,4 +1,4 @@
-{{- if .Values.weblateCustomResourcesPath }}
+{{- if .Values.migration.weblate.customResourcesPath }}
 apiVersion: v1
 kind: ConfigMap
 metadata:

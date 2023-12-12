@@ -131,7 +131,7 @@ spec:
             - name: WEBLATE_CONFIG_SERVER_URL
               valueFrom:
                 configMapKeyRef:
-                  key: WEBLATE_CONFIG_SERVER_URL
+                  key: WEBLATE_CONFIG_API_URL
                   name: migrationtool-{{ .Release.Name }}-env
             - name: WEBLATE_CONFIG_API_KEY
               valueFrom:
@@ -164,7 +164,7 @@ spec:
                   key: WEBLATE_CONFIG_CUSTOM_RESOURCES_PATH
                   name: migrationtool-{{ .Release.Name }}-env
           volumeMounts:
-            - mountPath: {{ .Values.weblateCustomResourcesPath }}
+            - mountPath: {{ .Values.migration.weblate.customResourcesPath }}
               name: migrationservice-resources
       restartPolicy: OnFailure
       imagePullSecrets:

@@ -128,7 +128,7 @@ spec:
                 secretKeyRef:
                   key: SPRING_DATA_MONGODB_URI
                   name: migrationtool-secret-{{ .Release.Name }}-env
-            - name: WEBLATE_CONFIG_SERVER_URL
+            - name: WEBLATE_CONFIG_API_URL
               valueFrom:
                 configMapKeyRef:
                   key: WEBLATE_CONFIG_API_URL

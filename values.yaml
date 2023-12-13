@@ -276,4 +276,4 @@ migration:
       slug: "onlineberatung"
       webUrl: "https://onlineberatung.net/weblate/projects/onlineberatung/"
     useCustomResourcesPath: true
-    customResourcesPath: "resources/weblate"
+    customResourcesPath: "resources/weblate/"

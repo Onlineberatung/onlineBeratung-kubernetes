@@ -128,7 +128,49 @@ spec:
                 secretKeyRef:
                   key: SPRING_DATA_MONGODB_URI
                   name: migrationtool-secret-{{ .Release.Name }}-env
+            - name: WEBLATE_CONFIG_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: WEBLATE_CONFIG_API_URL
+                  name: migrationtool-{{ .Release.Name }}-env
+            - name: WEBLATE_CONFIG_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: WEBLATE_CONFIG_API_KEY
+                  name: migrationtool-secret-{{ .Release.Name }}-env
+            - name: WEBLATE_CONFIG_PROJECT_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: WEBLATE_CONFIG_PROJECT_NAME
+                  name: migrationtool-{{ .Release.Name }}-env
+            - name: WEBLATE_CONFIG_PROJECT_SLUG
+              valueFrom:
+                configMapKeyRef:
+                  key: WEBLATE_CONFIG_PROJECT_SLUG
+                  name: migrationtool-{{ .Release.Name }}-env
+            - name: WEBLATE_CONFIG_WEB
+              valueFrom:
+                configMapKeyRef:
+                  key: WEBLATE_CONFIG_WEB
+                  name: migrationtool-{{ .Release.Name }}-env
+            - name: WEBLATE_CONFIG_USE_CUSTOM_RESOURCES_PATH
+              valueFrom:
+                configMapKeyRef:
+                  key: WEBLATE_CONFIG_USE_CUSTOM_RESOURCES_PATH
+                  name: migrationtool-{{ .Release.Name }}-env
+            - name: WEBLATE_CONFIG_CUSTOM_RESOURCES_PATH
+              valueFrom:
+                configMapKeyRef:
+                  key: WEBLATE_CONFIG_CUSTOM_RESOURCES_PATH
+                  name: migrationtool-{{ .Release.Name }}-env
+          volumeMounts:
+            - mountPath: {{ .Values.migration.weblate.customResourcesPath }}
+              name: migrationservice-resources
       restartPolicy: OnFailure
       imagePullSecrets:
       - name: registry-secret
+      volumes:
+        - name: migrationservice-resources
+          configMap:
+            name: migrationservice-resource-{{ .Release.Name }}-configmap
 {{- end }}

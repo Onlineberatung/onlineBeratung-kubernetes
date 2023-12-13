@@ -266,5 +266,16 @@ weblate:
         paths:
           - path: /(weblate)(.*)
             pathType: Prefix
+  api:
+    url:
+        "https://onlineberatung.net/weblate/api"
 
-
+migration:
+  weblate:
+    project:
+      name: "onlineberatung"
+      slug: "onlineberatung"
+      web:
+        url: "https://onlineberatung.net/weblate/projects/onlineberatung/"
+    useCustomResourcesPath: true
+    customResourcesPath: "resources/weblate/"

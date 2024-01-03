@@ -268,14 +268,17 @@ weblate:
             pathType: Prefix
   api:
     url:
-        "https://onlineberatung.net/weblate/api"
+        "http://onlineberatung.localhost/weblate/api"
+  project:
+    name: "onlineberatung"
+    slug: "onlineberatung"
+    web:
+      url: "http://onlineberatung.localhost/weblate/projects/onlineberatung/"
+  component:
+    mail:
+      name: "mailservice"
 
 migration:
   weblate:
-    project:
-      name: "onlineberatung"
-      slug: "onlineberatung"
-      web:
-        url: "https://onlineberatung.net/weblate/projects/onlineberatung/"
     useCustomResourcesPath: true
     customResourcesPath: "resources/weblate/"

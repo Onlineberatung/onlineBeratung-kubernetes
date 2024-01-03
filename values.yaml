@@ -268,12 +268,12 @@ weblate:
             pathType: Prefix
   api:
     url:
-        "https://onlineberatung.net/weblate/api"
+        "http://onlineberatung.localhost/weblate/api"
   project:
     name: "onlineberatung"
     slug: "onlineberatung"
     web:
-      url: "https://app.onlineberatung.live/weblate/projects/onlineberatung/"
+      url: "http://onlineberatung.localhost/weblate/projects/onlineberatung/"
   component:
     mail:
       name: "mailservice"

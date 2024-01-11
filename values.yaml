@@ -112,6 +112,8 @@ appDataprivacyUrl: "http://onlineberatung.localhost/datenschutz"
 mailServiceLoggingLevelRoot:  "DEBUG"
 mailServiceImageName: "ghcr.io/onlineberatung/onlineberatung-mailservice/onlineberatung-mailservice"
 mailServiceImageVersion: "develop_20221116_164215"
+mailService:
+  useCustomResourcesPath: "false"
 
 # Message service
 messageServiceImageName: "ghcr.io/onlineberatung/onlineberatung-messageservice/onlineberatung-messageservice"

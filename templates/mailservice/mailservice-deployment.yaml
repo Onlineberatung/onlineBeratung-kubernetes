@@ -180,6 +180,11 @@ spec:
                 configMapKeyRef:
                   key: SPRING_CACHE_JCACHE_CONFIG
                   name: mailservice-{{ .Release.Name }}-env
+            - name: TEMPLATE_CUSTOM_DEFAULT_TRANSLATIONS_PATH
+              valueFrom:
+                configMapKeyRef:
+                  key: TEMPLATE_CUSTOM_DEFAULT_TRANSLATIONS_PATH
+                  name: mailservice-{{ .Release.Name }}-env
           name: mailservice
           ports:
             - containerPort: 8080
@@ -218,6 +223,11 @@ spec:
               name: mailservice-config
               readOnly: true
             {{- end }}
+          {{- if .Values.mailService.useCustomResourcePath }}
+            - mountPath: {{ .Values.customDefaultTranslationsPath | default "mailservice/i18n/" }}
+              name: mailservice-translations-config
+              readOnly: true
+          {{- end }}
       imagePullSecrets:
         - name: registry-secret
       restartPolicy: Always
@@ -232,4 +242,9 @@ spec:
         - name: mailservice-config
           configMap:
             name: mailservice-settings-cache-{{ .Release.Name }}-configmap
+      {{- end }}
+      {{- if .Values.mailService.useCustomResourcePath }}
+        - name: mailservice-translations-config
+          configMap:
+            name: mailservice-settings-translations-{{ .Release.Name }}-configmap
       {{- end }}

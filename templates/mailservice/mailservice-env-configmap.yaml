@@ -32,6 +32,7 @@ data:
   {{- if .Values.mailServiceCacheConfigurationTargetDirectory }}
   SPRING_CACHE_JCACHE_CONFIG: {{ printf "%s%s%s" "file:" .Values.mailServiceCacheConfigurationTargetDirectory "/ehcache.xml" | quote }}
   {{- end }}
+  TRANSLATION_MANAGEMENT_SYSTEM_ENABLED: {{ .Values.weblate.enabled | default "false" | quote }}
 
 kind: ConfigMap
 metadata:

@@ -185,6 +185,11 @@ spec:
                 configMapKeyRef:
                   key: TEMPLATE_CUSTOM_DEFAULT_TRANSLATIONS_PATH
                   name: mailservice-{{ .Release.Name }}-env
+            - name: TRANSLATION_MANAGEMENT_SYSTEM_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: TRANSLATION_MANAGEMENT_SYSTEM_ENABLED
+                  name: mailservice-{{ .Release.Name }}-env
           name: mailservice
           ports:
             - containerPort: 8080

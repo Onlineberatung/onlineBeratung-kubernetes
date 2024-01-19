@@ -163,6 +163,12 @@ spec:
                 configMapKeyRef:
                   key: WEBLATE_CONFIG_CUSTOM_RESOURCES_PATH
                   name: migrationtool-{{ .Release.Name }}-env
+            - name: SPRING_DATA_MONGODB_ROCKETCHAT_URI
+              valueFrom:
+                secretKeyRef:
+                  key: SPRING_DATA_MONGODB_ROCKETCHAT_URI
+                  name: migrationtool-secret-{{ .Release.Name }}-env
+
           volumeMounts:
             - mountPath: {{ .Values.migration.weblate.customResourcesPath }}
               name: migrationservice-resources

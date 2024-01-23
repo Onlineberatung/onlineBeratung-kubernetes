@@ -242,6 +242,31 @@ documentationservice:
       memory: 384Mi
       cpu: "500m"
 
+frontend:
+  port: 80
+  react:
+    weblate:
+      host: ''
+      path: ''
+      project: 'frontend'
+      minPercentage: 50
+      api:
+        key: ''
+    translation:
+      cache:
+        disable: true
+        time: 30
+  node:
+    storagePath: ''
+    localization:
+      cache:
+        time: 120
+      weblate:
+        host: ''
+        path: ''
+        api:
+          key: ''
+
 weblate:
   enabled: false
   siteDomain: *globalDomainName

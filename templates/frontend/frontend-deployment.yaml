@@ -24,7 +24,12 @@ spec:
           imagePullPolicy: Always
           name: frontend
           ports:
-            - containerPort: 80
+            - containerPort: {{ .Values.frontend.port | quote }}
+          envFrom:
+            - configMapRef:
+                name: frontend-{{ .Release.Name }}-env
+            - secretRef:
+                name: frontend-secret-{{ .Release.Name }}-env
           {{- if .Values.frontend }}
           {{- if .Values.frontend.resources }}
           resources:

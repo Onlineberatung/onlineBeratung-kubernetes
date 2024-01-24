@@ -1,0 +1,19 @@
+apiVersion: v1
+data:
+  PORT: {{ .Values.frontend.port | quote }}
+  FRONTEND_WEBLATE_HOST: {{ .Values.frontend.react.weblate.host | quote }}
+  FRONTEND_WEBLATE_PATH: {{ .Values.frontend.react.weblate.path | quote }}
+  FRONTEND_WEBLATE_PROJECT: {{ .Values.frontend.react.weblate.project | quote }}
+  FRONTEND_WEBLATE_MIN_PERCENT: {{ .Values.frontend.react.weblate.minPercentage | quote }}
+  FRONTEND_TRANSLATION_CACHE_DISABLE: {{ .Values.frontend.react.translation.cache.disable | quote }}
+  FRONTEND_TRANSLATION_CACHE_TIME: {{ .Values.frontend.react.translation.cache.time | quote }}
+
+  STORAGE_PATH: {{ .Values.frontend.node.storagePath | quote }}
+  LOCALIZATION_CACHE_TIME: {{ .Values.frontend.node.localization.cache.time | quote }}
+  LOCALIZATION_WEBLATE_HOST: {{ .Values.frontend.node.localization.weblate.host | quote }}
+  LOCALIZATION_WEBLATE_PATH: {{ .Values.frontend.node.localization.weblate.path | quote }}
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: frontend-{{ .Release.Name }}-env
+  name: frontend-{{ .Release.Name }}-env

@@ -297,13 +297,14 @@ weblate:
     url:
         "http://onlineberatung.localhost/weblate/api"
   project:
-    name: "onlineberatung"
-    slug: "onlineberatung"
-    web:
-      url: "http://onlineberatung.localhost/weblate/projects/onlineberatung/"
+    backend:
+      name: "backend"
+      slug: "backend"
+      web:
+        url: "http://onlineberatung.localhost/weblate/projects/backend/"
   component:
     mail:
-      name: "mailservice"
+      name: "mailing"
 
 migration:
   weblate:

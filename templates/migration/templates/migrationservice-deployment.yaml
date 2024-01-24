@@ -148,11 +148,6 @@ spec:
                 configMapKeyRef:
                   key: WEBLATE_CONFIG_PROJECT_SLUG
                   name: migrationtool-{{ .Release.Name }}-env
-            - name: WEBLATE_CONFIG_WEB
-              valueFrom:
-                configMapKeyRef:
-                  key: WEBLATE_CONFIG_WEB
-                  name: migrationtool-{{ .Release.Name }}-env
             - name: WEBLATE_CONFIG_USE_CUSTOM_RESOURCES_PATH
               valueFrom:
                 configMapKeyRef:

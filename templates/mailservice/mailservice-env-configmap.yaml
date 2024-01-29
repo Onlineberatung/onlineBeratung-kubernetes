@@ -29,9 +29,7 @@ data:
   WEBLATE_API_URL: {{ .Values.weblate.api.url }}
   WEBLATE_PROJECT: {{ .Values.weblate.project.backend.name }}
   WEBLATE_COMPONENT: {{ .Values.weblate.component.mail.name }}
-  {{- if .Values.mailServiceCacheConfigurationTargetDirectory }}
-  SPRING_CACHE_JCACHE_CONFIG: {{ printf "%s%s%s" "file:" .Values.mailServiceCacheConfigurationTargetDirectory "/ehcache.xml" | quote }}
-  {{- end }}
+  SPRING_CACHE_JCACHE_CONFIG: {{ if .Values.mailServiceCacheConfigurationTargetDirectory }} {{ printf "%s%s%s" "file:" .Values.mailServiceCacheConfigurationTargetDirectory "/ehcache.xml" | quote }}   {{ end }}
   TRANSLATION_MANAGEMENT_SYSTEM_ENABLED: {{ .Values.weblate.enabled | default "false" | quote }}
 
 kind: ConfigMap

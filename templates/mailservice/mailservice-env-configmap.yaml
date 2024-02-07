@@ -25,7 +25,7 @@ data:
   LOGGING_LEVEL_ROOT: {{ .Values.mailServiceLoggingLevelRoot }}
   TEMPLATE_USE_CUSTOM_RESOURCES_PATH: {{ .Values.mailService.useCustomResourcePath | default "true" | quote }}
   TEMPLATE_CUSTOM_RESOURCES_PATH: "mailserviceTemplates/"
-  TEMPLATE_CUSTOM_DEFAULT_TRANSLATIONS_PATH: {{ .Values.customDefaultTranslationsPath | default "mailservice/i18n/" | quote }}
+  TEMPLATE_CUSTOM_DEFAULT_TRANSLATIONS_PATH: {{ .Values.customDefaultTranslationsPath | default "/mailservice/i18n/" | quote }}
   WEBLATE_API_URL: {{ .Values.weblate.api.url }}
   WEBLATE_PROJECT: {{ .Values.weblate.project.backend.name }}
   WEBLATE_COMPONENT: {{ .Values.weblate.component.mail.name }}

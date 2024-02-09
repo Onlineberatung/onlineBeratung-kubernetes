@@ -19,9 +19,10 @@ data:
   USERS_PUBLIC_PLAN_TECHNICAL_EMAIL: "{{ .Values.publicPlanTechnicalEmail }}"
   USERS_PUBLIC_PLAN_TECHNICAL_TENANTID: "{{ .Values.publicPlanTechnicalTenantId }}"
 
-  WEBLATE_CONFIG_API_URL: {{ .Values.weblate.api.url | default (printf "%s.%s" "weblate" .Release.Namespace)}}
+  WEBLATE_CONFIG_API_URL: "{{ .Values.weblate.api.url | default (printf "%s.%s" "weblate" .Release.Namespace)}}"
+  WEBLATE_CONFIG_WEB: "https://{{ .Values.global.domainName }}"
   WEBLATE_CONFIG_USE_CUSTOM_RESOURCES_PATH: "{{ .Values.migration.weblate.useCustomResourcesPath | default false }}"
-  WEBLATE_CONFIG_CUSTOM_RESOURCES_PATH: {{ .Values.migration.weblate.customResourcesPath | default "resources/weblate/" }}
+  WEBLATE_CONFIG_CUSTOM_RESOURCES_PATH: "{{ .Values.migration.weblate.customResourcesPath | default "resources/weblate/" }}"
 
 metadata:
   labels:

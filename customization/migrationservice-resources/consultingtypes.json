@@ -1,5 +1,5 @@
 {
-  "branch": "OB-TranslationBackend",
+  "branch": "develop",
   "file_format": "i18next",
   "filemask": "src/resources/i18n/*/consultingTypes.json",
   "name": "consultingTypes",

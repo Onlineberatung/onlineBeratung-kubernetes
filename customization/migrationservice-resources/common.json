@@ -1,0 +1,16 @@
+{
+  "branch": "develop",
+  "file_format": "i18next",
+  "filemask": "src/resources/i18n/*/common.json",
+  "name": "common",
+  "slug": "common",
+  "repo": "https://github.com/virtualidentityag/vi-saas-frontend.git",
+  "template": "src/resources/i18n/en/common.json",
+  "new_base": "",
+  "vcs": "git",
+  "manage_units": true,
+  "push": "",
+  "push_branch": ""
+}
+
+

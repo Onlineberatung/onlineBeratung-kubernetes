@@ -1,0 +1,14 @@
+{
+  "branch": "develop",
+  "file_format": "i18next",
+  "filemask": "src/resources/i18n/*/agency.json",
+  "name": "agencies",
+  "slug": "agencies",
+  "repo": "https://github.com/virtualidentityag/vi-saas-frontend.git",
+  "template": "src/resources/i18n/en/agency.json",
+  "new_base": "",
+  "vcs": "git",
+  "manage_units": true,
+  "push": "",
+  "push_branch": ""
+}

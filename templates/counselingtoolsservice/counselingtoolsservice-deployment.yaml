@@ -85,15 +85,15 @@ spec:
                 configMapKeyRef:
                   key: BUDIBASE_APPS_QUERY_ID
                   name: counselingtoolsservice-{{ .Release.Name }}-env
-            - name: BUDIBASE_CONSULTANT_VIEW_APP_ID
+            - name: BUDIBASE_CONSULTANTVIEWAPP_ID
               valueFrom:
                 configMapKeyRef:
-                  key: BUDIBASE_CONSULTANT_VIEW_APP_ID
+                  key: BUDIBASE_CONSULTANTVIEWAPP_ID
                   name: counselingtoolsservice-{{ .Release.Name }}-env
-            - name: BUDIBASE_CONSULTANTVIEW_QUERY_ID
+            - name: BUDIBASE_CONSULTANTVIEWAPP_QUERY_ID
               valueFrom:
                 configMapKeyRef:
-                  key: BUDIBASE_CONSULTANTVIEW_QUERY_ID
+                  key: BUDIBASE_CONSULTANTVIEWAPP_QUERY_ID
                   name: counselingtoolsservice-{{ .Release.Name }}-env
             - name: BUDIBASE_EXPORTAPP_ID
               valueFrom:

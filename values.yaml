@@ -252,6 +252,7 @@ frontend:
       minPercentage: 50
       api:
         key: ''
+    registration: {}
     translation:
       cache:
         disable: true

@@ -7,7 +7,7 @@ data:
   FRONTEND_WEBLATE_MIN_PERCENT: {{ .Values.frontend.react.weblate.minPercentage | quote }}
   FRONTEND_TRANSLATION_CACHE_DISABLE: {{ .Values.frontend.react.translation.cache.disable | quote }}
   FRONTEND_TRANSLATION_CACHE_TIME: {{ .Values.frontend.react.translation.cache.time | quote }}
-  FRONTEND_REGISTRATION_USE_CONSULTINGTYPE_SLUG: {{ .Values.frontend.react.registration.useConsultingtypeSlug | default "0" | quote }}
+  FRONTEND_REGISTRATION_USE_CONSULTINGTYPE_SLUG: {{ .Values.frontend.react.registration.useConsultingtypeSlug | default "1" | quote }}
 
   STORAGE_PATH: {{ .Values.frontend.node.storagePath | quote }}
   LOCALIZATION_CACHE_TIME: {{ .Values.frontend.node.localization.cache.time | quote }}

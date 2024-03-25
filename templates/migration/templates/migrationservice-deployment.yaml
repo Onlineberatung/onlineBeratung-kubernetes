@@ -11,7 +11,7 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           image: {{ .Values.migrationToolImageName }}:{{ .Values.migrationToolImageVersion }}
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           env:
             - name: SPRING_DATASOURCE_URL
               valueFrom:

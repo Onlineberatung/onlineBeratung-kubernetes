@@ -6,6 +6,9 @@ data:
   KEYCLOAK_RESOURCE:  {{ .Values.agencyServiceKeycloakResource }}
   APP_BASE_URL: "*"
   SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING: "true"
+  SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI: "{{ .Values.keycloakAuthServerUrl }}/realms/{{ .Values.keycloakRealm }}"
+  SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI: "{{ .Values.keycloakAuthServerUrl }}/realms/{{ .Values.keycloakRealm }}/protocol/openid-connect/certs"
+  SPRING_JWT_AUTH_CONVERTER_RESOURCEID: "{{ .Values.keycloakserviceAppClientid }}"
 kind: ConfigMap
 metadata:
   labels:

@@ -2,13 +2,33 @@
 apiVersion: v1
 kind: ConfigMap
 data:
+  {{- if .Values.global.useExternalMariaDb }}
+  SPRING_DATASOURCE_URL: "jdbc:mariadb://{{ .Values.global.mariaDbHost }}:3306/migrationservice"
+  {{- else }}
   SPRING_DATASOURCE_URL: "jdbc:mariadb://mariadb.{{ .Release.Namespace }}:3306/migrationservice"
+  {{- end }}
   ROCKETCHAT_CONFIG_SERVER_URL: "http://rocketchat.{{ .Release.Namespace }}:3000/api"
   KEYCLOAK_AUTH_SERVER_URL: "http://keycloak.{{ .Release.Namespace }}:8080/auth"
+  {{- if .Values.global.useExternalMariaDb }}
+  SPRING_DATASOURCE_USERSERVICE_URL: "jdbc:mariadb://{{ .Values.global.mariaDbHost }}:3306/userservice"
+  {{- else }}
   SPRING_DATASOURCE_USERSERVICE_URL: "jdbc:mariadb://mariadb.{{ .Release.Namespace }}:3306/userservice"
+  {{- end }}
+  {{- if .Values.global.useExternalMariaDb }}
+  SPRING_DATASOURCE_AGENCYSERVICE_URL: "jdbc:mariadb://{{ .Values.global.mariaDbHost }}:3306/agencyservice"
+  {{- else }}
   SPRING_DATASOURCE_AGENCYSERVICE_URL: "jdbc:mariadb://mariadb.{{ .Release.Namespace }}:3306/agencyservice"
+  {{- end }}
+  {{- if .Values.global.useExternalMariaDb }}
+  SPRING_DATASOURCE_TENANTSERVICE_URL: "jdbc:mariadb://{{ .Values.global.mariaDbHost }}:3306/tenantservice"
+  {{- else }}
   SPRING_DATASOURCE_TENANTSERVICE_URL: "jdbc:mariadb://mariadb.{{ .Release.Namespace }}:3306/tenantservice"
+  {{- end }}
+  {{- if .Values.global.useExternalMariaDb }}
+  SPRING_DATASOURCE_CONSULTINGTYPESERVICE_URL: "jdbc:mariadb://{{ .Values.global.mariaDbHost }}:3306/consultingtypeservice"
+  {{- else }}
   SPRING_DATASOURCE_CONSULTINGTYPESERVICE_URL: "jdbc:mariadb://mariadb.{{ .Release.Namespace }}:3306/consultingtypeservice"
+  {{- end }}
   MIGRATION_SPRING_PROFILE: "{{ .Values.migrationToolSpringProfile }}"
 
   USERS_JITSI_TECHNICAL_PASSWORD: "{{ .Values.jitsiTechnicalPassword }}"

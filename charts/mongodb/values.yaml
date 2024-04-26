@@ -1,5 +1,5 @@
 mongoImageName: "mongo"
-mongoVersion: "6.0"
+mongoVersion: "6.0.14"
 mongoSharedKey: "default"
 
 mongoDbDataStorage: "1Gi"

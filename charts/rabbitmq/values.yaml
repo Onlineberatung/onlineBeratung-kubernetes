@@ -1,2 +1,2 @@
 rabbitImageName: "rabbitmq"
-rabbitVersion: "3.9.14-management-alpine"
+rabbitVersion: "3.13.1-management-alpine"

@@ -1,4 +1,4 @@
 rocketchatImageName: "rocketchat/rocket.chat"
-rocketchatVersion: "5.4.1"
+rocketchatVersion: "5.4.10"
 
 useHostpathUploadStorage: false

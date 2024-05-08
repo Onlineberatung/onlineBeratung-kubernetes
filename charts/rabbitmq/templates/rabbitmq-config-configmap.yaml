@@ -9,7 +9,6 @@ data:
     listeners.tcp.default = 5672
     vm_memory_high_watermark.absolute = 2GB
     disk_free_limit.absolute = 2GB
-    classic_mirrored_queue_version = true
     default_user = {{ .Values.rabbitDefaultUser }}
     default_pass = {{ .Values.rabbitDefaultPass }}
     {{- if .Values.global.initializeDummyData }}

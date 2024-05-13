@@ -56,6 +56,11 @@ spec:
                 configMapKeyRef:
                   key: KEYCLOAK_HOSTNAME
                   name: keycloak-{{ .Release.Name }}-env
+            - name: JAVA_OPTS_APPEND
+              valueFrom:
+                configMapKeyRef:
+                  key: JAVA_OPTS_APPEND
+                  name: keycloak-{{ .Release.Name }}-env
             {{- if not .Values.global.enableTls }}
             - name: KC_HOSTNAME_STRICT_HTTPS
               value: "false"

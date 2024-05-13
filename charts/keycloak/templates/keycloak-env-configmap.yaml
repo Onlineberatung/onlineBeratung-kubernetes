@@ -13,6 +13,7 @@ data:
     # Supported log levels are ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE and WARN.
     KEYCLOAK_LOGLEVEL: {{ .Values.keycloakLogLevel }}
     ROOT_LOGLEVEL: {{ .Values.rootLogLevel }}
+    JAVA_OPTS_APPEND: -Dfile.encoding=UTF-8
 kind: ConfigMap
 metadata:
   labels:

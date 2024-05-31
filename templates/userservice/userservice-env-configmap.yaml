@@ -60,7 +60,7 @@ data:
   USER_ANONYMOUS_DELETEWORKFLOW_CRON: "0 0 * * * ?"
   ## Period of time before anonymous data will be deleted in minutes
   ## 2820 minutes = 47 hours
-  USER_ANONYMOUS_DELETEWORKFLOW_PERIODMINUTES: "2820"
+  USER_ANONYMOUS_DELETEWORKFLOW_PERIODMINUTES: "180"
   USER_ANONYMOUS_DEACTIVATEWORKFLOW_CRON: "0 0 * * * ?"
   USER_ANONYMOUS_DEACTIVATEWORKFLOW_PERIODMINUTES: "360"
   # Users with registration only deletion workflow

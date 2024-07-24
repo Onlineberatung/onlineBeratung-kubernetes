@@ -59,6 +59,11 @@ spec:
                 configMapKeyRef:
                   key: SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING
                   name: liveservice-{{ .Release.Name }}-env
+            - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  key: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+                  name: liveservice-{{ .Release.Name }}-env
           name: liveservice
           ports:
             - containerPort: 8080

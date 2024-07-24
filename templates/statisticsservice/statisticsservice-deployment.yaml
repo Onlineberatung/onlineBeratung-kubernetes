@@ -99,6 +99,11 @@ spec:
                 configMapKeyRef:
                   key: CONSULTING_TYPE_SERVICE_API_URL
                   name: statisticsservice-{{ .Release.Name }}-env
+            - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  key: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+                  name: statisticsservice-{{ .Release.Name }}-env
           image: {{ .Values.statisticsServiceImageName }}:{{ .Values.statisticsServiceImageVersion }}
           imagePullPolicy: Always
           name: statisticsservice

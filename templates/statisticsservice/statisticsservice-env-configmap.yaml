@@ -13,7 +13,10 @@ data:
     FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED: {{ .Values.global.multitenancyWithSingleDomainEnabled | quote }}
     TENANT_SERVICE_API_URL: "http://tenantservice.{{ .Release.Namespace }}:8080"
     CONSULTING_TYPE_SERVICE_API_URL: "http://consultingtypeservice.{{ .Release.Namespace }}:8080"
-
+    {{- if .Values.zipkin.enabled }}
+    MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: "{{ .Values.zipkin.tracing.endpoint }}"
+    {{- end }}
+    MANAGEMENT_TRACING_ENABLED: {{ .Values.zipkin.enabled | default false | quote }}
 kind: ConfigMap
 metadata:
   labels:

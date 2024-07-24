@@ -6,6 +6,10 @@ data:
   KEYCLOAK_RESOURCE:  {{ .Values.agencyServiceKeycloakResource }}
   APP_BASE_URL: "*"
   SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING: "true"
+  {{ - if .Values.zipkin.enabled }}
+  MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: "{{ .Values.zipkin.tracing.endpoint }}"
+  {{ - end }}
+  MANAGEMENT_TRACING_ENABLED: {{ .Values.zipkin.enabled | default false | quote }}
 kind: ConfigMap
 metadata:
   labels:

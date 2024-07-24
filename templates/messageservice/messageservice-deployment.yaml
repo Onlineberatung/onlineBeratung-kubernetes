@@ -194,6 +194,11 @@ spec:
                 configMapKeyRef:
                   key: FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED
                   name: messageservice-{{ .Release.Name }}-env
+            - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  key: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+                  name: messageservice-{{ .Release.Name }}-env
           image: {{ .Values.messageServiceImageName }}:{{ .Values.messageServiceImageVersion }}
           imagePullPolicy: Always
           name: messageservice

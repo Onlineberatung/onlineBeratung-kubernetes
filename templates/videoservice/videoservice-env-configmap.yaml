@@ -42,7 +42,7 @@ data:
     {{- if .Values.zipkin.enabled }}
     MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: "{{ .Values.zipkin.tracing.endpoint }}"
     {{- end }}
-    MANAGEMENT_TRACING_ENABLED: { { .Values.zipkin.enabled | default false | quote }}
+    MANAGEMENT_TRACING_ENABLED: {{ .Values.zipkin.enabled | default false | quote }}
 kind: ConfigMap
 metadata:
   labels:

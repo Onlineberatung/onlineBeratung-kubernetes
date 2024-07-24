@@ -39,7 +39,7 @@ data:
   STATISTICS_ENABLED: {{ .Values.global.statisticsEnabled | quote }}
   FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED: {{ .Values.global.multitenancyWithSingleDomainEnabled | quote }}
   {{- if .Values.zipkin.enabled }}
-  MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: "{{ .Values.zipkin.tracing.endpoint }}"
+  SPRING_ZIPKIN_BASEURL: {{ .Values.zipkin.tracing.baseUrl | default "" }}
   {{- end }}
   MANAGEMENT_TRACING_ENABLED: {{ .Values.zipkin.enabled | default false | quote }}
   SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI: "{{ .Values.keycloakAuthServerUrl }}/realms/{{ .Values.keycloakRealm }}"

@@ -198,6 +198,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+                  name: messageservice-{{ .Release.Name }}-env
             - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI
               valueFrom:
                 configMapKeyRef:

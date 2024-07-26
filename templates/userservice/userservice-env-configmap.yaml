@@ -101,7 +101,7 @@ data:
   APPOINTMENTS_DELETE-JOB-ENABLED: {{ .Values.appointments.deleteJobEnabled | default "false" | quote }}
   APPOINTMENTS_LIFESPAN-IN-HOURS: {{ .Values.appointments.lifespanInHours | default "24" | quote }}
   {{- if .Values.zipkin.enabled }}
-  MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: "{{ .Values.zipkin.tracing.endpoint }}"
+  SPRING_ZIPKIN_BASE_URL: "{{ .Values.zipkin.baseUrl }}"
   {{- end }}
   MANAGEMENT_TRACING_ENABLED: {{ .Values.zipkin.enabled | default false | quote }}
 kind: ConfigMap

@@ -476,10 +476,10 @@ spec:
                 configMapKeyRef:
                   key: APPOINTMENTS_LIFESPAN-IN-HOURS
                   name: userservice-{{ .Release.Name }}-env
-            - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+            - name: SPRING_ZIPKIN_BASE_URL
               valueFrom:
                 configMapKeyRef:
-                  key: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+                  key: SPRING_ZIPKIN_BASE_URL
                   name: userservice-{{ .Release.Name }}-env
           image: {{ .Values.userServiceImageName }}:{{ .Values.userServiceImageVersion }}
           imagePullPolicy: Always

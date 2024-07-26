@@ -481,6 +481,26 @@ spec:
                 configMapKeyRef:
                   key: SPRING_ZIPKIN_BASE_URL
                   name: userservice-{{ .Release.Name }}-env
+            - name: SPRING_ZIPKIN_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_ZIPKIN_BASE_URL
+                  name: userservice-{{ .Release.Name }}-env
+            - name: SPRING_SLEUTH_WEB_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_SLEUTH_WEB_ENABLED
+                  name: userservice-{{ .Release.Name }}-env
+            - name: SPRING_SLEUTH_SAMPLER_PERCENTAGE
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_SLEUTH_SAMPLER_PERCENTAGE
+                  name: userservice-{{ .Release.Name }}-env
+            - name: SPRING_ZIPKIN_SENDER_TYPE
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_ZIPKIN_SENDER_TYPE
+                  name: userservice-{{ .Release.Name }}-env
           image: {{ .Values.userServiceImageName }}:{{ .Values.userServiceImageVersion }}
           imagePullPolicy: Always
           name: userservice

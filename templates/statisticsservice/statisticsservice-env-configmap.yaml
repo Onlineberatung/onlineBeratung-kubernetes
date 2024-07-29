@@ -16,8 +16,8 @@ data:
     {{- if .Values.zipkin.enabled }}
     SPRING_ZIPKIN_BASE_URL: "{{ .Values.zipkin.baseUrl }}"
     {{- end }}
-    SPRING_SLEUTH_WEB_ENABLED: { { .Values.zipkin.enabled | default false | quote } }
-    SPRING_SLEUTH_SAMPLER_PERCENTAGE: { { .Values.zipkin.samplerPercentage | default "1.0" | quote } }
+    SPRING_SLEUTH_WEB_ENABLED: {{ .Values.zipkin.enabled | default false | quote }}
+    SPRING_SLEUTH_SAMPLER_PERCENTAGE: {{ .Values.zipkin.samplerPercentage | default "1.0" | quote }}
 kind: ConfigMap
 metadata:
   labels:

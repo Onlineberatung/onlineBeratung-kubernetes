@@ -99,11 +99,22 @@ spec:
                 configMapKeyRef:
                   key: CONSULTING_TYPE_SERVICE_API_URL
                   name: statisticsservice-{{ .Release.Name }}-env
-            - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+            - name: SPRING_ZIPKIN_BASE_URL
               valueFrom:
                 configMapKeyRef:
-                  key: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+                  key: SPRING_ZIPKIN_BASE_URL
                   name: statisticsservice-{{ .Release.Name }}-env
+            - name: SPRING_SLEUTH_WEB_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_SLEUTH_WEB_ENABLED
+                  name: statisticsservice-{{ .Release.Name }}-env
+            - name: SPRING_SLEUTH_SAMPLER_PERCENTAGE
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_SLEUTH_SAMPLER_PERCENTAGE
+                  name: statisticsservice-{{ .Release.Name }}-env
+
           image: {{ .Values.statisticsServiceImageName }}:{{ .Values.statisticsServiceImageVersion }}
           imagePullPolicy: Always
           name: statisticsservice

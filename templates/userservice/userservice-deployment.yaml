@@ -481,11 +481,6 @@ spec:
                 configMapKeyRef:
                   key: SPRING_ZIPKIN_BASE_URL
                   name: userservice-{{ .Release.Name }}-env
-            - name: SPRING_ZIPKIN_BASE_URL
-              valueFrom:
-                configMapKeyRef:
-                  key: SPRING_ZIPKIN_BASE_URL
-                  name: userservice-{{ .Release.Name }}-env
             - name: SPRING_SLEUTH_WEB_ENABLED
               valueFrom:
                 configMapKeyRef:

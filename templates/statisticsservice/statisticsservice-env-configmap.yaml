@@ -13,7 +13,11 @@ data:
     FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED: {{ .Values.global.multitenancyWithSingleDomainEnabled | quote }}
     TENANT_SERVICE_API_URL: "http://tenantservice.{{ .Release.Namespace }}:8080"
     CONSULTING_TYPE_SERVICE_API_URL: "http://consultingtypeservice.{{ .Release.Namespace }}:8080"
-
+    {{- if .Values.zipkin.enabled }}
+    SPRING_ZIPKIN_BASE_URL: "{{ .Values.zipkin.baseUrl }}"
+    {{- end }}
+    SPRING_SLEUTH_WEB_ENABLED: {{ .Values.zipkin.enabled | default false | quote }}
+    SPRING_SLEUTH_SAMPLER_PERCENTAGE: {{ .Values.zipkin.samplerPercentage | default "1.0" | quote }}
 kind: ConfigMap
 metadata:
   labels:

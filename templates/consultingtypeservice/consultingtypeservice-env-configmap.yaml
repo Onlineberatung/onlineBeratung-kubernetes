@@ -29,7 +29,10 @@ data:
 {{- end }}
   FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED: {{ .Values.global.multitenancyWithSingleDomainEnabled | quote }}
   SETTING_MAIN_TENANT_SUBDOMAIN_FOR_SINGLE_DOMAIN_MULTITENANCY: {{ .Values.global.settingMainTenantSubdomainForSingleDomainMultitenancy | quote }}
-
+  {{- if .Values.zipkin.enabled }}
+  MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: "{{ .Values.zipkin.tracing.endpoint }}"
+  {{- end }}
+  MANAGEMENT_TRACING_ENABLED: {{ .Values.zipkin.enabled | default false | quote }}
 kind: ConfigMap
 metadata:
   labels:

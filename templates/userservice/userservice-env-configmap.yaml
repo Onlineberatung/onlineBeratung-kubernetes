@@ -59,8 +59,7 @@ data:
   REGISTRATION_CORS_ALLOWED_ORIGINS: ""
   USER_ANONYMOUS_DELETEWORKFLOW_CRON: "0 0 * * * ?"
   ## Period of time before anonymous data will be deleted in minutes
-  ## 2820 minutes = 47 hours
-  USER_ANONYMOUS_DELETEWORKFLOW_PERIODMINUTES: "2820"
+  USER_ANONYMOUS_DELETEWORKFLOW_PERIODMINUTES: {{ .Values.userAnonymousDeleteworkflowPeriodMinutes | default "2820" | quote }}
   USER_ANONYMOUS_DEACTIVATEWORKFLOW_CRON: "0 0 * * * ?"
   USER_ANONYMOUS_DEACTIVATEWORKFLOW_PERIODMINUTES: "360"
   # Users with registration only deletion workflow
@@ -101,7 +100,11 @@ data:
   APPOINTMENTS_DELETE-JOB-CRON: {{ .Values.appointments.deleteJobCron | default "0 0 0 * * ?" | quote }}
   APPOINTMENTS_DELETE-JOB-ENABLED: {{ .Values.appointments.deleteJobEnabled | default "false" | quote }}
   APPOINTMENTS_LIFESPAN-IN-HOURS: {{ .Values.appointments.lifespanInHours | default "24" | quote }}
-
+  {{- if .Values.zipkin.enabled }}
+  SPRING_ZIPKIN_BASE_URL: "{{ .Values.zipkin.baseUrl }}"
+  {{- end }}
+  SPRING_SLEUTH_WEB_ENABLED: {{ .Values.zipkin.enabled | default false | quote }}
+  SPRING_SLEUTH_SAMPLER_PERCENTAGE: {{ .Values.zipkin.samplerPercentage | default "1.0" | quote }}
 kind: ConfigMap
 metadata:
   labels:

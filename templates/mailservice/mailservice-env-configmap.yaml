@@ -31,7 +31,10 @@ data:
   WEBLATE_COMPONENT: {{ .Values.weblate.component.mail.name }}
   SPRING_CACHE_JCACHE_CONFIG: {{ if .Values.mailServiceCacheConfigurationTargetDirectory }} {{ printf "%s%s%s" "file:" .Values.mailServiceCacheConfigurationTargetDirectory "/ehcache.xml" | quote }}   {{ end }}
   TRANSLATION_MANAGEMENT_SYSTEM_ENABLED: {{ .Values.weblate.enabled | default "false" | quote }}
-
+  {{- if .Values.zipkin.enabled }}
+  MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: "{{ .Values.zipkin.tracing.endpoint }}"
+  {{- end }}
+  MANAGEMENT_TRACING_ENABLED: {{ .Values.zipkin.enabled | default false | quote }}
 kind: ConfigMap
 metadata:
   labels:

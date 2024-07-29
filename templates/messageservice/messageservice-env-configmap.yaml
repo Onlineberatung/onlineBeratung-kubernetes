@@ -38,6 +38,10 @@ data:
   TENANT_SERVICE_API_URL: "http://tenantservice.{{ .Release.Namespace }}:8080"
   STATISTICS_ENABLED: {{ .Values.global.statisticsEnabled | quote }}
   FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED: {{ .Values.global.multitenancyWithSingleDomainEnabled | quote }}
+  {{- if .Values.zipkin.enabled }}
+  MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: "{{ .Values.zipkin.tracing.endpoint }}"
+  {{- end }}
+  MANAGEMENT_TRACING_ENABLED: {{ .Values.zipkin.enabled | default false | quote }}
   SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI: "{{ .Values.keycloakAuthServerUrl }}/realms/{{ .Values.keycloakRealm }}"
   SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI: "{{ .Values.keycloakAuthServerUrl }}/realms/{{ .Values.keycloakRealm }}/protocol/openid-connect/certs"
   SPRING_JWT_AUTH_CONVERTER_RESOURCEID: "{{ .Values.keycloakserviceAppClientid }}"

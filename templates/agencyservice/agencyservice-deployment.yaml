@@ -179,6 +179,11 @@ spec:
                 configMapKeyRef:
                   key: SPRING_JWT_AUTH_CONVERTER_RESOURCEID
                   name: agencyservice-{{ .Release.Name }}-env
+            - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  key: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+                  name: agencyservice-{{ .Release.Name }}-env
           name: agencyservice
           ports:
             - containerPort: 8080

@@ -139,6 +139,11 @@ spec:
                 configMapKeyRef:
                   key: SETTING_MAIN_TENANT_SUBDOMAIN_FOR_SINGLE_DOMAIN_MULTITENANCY
                   name: consultingtypeservice-{{ .Release.Name }}-env
+            - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  key: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+                  name: consultingtypeservice-{{ .Release.Name }}-env
 
           image:  {{ .Values.consultingTypeServiceImageName }}:{{ .Values.consultingTypeServiceImageVersion }}
           imagePullPolicy: Always

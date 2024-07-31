@@ -139,10 +139,20 @@ spec:
                 configMapKeyRef:
                   key: SETTING_MAIN_TENANT_SUBDOMAIN_FOR_SINGLE_DOMAIN_MULTITENANCY
                   name: consultingtypeservice-{{ .Release.Name }}-env
-            - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+            - name: SPRING_ZIPKIN_BASE_URL
               valueFrom:
                 configMapKeyRef:
-                  key: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+                  key: SPRING_ZIPKIN_BASE_URL
+                  name: consultingtypeservice-{{ .Release.Name }}-env
+            - name: SPRING_SLEUTH_WEB_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_SLEUTH_WEB_ENABLED
+                  name: consultingtypeservice-{{ .Release.Name }}-env
+            - name: SPRING_SLEUTH_SAMPLER_PERCENTAGE
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_SLEUTH_SAMPLER_PERCENTAGE
                   name: consultingtypeservice-{{ .Release.Name }}-env
 
           image:  {{ .Values.consultingTypeServiceImageName }}:{{ .Values.consultingTypeServiceImageVersion }}

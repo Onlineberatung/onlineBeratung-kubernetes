@@ -59,6 +59,8 @@ spec:
               value: {{ .Values.olcRootDn }}
             - name: LDAP_USER_DC
               value: {{ .Values.ouConfUsersDn }}
+            - name: LDAP_ULIMIT_NOFILES
+              value: "2048"
           image: {{ .Values.openldapImageName }}:{{ .Values.openldapVersion }}
           name: openldap
           ports:

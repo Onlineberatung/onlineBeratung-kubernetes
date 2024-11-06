@@ -14,7 +14,7 @@ global:
   useExternalMariaDb: false
   settingMainTenantSubdomainForSingleDomainMultitenancy: "not-needed"
   migrationToolEnabled: false
-  24x7Enabled: false
+  site24x7Enabled: false
 
   # Secrets MariaDB
   mysqlRootPassword: "root"
@@ -314,4 +314,4 @@ migration:
     customResourcesPath: "resources/weblate/"
 
 # site24x7
-s247licenseKey: "key"
+site24x7LicenseKey: "key"

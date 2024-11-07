@@ -491,6 +491,18 @@ spec:
                 configMapKeyRef:
                   key: SPRING_SLEUTH_SAMPLER_PERCENTAGE
                   name: userservice-{{ .Release.Name }}-env
+          {{ - if .Values.global.site24x7Enabled }}
+            - name: SITE247_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: SITE247_LICENSE_KEY
+                  name: userservice-secret-{{ .Release.Name }}-env
+            - name: JAVA_TOOL_OPTIONS
+              valueFrom:
+                configMapKeyRef:
+                  key: JAVA_TOOL_OPTIONS
+                  name: userservice-{{ .Release.Name }}-env
+          {{ - end }}
           image: {{ .Values.userServiceImageName }}:{{ .Values.userServiceImageVersion }}
           imagePullPolicy: Always
           name: userservice
@@ -522,6 +534,10 @@ spec:
           volumeMounts:
             - mountPath: /import
               name: userservice-import
+          {{ - if .Values.global.site24x7Enabled }}
+            - mountPath: /site24x7Files/
+              name: site24x7-files
+          {{ - end }}
         - name: set-masterkey
           image: badouralix/curl-jq
           env:
@@ -573,3 +589,6 @@ spec:
       volumes:
         - name: userservice-import
           emptyDir: {}
+        - name: site24x7-files
+          configMap:
+            name: site24x7-files-{{ .Release.Name }}-configmap

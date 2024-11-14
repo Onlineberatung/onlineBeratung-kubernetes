@@ -27,6 +27,10 @@ spec:
         - name: wait-for-rocketchat
           image: busybox
           command: [ "sh", "-c", "until nc -z rocketchat 3000 > /dev/null; do echo Waiting for rocketchat.; sleep 5; done;" ]
+        - name: agent-copy
+          image: site24x7/apminsight-javaagent:latest
+          imagePullPolicy: IfNotPresent
+          command: [ 'cp', '-r', '/opt/site24x7/.', '/home/apm' ]
       containers:
         - env:
             - name: IDENTITY_OPENID_CONNECT_URL
@@ -535,8 +539,8 @@ spec:
             - mountPath: /import
               name: userservice-import
           {{- if .Values.global.site24x7Enabled }}
-            - mountPath: /site24x7Files/
-              name: site24x7-files
+            - mountPath: /site24x7/
+              name: s247agent
           {{- end }}
         - name: set-masterkey
           image: badouralix/curl-jq
@@ -589,6 +593,4 @@ spec:
       volumes:
         - name: userservice-import
           emptyDir: {}
-        - name: site24x7-files
-          configMap:
-            name: site24x7-files-{{ .Release.Name }}-configmap
+        - name: s247agent

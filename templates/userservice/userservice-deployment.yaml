@@ -594,3 +594,5 @@ spec:
         - name: userservice-import
           emptyDir: {}
         - name: s247agent
+          persistentVolumeClaim:
+            claimName: s247agent

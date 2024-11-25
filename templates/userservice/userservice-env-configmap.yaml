@@ -106,7 +106,7 @@ data:
   SPRING_SLEUTH_WEB_ENABLED: {{ .Values.zipkin.enabled | default false | quote }}
   SPRING_SLEUTH_SAMPLER_PERCENTAGE: {{ .Values.zipkin.samplerPercentage | default "1.0" | quote }}
   {{- if .Values.global.site24x7Enabled }}
-  JAVA_TOOL_OPTIONS: "-javaagent:/opt/apm/apminsight-javaagent.jar -Dapminsight.application.name=userservice-{{ .Release.Name }} -Dapminsight.log.dir=/home/apm"
+  JAVA_TOOL_OPTIONS: "-javaagent:/site24x7/apminsight-javaagent.jar -Dapminsight.application.name=userservice-{{ .Release.Name }}-site24x7"
   {{- end }}
 kind: ConfigMap
 metadata:

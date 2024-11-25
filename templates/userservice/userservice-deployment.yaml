@@ -31,6 +31,9 @@ spec:
           image: site24x7/apminsight-javaagent:latest
           imagePullPolicy: IfNotPresent
           command: [ 'cp', '-r', '/opt/site24x7/.', '/home/apm' ]
+          volumeMounts:
+            - name: s247agent
+              mountPath: /home/apm
       containers:
         - env:
             - name: IDENTITY_OPENID_CONNECT_URL
@@ -594,5 +597,3 @@ spec:
         - name: userservice-import
           emptyDir: {}
         - name: s247agent
-          persistentVolumeClaim:
-            claimName: s247agent

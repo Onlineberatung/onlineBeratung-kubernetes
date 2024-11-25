@@ -30,7 +30,7 @@ spec:
         - name: site24x7
           image: site24x7/apminsight-javaagent:latest
           imagePullPolicy: IfNotPresent
-          command: [ 'cp', '-r', '/opt/site24x7/.', '/site24x7/' ]
+          command: [ 'cp', '-r', '/opt/site24x7/.', '/home/apm' ]
       containers:
         - env:
             - name: IDENTITY_OPENID_CONNECT_URL
@@ -539,7 +539,7 @@ spec:
             - mountPath: /import
               name: userservice-import
           {{- if .Values.global.site24x7Enabled }}
-            - mountPath: /site24x7/
+            - mountPath: /home/apm
               name: s247agent
           {{- end }}
         - name: set-masterkey

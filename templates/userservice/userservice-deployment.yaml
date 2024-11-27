@@ -30,14 +30,13 @@ spec:
         - name: site24x7
           image: site24x7/apminsight-javaagent:latest
           imagePullPolicy: IfNotPresent
-          command:
-            - sh
-            - -c
-            - |
-              cp -r /opt/site24x7/. /home/apm && sed -i "s/^license.key=.*/license.key=${SITE247_LICENSE_KEY}/" /home/apm/apminsight.conf
+          command: [ 'cp', '-r', '/opt/site24x7/.', '/home/apm' ]
           volumeMounts:
             - name: s247agent
               mountPath: /home/apm
+        - name: write-site24x7-licence-key
+          image: busybox
+          command: [ "sh", "-c", "sed -i \"s/^license.key=.*/license.key=${SITE247_LICENSE_KEY}/\" /home/apm/apminsight.conf" ]
       containers:
         - env:
             - name: IDENTITY_OPENID_CONNECT_URL

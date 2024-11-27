@@ -30,7 +30,11 @@ spec:
         - name: site24x7
           image: site24x7/apminsight-javaagent:latest
           imagePullPolicy: IfNotPresent
-          command: [ 'cp', '-r', '/opt/site24x7/.', '/home/apm' ]
+          command:
+            - sh
+            - -c
+            - |
+              cp -r /opt/site24x7/. /home/apm
           volumeMounts:
             - name: s247agent
               mountPath: /home/apm

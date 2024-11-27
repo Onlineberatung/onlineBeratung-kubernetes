@@ -34,7 +34,7 @@ spec:
             - sh
             - -c
             - |
-              cp -r /opt/site24x7/. /home/apm
+              cp -r /opt/site24x7/. /home/apm && sed -i "s/^license.key=.*/license.key=${SITE247_LICENSE_KEY}/" /home/apm/apminsight.conf
           volumeMounts:
             - name: s247agent
               mountPath: /home/apm

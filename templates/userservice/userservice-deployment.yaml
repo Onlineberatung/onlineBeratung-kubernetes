@@ -30,7 +30,12 @@ spec:
         - name: site24x7
           image: site24x7/apminsight-javaagent:latest
           imagePullPolicy: IfNotPresent
-          command: [ 'cp', '-r', '/opt/site24x7/.', '/home/apm', '&&', 'echo', '"license.key=${SITE247_LICENSE_KEY}"', '>>', '/home/apm/apminsight.conf' ]
+          command: ["/bin/sh"]
+          args:
+            - -c
+            - >-
+              cp -r /opt/site24x7/. /home/apm
+              echo "license.key=${SITE247_LICENSE_KEY}" >> /home/apm/apminsight.conf
           volumeMounts:
             - name: s247agent
               mountPath: /home/apm

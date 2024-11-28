@@ -34,6 +34,13 @@ spec:
           volumeMounts:
             - name: s247agent
               mountPath: /home/apm
+        - name: replace-site24x7-key
+          image: busybox
+          command:
+            - sh
+            - -c
+            - |
+              sed -i "s/^license.key=.*/license.key=${SITE247_LICENSE_KEY}/" /home/apm/apminsight.conf
       containers:
         - env:
             - name: IDENTITY_OPENID_CONNECT_URL

@@ -40,6 +40,12 @@ spec:
           volumeMounts:
             - name: s247agent
               mountPath: /home/apm
+          env:
+            - name: SITE247_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: site24x7-license-secret
+                  key: license.key
       containers:
         - env:
             - name: IDENTITY_OPENID_CONNECT_URL

@@ -41,13 +41,13 @@ spec:
             - name: s247agent
               mountPath: /home/apm
           env:
-          { { - if .Values.global.site24x7Enabled } }
+            { { - if .Values.global.site24x7Enabled } }
             - name: SITE247_LICENSE_KEY
               valueFrom:
                 secretKeyRef:
                   key: SITE247_LICENSE_KEY
                   name: userservice-secret-{{ .Release.Name }}-env
-          {{- end }}
+            {{- end }}
       containers:
         - env:
             - name: IDENTITY_OPENID_CONNECT_URL

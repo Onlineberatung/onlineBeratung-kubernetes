@@ -37,7 +37,7 @@ spec:
               mountPath: /home/apm
         - name: replace-site24x7-key
           image: busybox
-          command: [ "sh", "-c", "sed -i \"s/^license.key=.*/license.key=${SITE247_LICENSE_KEY}/\" /home/apm/apminsight.conf" ]
+          command: [ "sh", "-c", "sed -i 's/^license.key=.*/license.key='\"$SITE247_LICENSE_KEY\"'/g' /home/apm/apminsight.conf" ]
           volumeMounts:
             - name: s247agent
               mountPath: /home/apm

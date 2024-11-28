@@ -27,7 +27,7 @@ spec:
         - name: wait-for-rocketchat
           image: busybox
           command: [ "sh", "-c", "until nc -z rocketchat 3000 > /dev/null; do echo Waiting for rocketchat.; sleep 5; done;" ]
-        { { - if .Values.global.site24x7Enabled } }
+        {{- if .Values.global.site24x7Enabled }}
         - name: site24x7
           image: site24x7/apminsight-javaagent:latest
           imagePullPolicy: IfNotPresent

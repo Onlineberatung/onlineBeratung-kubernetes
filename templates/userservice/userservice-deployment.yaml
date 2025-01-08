@@ -625,3 +625,4 @@ spec:
       volumes:
         - name: userservice-import
           emptyDir: {}
+        - name: s247agent

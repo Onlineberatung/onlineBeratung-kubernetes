@@ -108,6 +108,9 @@ data:
   {{- if .Values.global.site24x7Enabled }}
   JAVA_TOOL_OPTIONS: "-javaagent:/home/apm/apminsight-javaagent.jar -Dapminsight.application.name=userservice-{{ .Release.Name }}-site24x7"
   {{- end }}
+  SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI: "{{ .Values.keycloakAuthServerUrl }}/realms/{{ .Values.keycloakRealm }}"
+  SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI: "{{ .Values.keycloakAuthServerUrl }}/realms/{{ .Values.keycloakRealm }}/protocol/openid-connect/certs"
+  SPRING_JWT_AUTH_CONVERTER_RESOURCEID: "{{ .Values.keycloakserviceAppClientid }}"
 kind: ConfigMap
 metadata:
   labels:

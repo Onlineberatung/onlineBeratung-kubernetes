@@ -570,6 +570,10 @@ spec:
           volumeMounts:
             - mountPath: /import
               name: userservice-import
+        {{- if .Values.global.site24x7Enabled }}
+        - mountPath: /home/apm
+          name: s247agent
+        {{- end }}
         - name: set-masterkey
           image: badouralix/curl-jq
           env:

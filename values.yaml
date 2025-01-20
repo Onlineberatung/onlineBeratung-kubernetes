@@ -317,4 +317,4 @@ migration:
 site24x7LicenseKey: "key"
 
 zipkin:
-  enabled: "false"
+  enabled: false

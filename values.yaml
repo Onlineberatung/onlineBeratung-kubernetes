@@ -315,3 +315,6 @@ migration:
 
 # site24x7
 site24x7LicenseKey: "key"
+
+zipkin:
+  enabled: "false"

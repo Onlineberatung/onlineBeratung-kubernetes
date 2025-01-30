@@ -154,7 +154,21 @@ spec:
                 configMapKeyRef:
                   key: SPRING_SLEUTH_SAMPLER_PERCENTAGE
                   name: consultingtypeservice-{{ .Release.Name }}-env
-
+            - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI
+                  name: consultingtypeservice-{{ .Release.Name }}-env
+            - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI
+                  name: consultingtypeservice-{{ .Release.Name }}-env
+            - name: SPRING_JWT_AUTH_CONVERTER_RESOURCEID
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_JWT_AUTH_CONVERTER_RESOURCEID
+                  name: consultingtypeservice-{{ .Release.Name }}-env
           image:  {{ .Values.consultingTypeServiceImageName }}:{{ .Values.consultingTypeServiceImageVersion }}
           imagePullPolicy: Always
           name: consultingtypeservice
@@ -170,16 +184,16 @@ spec:
             requests:
               {{- if .Values.consultingtypeservice.resources.requests.memory }}
               memory: {{  .Values.consultingtypeservice.resources.requests.memory }}
-              {{- end}}
+              {{- end }}
               {{- if .Values.consultingtypeservice.resources.requests.cpu }}
               cpu: {{ .Values.consultingtypeservice.resources.requests.cpu }}
-              {{- end}}
+              {{- end }}
             {{- end }}
             {{- if .Values.consultingtypeservice.resources.limits }}
             limits:
               {{- if .Values.consultingtypeservice.resources.limits.memory }}
               memory: {{ .Values.consultingtypeservice.resources.limits.memory }}
-              {{- end}}
+              {{- end }}
               {{- if .Values.consultingtypeservice.resources.limits.cpu }}
               cpu: {{ .Values.consultingtypeservice.resources.limits.cpu }}
               {{- end }}

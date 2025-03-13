@@ -204,6 +204,21 @@ spec:
                 configMapKeyRef:
                   key: SPRING_SLEUTH_SAMPLER_PERCENTAGE
                   name: uploadservice-{{ .Release.Name }}-env
+            - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI
+                  name: uploadservice-{{ .Release.Name }}-env
+            - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI
+                  name: uploadservice-{{ .Release.Name }}-env
+            - name: SPRING_JWT_AUTH_CONVERTER_RESOURCEID
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_JWT_AUTH_CONVERTER_RESOURCEID
+                  name: uploadservice-{{ .Release.Name }}-env
           image: {{ .Values.uploadServiceImageName }}:{{ .Values.uploadServiceImageVersion }}
           imagePullPolicy: Always
           name: uploadservice

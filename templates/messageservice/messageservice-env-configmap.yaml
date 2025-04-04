@@ -48,6 +48,7 @@ data:
   {{- if .Values.global.sentryEnabled }}
   SENTRY_ENVIRONMENT: "{{ .Values.sentry.environment }} | default .Release.Namespace }}"
   SENTRY_SAMPLE_RATE: "{{ .Values.sentry.sampleRate | default 0.25 }}"
+  SENTRY_PERFORMANCE_MONITORING_ENABLED: "{{ .Values.sentry.performanceMonitoringEnabled | default true | quote }}"
   {{- end }}
 kind: ConfigMap
 metadata:

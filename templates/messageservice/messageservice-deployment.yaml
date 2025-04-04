@@ -219,10 +219,15 @@ spec:
                 configMapKeyRef:
                   key: SENTRY_ENVIRONMENT
                   name: messageservice-{{ .Release.Name }}-env
-            - name: SENTRY_ENVIRONMENT
+            - name: SENTRY_SAMPLE_RATE
               valueFrom:
                 configMapKeyRef:
-                  key: SENTRY_ENVIRONMENT
+                  key: SENTRY_SAMPLE_RATE
+                  name: messageservice-{{ .Release.Name }}-env
+            - name: ONLINEBERATUNG_SENTRY_DSN
+              valueFrom:
+                secretKeyRef:
+                  key: ONLINEBERATUNG_SENTRY_DSN
                   name: messageservice-{{ .Release.Name }}-env
 
 

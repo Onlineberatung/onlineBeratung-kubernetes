@@ -539,6 +539,7 @@ spec:
                 configMapKeyRef:
                   key: SPRING_JWT_AUTH_CONVERTER_RESOURCEID
                   name: userservice-{{ .Release.Name }}-env
+          {{- if .Values.global.sentryEnabled }}
             - name: SENTRY_ENVIRONMENT
               valueFrom:
                 configMapKeyRef:
@@ -552,8 +553,9 @@ spec:
             - name: ONLINEBERATUNG_SENTRY_DSN
               valueFrom:
                 secretKeyRef:
-                  key: ONLINEBERATUNG_SENTRY_DSN
+                  key: SENTRY_DSN
                   name: userservice-{{ .Release.Name }}-env
+          {{- end }}
           image: {{ .Values.userServiceImageName }}:{{ .Values.userServiceImageVersion }}
           imagePullPolicy: Always
           name: userservice

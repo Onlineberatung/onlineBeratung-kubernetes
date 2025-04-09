@@ -229,7 +229,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: SENTRY_DSN
-                  name: messageservice-{{ .Release.Name }}-env
+                  name: messageservice-secret-{{ .Release.Name }}-env
             {{- end }}
           image: {{ .Values.messageServiceImageName }}:{{ .Values.messageServiceImageVersion }}
           imagePullPolicy: Always

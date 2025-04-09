@@ -554,7 +554,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: SENTRY_DSN
-                  name: userservice-{{ .Release.Name }}-env
+                  name: userservice-secret-{{ .Release.Name }}-env
           {{- end }}
           image: {{ .Values.userServiceImageName }}:{{ .Values.userServiceImageVersion }}
           imagePullPolicy: Always

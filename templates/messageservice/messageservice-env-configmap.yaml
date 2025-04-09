@@ -45,6 +45,11 @@ data:
   SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI: "{{ .Values.keycloakAuthServerUrl }}/realms/{{ .Values.keycloakRealm }}"
   SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWKSETURI: "{{ .Values.keycloakAuthServerUrl }}/realms/{{ .Values.keycloakRealm }}/protocol/openid-connect/certs"
   SPRING_JWT_AUTH_CONVERTER_RESOURCEID: "{{ .Values.keycloakserviceAppClientid }}"
+  {{- if .Values.global.sentryEnabled }}
+  SENTRY_ENVIRONMENT: {{ .Values.sentry.environment | default "notspecified" | quote }}
+  SENTRY_SAMPLE_RATE: {{ .Values.sentry.sampleRate | default 0.25 | quote }}
+  SENTRY_PERFORMANCE_MONITORING_ENABLED: {{ .Values.sentry.performanceMonitoringEnabled | default true | quote }}
+  {{- end }}
 kind: ConfigMap
 metadata:
   labels:

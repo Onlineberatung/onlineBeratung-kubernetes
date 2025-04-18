@@ -225,6 +225,11 @@ spec:
                 configMapKeyRef:
                   key: SENTRY_SAMPLE_RATE
                   name: messageservice-{{ .Release.Name }}-env
+            - name: SENTRY_PERFORMANCE_MONITORING_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: SENTRY_PERFORMANCE_MONITORING_ENABLED
+                  name: messageservice-{{ .Release.Name }}-env
             - name: ONLINEBERATUNG_SENTRY_DSN
               valueFrom:
                 secretKeyRef:

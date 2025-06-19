@@ -127,7 +127,7 @@ messageService:
     minimumIdle: 5
     idleTimeout: 600000
     connectionTimeout: 30000
-    maxLifetime: 1800000
+    maxLifetime: 900000
     validationTimeout: 5000
 csrfWhitelistHeaderProperty: "local"
 

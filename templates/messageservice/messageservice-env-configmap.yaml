@@ -54,7 +54,7 @@ data:
   SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE: {{ .Values.messageService.hikari.minimumIdle | default 5 | quote }}
   SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT: {{ .Values.messageService.hikari.idleTimeout | default 600000 | quote }}
   SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT: {{ .Values.messageService.hikari.connectionTimeout | default 30000 | quote }}
-  SPRING_DATASOURCE_HIKARI_MAX_LIFETIME: "{{ .Values.messageService.hikari.maxLifetime | default "1800000" }}"
+  SPRING_DATASOURCE_HIKARI_MAX_LIFETIME: "{{ .Values.messageService.hikari.maxLifetime | default "900000" }}"
   SPRING_DATASOURCE_HIKARI_VALIDATION_TIMEOUT: {{ .Values.messageService.hikari.validationTimeout | default 5000 | quote }}
 kind: ConfigMap
 metadata:

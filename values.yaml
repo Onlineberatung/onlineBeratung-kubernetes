@@ -121,6 +121,14 @@ messageServiceImageName: "ghcr.io/onlineberatung/onlineberatung-messageservice/o
 messageServiceImageVersion: "develop_20221117_170507"
 messageServiceSpringProfilesActive: "local"
 messageServiceKeycloakResource: "message-service"
+messageService:
+  hikari:
+    maximumPoolSize: 30
+    minimumIdle: 5
+    idleTimeout: 600000
+    connectionTimeout: 30000
+    maxLifetime: 900000
+    validationTimeout: 5000
 csrfWhitelistHeaderProperty: "local"
 
 # Upload service

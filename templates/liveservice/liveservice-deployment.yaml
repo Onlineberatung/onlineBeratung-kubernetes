@@ -59,11 +59,13 @@ spec:
                 configMapKeyRef:
                   key: SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING
                   name: liveservice-{{ .Release.Name }}-env
+            {{- if .Values.zipkin.enabled }}
             - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
               valueFrom:
                 configMapKeyRef:
                   key: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
                   name: liveservice-{{ .Release.Name }}-env
+            {{- end }}
             - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI
               valueFrom:
                 configMapKeyRef:

@@ -190,11 +190,13 @@ spec:
                 configMapKeyRef:
                   key: TRANSLATION_MANAGEMENT_SYSTEM_ENABLED
                   name: mailservice-{{ .Release.Name }}-env
+            {{- if .Values.zipkin.enabled }}
             - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
               valueFrom:
                 configMapKeyRef:
                   key: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
                   name: mailservice-{{ .Release.Name }}-env
+            {{- end }}
           name: mailservice
           ports:
             - containerPort: 8080

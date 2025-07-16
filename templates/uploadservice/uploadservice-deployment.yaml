@@ -184,6 +184,7 @@ spec:
                 configMapKeyRef:
                   key: FEATURE_MULTITENANCY_WITH_SINGLE_DOMAIN_ENABLED
                   name: uploadservice-{{ .Release.Name }}-env
+          {{- if .Values.zipkin.enabled }}
             - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
               valueFrom:
                 configMapKeyRef:
@@ -194,6 +195,7 @@ spec:
                 configMapKeyRef:
                   key: SPRING_ZIPKIN_BASE_URL
                   name: uploadservice-{{ .Release.Name }}-env
+          {{- end }}
             - name: SPRING_SLEUTH_WEB_ENABLED
               valueFrom:
                 configMapKeyRef:

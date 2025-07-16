@@ -194,11 +194,13 @@ spec:
                 configMapKeyRef:
                   key: SPRING_JWT_AUTH_CONVERTER_RESOURCEID
                   name: videoservice-{{ .Release.Name }}-env
+            {{- if .Values.zipkin.enabled }}
             - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
               valueFrom:
                 configMapKeyRef:
                   key: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
                   name: videoservice-{{ .Release.Name }}-env
+            {{- end }}
           image: {{ .Values.videoServiceImageName }}:{{ .Values.videoServiceImageVersion }}
           imagePullPolicy: Always
           name: videoservice

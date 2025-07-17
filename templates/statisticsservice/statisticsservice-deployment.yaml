@@ -99,11 +99,13 @@ spec:
                 configMapKeyRef:
                   key: CONSULTING_TYPE_SERVICE_API_URL
                   name: statisticsservice-{{ .Release.Name }}-env
+            {{- if .Values.zipkin.enabled }}
             - name: SPRING_ZIPKIN_BASE_URL
               valueFrom:
                 configMapKeyRef:
                   key: SPRING_ZIPKIN_BASE_URL
                   name: statisticsservice-{{ .Release.Name }}-env
+            {{- end }}
             - name: SPRING_SLEUTH_WEB_ENABLED
               valueFrom:
                 configMapKeyRef:

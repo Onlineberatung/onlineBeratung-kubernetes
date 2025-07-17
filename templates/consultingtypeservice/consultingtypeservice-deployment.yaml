@@ -139,11 +139,13 @@ spec:
                 configMapKeyRef:
                   key: SETTING_MAIN_TENANT_SUBDOMAIN_FOR_SINGLE_DOMAIN_MULTITENANCY
                   name: consultingtypeservice-{{ .Release.Name }}-env
+            {{- if .Values.zipkin.enabled }}
             - name: SPRING_ZIPKIN_BASE_URL
               valueFrom:
                 configMapKeyRef:
                   key: SPRING_ZIPKIN_BASE_URL
                   name: consultingtypeservice-{{ .Release.Name }}-env
+            {{- end }}
             - name: SPRING_SLEUTH_WEB_ENABLED
               valueFrom:
                 configMapKeyRef:

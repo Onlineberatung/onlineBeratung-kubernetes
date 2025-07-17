@@ -497,11 +497,13 @@ spec:
                 configMapKeyRef:
                   key: APPOINTMENTS_LIFESPAN-IN-HOURS
                   name: userservice-{{ .Release.Name }}-env
+            {{- if .Values.zipkin.enabled }}
             - name: SPRING_ZIPKIN_BASE_URL
               valueFrom:
                 configMapKeyRef:
                   key: SPRING_ZIPKIN_BASE_URL
                   name: userservice-{{ .Release.Name }}-env
+            {{- end }}
             - name: SPRING_SLEUTH_WEB_ENABLED
               valueFrom:
                 configMapKeyRef:

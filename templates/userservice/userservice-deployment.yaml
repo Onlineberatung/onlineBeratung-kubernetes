@@ -376,7 +376,10 @@ spec:
                   key:   USER_REGISTEREDONLY_DELETEWORKFLOW_CHECK_DAYS
                   name: userservice-{{ .Release.Name }}-env
             - name: USER_REGISTEREDONLY_DELETEWORKFLOW_AFTERSESSIONPURGE_ENABLED
-              value: "true"
+              valueFrom:
+                configMapKeyRef:
+                  key: USER_REGISTEREDONLY_DELETEWORKFLOW_AFTERSESSIONPURGE_ENABLED
+                  name: userservice-{{ .Release.Name }}-env
             - name: IDENTITY_OTP_ALLOWED_FOR_USERS
               valueFrom:
                 configMapKeyRef:

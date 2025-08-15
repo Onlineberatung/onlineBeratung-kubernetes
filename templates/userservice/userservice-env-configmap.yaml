@@ -66,6 +66,7 @@ data:
   USER_REGISTEREDONLY_DELETEWORKFLOW_ENABLED: {{ .Values.userRegisteredonlyDeleteworkflowEnabled | default "false" | quote }}
   USER_REGISTEREDONLY_DELETEWORKFLOW_CRON: "0 0 0 * * ?"
   USER_REGISTEREDONLY_DELETEWORKFLOW_CHECK_DAYS: {{ .Values.userRegisteredonlyflowCheckDays | default "2190" | quote }}
+  USER_REGISTEREDONLY_DELETEWORKFLOW_AFTERSESSIONPURGE_ENABLED: {{ .Values.userRegisteredOnlyDeleteWorkflowAfterSessionPurgeEnabled | default "false" | quote }}
   SESSION_INACTIVE_DELETEWORKFLOW_ENABLED: {{ .Values.sessionInactiveDeleteworkflowEnabled | quote }}
   SESSION_INACTIVE_DELETEWORKFLOW_CRON: {{ .Values.sessionInactiveDeleteworkflowCron | default "0 0 0 * * ?" | quote }}
   SESSION_INACTIVE_DELETEWORKFLOW_CHECK_DAYS: {{ .Values.sessionInactiveDeleteworkflowCheckDays | quote }}

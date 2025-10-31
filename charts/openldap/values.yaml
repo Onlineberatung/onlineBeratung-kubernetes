@@ -1,4 +1,4 @@
-openldapImageName: "bitnami/openldap"
+openldapImageName: "bitnamilegacy/openldap"
 openldapVersion: "2.6"
 
 adminUsername: "admin"

@@ -9,6 +9,6 @@ sources:
 type: application
 dependencies:
   - name: weblate
-    version: 0.5.3
+    version: 0.5.3-bitnamilegacy
     repository: https://helm.weblate.org
     condition: weblate.enabled

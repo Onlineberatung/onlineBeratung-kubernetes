@@ -96,7 +96,7 @@ spec:
               name: rocketchat-user-uploads
           {{- end }}
       restartPolicy: Always
-      {{- if .Values.global.initializeDummyData }}
+      {{- if or .Values.global.initializeDummyData .Values.useHostpathUploadStorage }}
       volumes:
         {{- if .Values.useHostpathUploadStorage }}
         - name: rocketchat-app-uploads
@@ -106,7 +106,9 @@ spec:
           persistentVolumeClaim:
             claimName: rocketchat-user-uploads
         {{- end }}
+        {{- if .Values.global.initializeDummyData }}
         - name: plattform-init-data
           persistentVolumeClaim:
             claimName: plattform-initialization-data
+        {{- end }}
       {{- end }}

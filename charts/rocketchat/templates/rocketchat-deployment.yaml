@@ -65,6 +65,9 @@ spec:
                 configMapKeyRef:
                   key: EXIT_UNHANDLEDPROMISEREJECTION
                   name: rocketchat-{{ .Release.Name }}-env
+            {{- with .Values.extraEnv }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
           image: {{ .Values.rocketchatImageName }}:{{ .Values.rocketchatVersion }}
           name: rocketchat
           {{- if .Values.resources }}
